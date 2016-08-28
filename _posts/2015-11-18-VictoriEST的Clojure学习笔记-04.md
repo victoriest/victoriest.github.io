@@ -106,7 +106,7 @@ user=> (clojure.java.io/reader "J:\\est.txt")
 #<BufferedReader java.io.BufferedReader@370ff791>
 ```
 这样会导致文件一直处于打开状态 所以 我们用with-open
-```
+```clojure
 user=> (with-open [rdr (clojure.java.io/reader "J:\\est.txt")]
   #_=> (count (let [x (line-seq rdr)] (println x) x)))
 (estest estest)
@@ -140,6 +140,7 @@ peek
 pop
 assoc
 subvec
+
 ```clojure
 user=> (dissoc x :c)
 {:b 2, :a 1}
@@ -169,6 +170,7 @@ dissoc
 select-keys
 merge
 merge-with
+
 ```clojure
 user=> (def x {:a 1 :b 2 :c 3})
 #'user/x
@@ -216,6 +218,7 @@ select
 rename
 project
 join
+
 ```clojure
 user=> (def set-1 #{"java" "c" "r" "clojure"})
 #'user/set-1

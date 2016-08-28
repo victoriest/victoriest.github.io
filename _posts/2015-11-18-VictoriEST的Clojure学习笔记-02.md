@@ -184,7 +184,7 @@ clojure.core/interleave
 
 - iterate
 - clojure.core/iterate
-```
+```clojure
 ([f x])
   Returns a lazy sequence of x, (f x), (f (f x)) etc. f must be free of side-effects
 ```
@@ -192,7 +192,7 @@ clojure.core/interleave
 - drop-last 返回除最后一个元素之外的序列
 
 - range
-```
+```clojure
 clojure.core/range
 ([] [end] [start end] [start end step])
   Returns a lazy seq of nums from start (inclusive) to end
