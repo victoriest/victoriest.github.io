@@ -1,2 +1,4 @@
-_site/*
-docs/_site
+_site/
+.DS_Store
+_themes/
+.sass-cache/
