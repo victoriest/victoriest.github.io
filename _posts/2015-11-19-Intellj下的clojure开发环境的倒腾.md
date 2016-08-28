@@ -7,6 +7,7 @@ tags:
  - clojure
  - IntelliJ
  - Leiningen
+excerpt_separator: <!--more-->
 ---
 
 
@@ -21,6 +22,8 @@ mac下, 可以使用```brew install leiningen```安装, 很简单; 当然, 你�
 ### 安装Cursive插件
 
 首先, 你要有IntelliJ, 在[Cursive的安装引导页面](https://cursive-ide.com/userguide/index.html)有详细安装引导.
+
+<!--more-->
 
 ### 新建/导入Leiningen项目到IntelliJ
 

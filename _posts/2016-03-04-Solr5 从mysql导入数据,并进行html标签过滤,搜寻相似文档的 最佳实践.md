@@ -6,6 +6,7 @@ description: Solr5从mysql导入数据,并进行html标签过滤,搜寻相似文
 -tags:
  - Solr
  - java
+excerpt_separator: <!--more-->
 ---
 
 # 准备工作
@@ -24,6 +25,7 @@ description: Solr5从mysql导入数据,并进行html标签过滤,搜寻相似文
 
 ##配置文件
 **在solr的"./server/solr/configsets/"目录下可以看到几个configs的例子, 这里我们复制一个"basic_configs"例子, 给他重命名为你希望的名字. 这里我们给他起为victoriest, 进入这个victoriest/conf目录后, 我们就要进行一系列的配置文件的修改了**
+<!--more-->
 
 * ##### 进行mysql数据导入相关配置
 在solrconfig.xml文件中, 加入如下配置:

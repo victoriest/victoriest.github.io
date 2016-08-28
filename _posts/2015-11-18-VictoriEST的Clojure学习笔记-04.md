@@ -5,6 +5,7 @@ date: 2015-11-18
 description: VictoriEST的Clojure学习笔记 - 04
 tags:
  - clojure
+excerpt_separator: <!--more-->
 ---
 
 继续说说序列
@@ -28,6 +29,8 @@ user=> (take-while odd? [1 1 1 1 1 3 3 2 3 3 4 ])
 user=> (drop-while odd? [1 1 1 1 1 3 3 2 3 3 4 ])
 (2 3 3 4)
 ```
+
+<!--more-->
 
 - split-at, split-with 把一个容器一分为二
 ```clojure

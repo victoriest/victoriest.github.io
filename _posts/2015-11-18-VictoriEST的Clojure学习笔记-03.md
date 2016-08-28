@@ -5,6 +5,7 @@ date: 2015-11-18
 description: VictoriEST的Clojure学习笔记 - 03
 tags:
  - clojure
+excerpt_separator: <!--more-->
 ---
 
 ##### 序列
@@ -39,6 +40,8 @@ user=> (last [1 2 3])
 user=> (last [])
 nil
 ```
+
+<!--more-->
 
 - rest : 得到除序列的第一个元素外组成的序列, 如果没有其他元素, 返回一个空序列
 ```clojure

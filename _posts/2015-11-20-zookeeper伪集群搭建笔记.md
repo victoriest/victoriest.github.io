@@ -6,6 +6,7 @@ description: zookeeper伪集群搭建笔记
 tags:
  - storm
  - zookeeper
+excerpt_separator: <!--more-->
 ---
 
 这几天准备研究一下storm, 想先把storm的环境搭起来, 为了实现真是的集群环境, 在网上找了一些引导教程, 发现前置条件是需要搭建好zookeeper的服务器环境. 于是便有了此文.
@@ -27,6 +28,8 @@ mv ./zookeeper-3.3.6.tar.gz /zookeeper
 2. ##### zookeeper伪集群环境的配置文件
 zookeeper配置文件在conf目录下, 这里, 我们以启动3个服务器大小的zookeeper集群.
 * 新建名为zoo1.cfg, zoo2.cfg, zoo3.cfg的文件, 内容如下:
+<!--more-->
+
 ```
 # zoo1.cfg
 tickTime=2000

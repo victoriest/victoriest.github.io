@@ -6,6 +6,7 @@ description: Golang实现简单tcp服务器
 tags:
  - golang
  - tcp服务器
+excerpt_separator: <!--more-->
 ---
 
 ## 概述
@@ -45,6 +46,8 @@ goroutine是一种轻量型的线程, 作为golang语言的语言特性, 可以�
 ```
 然后, 打开xFce终端, 键入命令
 > go run test.go
+
+<!--more-->
 
 我们就会看到终端的输出, 可以看到10行"hello world".  这里, 我们的hello world程序就是利用了gorountine创建了一个多线程/协程程序, 然后利用channel等待开启的协程处理完毕, 才结束主线程.
 

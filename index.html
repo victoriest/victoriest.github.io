@@ -22,9 +22,11 @@ layout: page
 </div>
 
   <div class="post-descr">
-    <p>
-      {{ post.description }}
-    </p>
+    <!-- <p> -->
+    <!--   {{ post.description }} -->
+    <!-- </p> -->
+    {{post.excerpt}}
+<a href="{{post.url | prepend:site.baseurl | prepend:site.url}}">阅读全文</a>
   </div>
   {% endfor %}
 

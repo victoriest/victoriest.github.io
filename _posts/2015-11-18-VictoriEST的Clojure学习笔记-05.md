@@ -5,6 +5,7 @@ date: 2015-11-18
 description: VictoriEST的Clojure学习笔记 - 05
 tags:
  - clojure
+excerpt_separator: <!--more-->
 ---
 
 函数式编程概念
@@ -32,6 +33,8 @@ tags:
 			 	(fibo next (+ current next) (dec x)))]
 	(fibo 0N 1N x)))
 ```
+
+<!--more-->
 
 * 自递归
 ```clojure

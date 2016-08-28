@@ -5,6 +5,7 @@ date: 2015-11-18
 description: windows下的golang交叉编译环境搭建
 tags:
  - golang
+excerpt_separator: <!--more-->
 ---
 
 1. 下载[mingw](http://sourceforge.net/projects/mingw/files/)
@@ -42,6 +43,8 @@ tags:
 >     pause
 
 运行完毕将会产生交叉编译环境列表如下(不完全，请根据自己需要修改)
+
+<!--more-->
 
 x86的windows/linux/darwin(mac os)/freebsd
 

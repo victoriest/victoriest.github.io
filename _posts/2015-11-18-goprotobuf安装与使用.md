@@ -6,6 +6,7 @@ description: goprotobuf安装与使用
 tags:
  - golang
  - protobuff
+excerpt_separator: <!--more-->
 ---
 
 - 安装 : 
@@ -37,3 +38,5 @@ tags:
 > http://www.cnblogs.com/zhangqingping/archive/2012/10/28/2743274.html
 > 
 > https://godoc.org/code.google.com/p/goprotobuf/proto
+<!--more-->
+

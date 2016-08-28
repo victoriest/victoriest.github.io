@@ -5,6 +5,7 @@ date: 2015-11-18
 description: VictoriEST的Clojure学习笔记 - 02
 tags:
  - clojure
+excerpt_separator: <!--more-->
 ---
 
 又一次重新开始继续学习clojure, 由于我的重点是clojure本身, 我是不打算折腾工具/环境的. 唯一用的就是上移篇笔记提到的leiningen的repl环境.
@@ -37,6 +38,8 @@ tags:
         (java.sql Connection Statement)))
 ```
 - 参考资料:[Clojure ns require use import](http://ju.outofmemory.cn/entry/143769)
+
+<!--more-->
 
 ##### 文档, 帮助
 - 查找文档 (doc 文档名), 如果不知道确切的名字, (find-doc 不确切的名字), 还有一个网站http://clojuredocs.org/

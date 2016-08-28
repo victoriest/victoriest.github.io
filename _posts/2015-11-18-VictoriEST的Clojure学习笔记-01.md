@@ -5,6 +5,7 @@ date: 2015-11-18
 description: VictoriEST的Clojure学习笔记 - 01
 tags:
  - clojure
+excerpt_separator: <!--more-->
 ---
 
 
@@ -19,6 +20,8 @@ tags:
 
 ## 目标
 目标就是, 为了自我鞭策自己, 将clojure学习下去, 最终, 能够**使用clojure进行实际的开发**, 能够**编写, 测试, 发布clojure模块, 将coljure模块嵌入已有的java项目**, **开发web项目**(?)
+
+<!--more-->
 
 ## 我目前还没忘记的
 下面是一些之前学习的仍然记得的皮毛:

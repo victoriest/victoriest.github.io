@@ -3,11 +3,12 @@ layout: post
 title: "使用 apache 和 tomcat 搭建负载均衡环境"
 date: 2016-04-26
 description: 使用 apache 和 tomcat 搭建负载均衡环境
--tags:
+tags:
  - 负载均衡
  - apache
  - tomcat
---
+excerpt_separator: <!--more-->
+---
 
 ### 前置环境
 * 安装apache 其中配置文件在/etc/httpd/conf/httpd.conf
@@ -43,7 +44,7 @@ Order Deny,Allow
 Allow from all
 </Location>
 ```
-
+<!--more-->
 * 配置示例中, 我们定义了两个负载均衡的组(mycluster和myclusters), 访问路径分别为/test和/test2
 
 * status=+H, 的意义为热备份(Hot Standby), 当主节点down掉, 才会访问+H的节点
