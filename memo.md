@@ -3,26 +3,25 @@ layout: page
 title: about
 ---
 
-* <a href="#杂项">杂项</a>
-	* <a href="#Swift相关学习教程">Swift相关学习教程</a>
-	* <a href="#mysql数据库配置部署相关">mysql数据库配置部署相关</a>
-* <a href="#优秀技术博客">优秀技术博客</a>
-* <a href="./clojure/README.md">Clojure</a>
-* <a href="./golang/README.md">Golang</a>
-* <a href="#IDEs">IDEs</a>
-	* <a href="#Sublime Text">Sublime Text</a>
-	* <a href="#IntelliJ IDEA">IntelliJ IDEA</a>
-	* <a href="./emacs/README.md">Emacs</a>
-	* <a href="./vim/README.md">Vim</a>
-* <a href="#游戏开发">游戏开发</a>
-* <a href="#Java">Java</a>
-	* <a href="#Ant相关">Ant相关</a>
-	* <a href="#Maven相关">Maven相关</a>
-	* <a href="#Storm相关">Storm相关</a>
-* <a href="#Docker">Docker</a>
-* <a href="#原创的系列文章/笔记">原创的系列文章/笔记</a>
+* [杂项](#杂项)
+	* [Swift相关学习教程](#Swift相关学习教程)
+	* [mysql数据库配置部署相关](#mysql数据库配置部署相关)
+* [优秀技术博客](#秀技术博客)
+* [Clojure](#Clojure)
+* [Golang](#Golang)
+* [IDEs](#IDEs)
+	* [Sublime Text](#Sublime Text)
+	* [IntelliJ IDEA](#IntelliJ IDEA)
+	* [Emacs](#Emacs)
+	* [Vim](#Vim)
+* [游戏开发](#游戏开发)
+* [Java](#Java)
+	* [Ant相关](#Ant相关)
+	* [Maven相关](#Maven相关)
+	* [Storm相关](#Storm相关)
+* [Docker](#Docker)
 
-<p id="杂项">杂项</p>
+<h1 id="杂项">杂项</h1>
 
 [jekyllthemes.org](http://jekyllthemes.org/)
 
@@ -152,9 +151,9 @@ title: about
 
 [Gaccob 的博客 - 游戏后台开发](http://www.gaccob.com/)
 
-## <p id="IDEs">IDEs</p>
+<p id="IDEs">IDEs</p>
 
-### <p id="Sublime Text">Sublime Text</p>
+<p id="Sublime Text">Sublime Text</p>
 
 [sublime text 3](http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/)
 
@@ -164,7 +163,7 @@ title: about
 
 [Sublime Text 使用介绍、全套快捷键及插件推荐](http://www.daqianduan.com/4820.html)
 
-### <p id="IntelliJ IDEA">IntelliJ IDEA</p>
+<p id="IntelliJ IDEA">IntelliJ IDEA</p>
 
 [idea主题网站](http://color-themes.com/)
 
@@ -174,7 +173,57 @@ title: about
 
 [Cursive is the Clojure IDE that understands your code(IDEA的一个clojure插件)](https://cursiveclojure.com/)
 
-## <p id="游戏开发">游戏开发</p>
+<p id="Vim">Vim</p>
+
+[linux系统中VIM编辑器推荐安装插件](http://blog.csdn.net/gsls181711/article/details/40540787)
+
+[vim-airline - 狀態列顯示的好幫手](http://terrychen.logdown.com/posts/2014/10/18/vim-airline-status-bar-helper)
+
+[Vim - 适合自己的，才是最好的](http://geekplux.com/2015/06/06/vim-those-fit-yourself-are-the-best.html)
+
+[vi/vim使用进阶: 目录](http://easwy.com/blog/archives/advanced-vim-skills-catalog/)
+
+[无插件Vim编程技巧](http://coolshell.cn/articles/11312.html)
+
+[vim scripts](http://vim-scripts.org/vim/scripts.html)
+
+[所需即所获：像 IDE 一样使用 vim](https://github.com/yangyangwithgnu/use_vim_as_ide)
+
+[将你的Vim 打造成轻巧强大的IDE](http://yuez.me/jiang-ni-de-vim-da-zao-cheng-qing-qiao-qiang-da-de-ide/)
+
+[vim的简略配置](http://blog.kelu.org/linux/2015/01/12/vim-simple-config.html)
+
+[vim-go](https://github.com/fatih/vim-go)
+
+[配置 VIM 的 Go 语言开发环境](http://wuwen.org/article/38/setup-vim-go-dev-environment.html)
+
+[vim安装markdown插件](http://www.jianshu.com/p/24aefcd4ca93)
+
+[My Clojure Toolchain: Vim](http://blog.venanti.us/clojure-vim/)
+
+[Writing Clojure in Vim](https://robots.thoughtbot.com/writing-clojure-in-vim)
+
+[Programming Clojure with Vim (2013 edition)](http://www.deepbluelambda.org/programming/clojure/programming-clojure-with-vim-2013-edition)
+
+[Golang开发环境搭建-Vim篇](http://tonybai.com/2014/11/07/golang-development-environment-for-vim/)
+
+[vim插件推荐](http://vimawesome.com/)
+
+<p id="Emacs">Emacs</p>
+
+[一年成为Emacs高手](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org)
+
+[从零开始——Emacs 安装配置使用教程](http://www.jianshu.com/p/b4cf683c25f3)
+
+[Org-mode五分钟教程](http://blog.chinaunix.net/uid-16237159-id-62365.html)
+
+[Hello, Emacs](http://jerrypeng.me/2012/08/hello-emacs/)
+
+<http://emacsist.com/>
+
+<https://github.com/syl20bnr/spacemacs/>
+
+<p id="游戏开发">游戏开发</p>
 
 [MMORPG服务器架构](http://www.blogjava.net/landon/archive/2012/07/14/383092.html)
 
@@ -196,7 +245,67 @@ title: about
 
 [2d游戏素材网站](http://www.spriters-resource.com/)
 
-## <p id="Java">Java</p>
+<p id="Golang">Golang</p>
+
+[goprotobuf](https://code.google.com/p/goprotobuf/)
+
+[Go怎么写测试用例](https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/11.3.md)
+
+[golang的服务器](https://github.com/linjianzao/gonet)
+
+[一种用于网游服务器的支持多路复用的网络协议处框架](http://blog.sina.com.cn/s/blog_9be3b8f10101dfpt.html)
+
+[葡萄引擎项目 -> 非常简单的Golang服 + C#客户端. TCP协](http://blog.csdn.net/spiritring/article/details/12621023)
+
+[Go 语言包管理 无需 Git 和 Hg 等版本管理工具，就可以下载指定版本的 Go 语言包](http://gopm.io/)
+
+[Golang通过Thrift框架完美实现跨语言调用](http://www.open-open.com/lib/view/open1380527669353.html)
+
+[比较靠谱的orm框架](https://github.com/jinzhu/gorm)
+
+[XORM - eXtra ORM for Go 一个简单而强大的 Go 语言 ORM 框架](http://xorm.io/)
+
+[study golang](http://studygolang.com/)
+
+[Go实战开发](https://github.com/astaxie/Go-in-Action)
+
+[config文件读取库](https://github.com/Unknwon/goconfig)
+
+[Go 语言中实现优雅的停止程序](http://www.oschina.net/translate/golang-graceful-stop)
+
+[Go程序如何安全退出(CTRL+C)](http://my.oschina.net/chai2010/blog/125853)
+
+[beego](http://beego.me/)
+
+[go by example](https://gobyexample.com/)
+
+[golang中国](http://golangtc.com/)
+
+<p id="Clojure">Clojure</p>
+
+[SICP Distilled](http://www.sicpdistilled.com/)
+
+##### clojure长连接服务器的相关思考
+在考虑是否能用clojure实现一个长连接的服务器, google一下key word:"clojure netty"
+* [clojure netty](https://github.com/cymen/clojure-netty)
+* [a simple netty HTTP server in clojure](http://eigenjoy.com/2010/07/30/a-simple-netty-http-server-in-clojure/)
+* [asynchronous communication for clojure](https://github.com/ztellman/aleph)
+
+[clojure 最美文档](https://devdocs.elibing.com/clojure~1.8/)
+
+[Clojure 的洞穴](http://wangjinquan.me/show/Clojure%20%E7%9A%84%E6%B4%9E%E7%A9%B4)
+
+[Clojure入门教程: Clojure – Functional Programming for the JVM中文版](http://xumingming.sinaapp.com/302/clojure-functional-programming-for-the-jvm-clojure-tutorial/)
+
+[Clojure Handbook](http://qiujj.com/static/clojure-handbook.html)
+
+[clojure学习资源](http://chunyemen.org/archives/642)
+
+[4clojure - 在线clojure习题](http://www.4clojure.com/)
+
+[braveclojure - 一本比较好的入门在线读物](http://www.braveclojure.com/)
+
+<p id="Java">Java</p>
 
 [中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
 
@@ -239,7 +348,7 @@ title: about
 
 <http://j.outofmemory.cn/>
 
-### <p id="Ant相关">Ant相关</p>
+<p id="Ant相关">Ant相关</p>
 
 [如何使用ANT实现FTP功能??利用ant实现SSH(SFTP)功能](http://blog.sina.com.cn/s/blog_9ed782ea010146h1.html)
 
@@ -247,13 +356,13 @@ title: about
 
 [在Ant下使用ftp](http://soukenan.blog.51cto.com/5130995/1171157)
 
-### <p id="Maven相关">Maven相关</p>
+<p id="Maven相关">Maven相关</p>
 
 [Maven官方搜索](http://search.maven.org/)
 
 [http://www.mvnrepository.com/](http://www.mvnrepository.com/)
 
-### <p id="Storm相关">Storm相关</p>
+<p id="Storm相关">Storm相关</p>
 
 [基于Storm的Nginx log实时监控系统](http://tech.uc.cn/?p=2866)
 
@@ -265,7 +374,7 @@ title: about
 
 [Storm集群安装部署步骤](http://www.cnblogs.com/panfeng412/archive/2012/11/30/how-to-install-and-deploy-storm-cluster.html)
 
-##<p id="Docker">Docker</p>
+<p id="Docker">Docker</p>
 
 [欢迎来到docker用户指南](http://www.widuu.com/chinese_docker/userguide/README.html)
 
@@ -282,46 +391,6 @@ title: about
 [一站式 Docker 服务](http://www.dockerpool.com/)
 
 <https://docker.cn/p/docker-base-dockerfile-java-dev>
-
-## <p id="原创的系列文章/笔记">原创的系列文章/笔记</p>
-
-### 未分类
-
-[apache+tomcat搭建负载均衡环境](./apache+tomcat搭建负载均衡环境.md)
-
-[Solr5 从mysql导入数据,并进行html标签过滤,搜寻相似文档的 最佳实践](./Solr5 从mysql导入数据,并进行html标签过滤,搜寻相似文档的 最佳实践.md)
-
-[粗想分布式缓存解决方案](./粗想分布式缓存解决方案.md)
-
-[zookeeper伪集群搭建笔记](./zookeeper伪集群搭建笔记.md)
-
-### vim相关
-
-[vim倒腾笔记](./emacs_and_vim/vim倒腾笔记.md)
-
-[vimrc](./emacs_and_vim/vimrc)
-
-### clojure
-
-[VictoriEST的Clojure学习笔记-01](./clojure/VictoriEST的Clojure学习笔记-01.md)
-
-[VictoriEST的Clojure学习笔记-02](./clojure/VictoriEST的Clojure学习笔记-02.md)
-
-[VictoriEST的Clojure学习笔记-03](./clojure/VictoriEST的Clojure学习笔记-03.md)
-
-[VictoriEST的Clojure学习笔记-04](./clojure/VictoriEST的Clojure学习笔记-04.md)
-
-[VictoriEST的Clojure学习笔记-05](./clojure/VictoriEST的Clojure学习笔记-05.md)
-
-[Intellj下的clojure开发环境的倒腾](./clojure/Intellj下的clojure开发环境的倒腾.md)
-
-### Golang
-
-[Golang实现简单tcp服务器](./golang/Golang实现简单tcp服务器.md)
-
-[goprotobuf安装与使用](./golang/goprotobuf安装与使用.md)
-
-[windows下的golang交叉编译环境搭建](./golang/windows下的golang交叉编译环境搭建.md)
 
 ## Bonus
 
