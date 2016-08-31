@@ -21,7 +21,7 @@ title: about
     * [Docker](#Docker)
 * [优秀技术博客](#优秀技术博客)
 * [杂项](#杂项)
-	* [Swift相关学习教程](#Swift相关学习教程)
+	* [mac/ios开发相关](#mac/ios)
 	* [mysql数据库配置部署相关](#mysql数据库配置部署相关)
     * [个人站点搭建(jekyll & git-page)](#jekyll)
 * [游戏开发](#游戏开发)
@@ -65,6 +65,8 @@ title: about
 [golang中国](http://golangtc.com/)
 
 <h2 id="Clojure">Clojure</h2>
+
+[clojure-doc](http://clojure-doc.org/)
 
 [nightcode-clojure的IDE](https://sekao.net/nightcode/)
 
@@ -148,6 +150,18 @@ title: about
 [Redux 中文文档 Join the chat at https://gitter.im/camsong/redux-in-chinese](http://cn.redux.js.org/index.html)
 
 [react native 官网](https://facebook.github.io/react-native/)
+
+[react gitbook](https://www.gitbook.com/book/hulufei/react-tutorial/details)
+
+[使用React、Node.js、MongoDB、Socket.IO开发一个角色投票应用](http://www.kancloud.cn/kancloud/create-voting-app/63976)
+
+[REACT JS 视频教程](http://www.oxox.work/web/recommend/react-js-tutorial/)
+
+[React 学习指南](http://www.zhuowenli.com/frontend/react-guide.html)
+
+[视频React.js中文教程]](http://www.tudou.com/listplay/ah20h1-t4V4.html)
+
+[React.js快速开始](http://www.phperz.com/article/15/0712/140537.html)
 
 <h1>工具</h1>
 
@@ -351,8 +365,7 @@ title: about
 
 [StuQ 技能图](https://git.oschina.net/stuq/skill-map/)
 
-<h2 id="Swift相关学习教程">Swift相关学习教程</h2>
-
+<h2 id="mac/ios">mac/ios开发相关</h2>
 
 [OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
 
@@ -374,7 +387,17 @@ title: about
 
 [在linux同一台主机下面搭建两个mysql 实例并实现主从复制 (一)](http://www.it165.net/database/html/201404/6178.html)
 
-[<h2 id="jekyll">个人站点搭建(jekyll & git-page)</h2>
+[在linux同一台主机下面搭建两个mysql 实例并实现主从复制(二)](http://www.it165.net/database/html/201404/6179.html)
+
+<h2 id="jekyll">个人站点搭建(jekyll & git-page)</h2>
+
+[通过GitHub Pages建立个人站点（详细步骤）](http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
+
+[http://jekyllcn.com/](http://jekyllcn.com/)
+
+[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)
+
+<h3>jekyll主题相关</h3>
 
 [jekyllthemes.org](http://jekyllthemes.org/)
 
@@ -383,18 +406,6 @@ title: about
 [jekyllthemes](http://jekyllthemes.io/)
 
 [有哪些简洁明快的 Jekyll 模板](http://www.zhihu.com/question/20223939)
-
-[Publish Websites Like a BOSS](http://ruhoh.com/)
-
-[jekyllbootstrap](http://jekyllbootstrap.com/)
-
-[通过GitHub Pages建立个人站点（详细步骤）](http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
-
-[http://jekyllcn.com/](http://jekyllcn.com/)
-
-[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)
-
-在linux同一台主机下面搭建两个mysql 实例并实现主从复制(二)](http://www.it165.net/database/html/201404/6179.html)
 
 <h1 id="游戏开发">游戏开发</h1>
 
