@@ -7,17 +7,19 @@ title: about
     * [Golang](#Golang)
     * [Clojure](#Clojure)
     * [Java](#Java)
+    * [JavaScript](#js)
 * [工具](#IDEs)
     * [IDEs](#IDEs)
     	* [Sublime Text](#Sublime Text)
     	* [IntelliJ IDEA](#IntelliJ IDEA)
     	* [Emacs](#Emacs)
     	* [Vim](#Vim)
+    * [Git相关](#git)
     * [Ant相关](#Ant相关)
 	* [Maven相关](#Maven相关)
 	* [Storm相关](#Storm相关)
     * [Docker](#Docker)
-* [优秀技术博客](#秀技术博客)
+* [优秀技术博客](#优秀技术博客)
 * [杂项](#杂项)
 	* [Swift相关学习教程](#Swift相关学习教程)
 	* [mysql数据库配置部署相关](#mysql数据库配置部署相关)
@@ -64,6 +66,8 @@ title: about
 
 <h2 id="Clojure">Clojure</h2>
 
+[nightcode-clojure的IDE](https://sekao.net/nightcode/)
+
 [SICP Distilled](http://www.sicpdistilled.com/)
 
 ##### clojure长连接服务器的相关思考
@@ -87,6 +91,8 @@ title: about
 [braveclojure - 一本比较好的入门在线读物](http://www.braveclojure.com/)
 
 <h2 id="Java">Java</h2>
+
+[Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
 
 [中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
 
@@ -128,6 +134,20 @@ title: about
 [Better Java](https://www.seancassidy.me/better-java.html#style)
 
 <http://j.outofmemory.cn/>
+
+<h2 id="js">JavaScript</h2>
+
+[动态可视化库visjs](http://visjs.org/)
+
+[React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
+
+[reactjs-cn](http://reactjs.cn/react/index.html)
+
+[react china](http://react-china.org/)
+
+[Redux 中文文档 Join the chat at https://gitter.im/camsong/redux-in-chinese](http://cn.redux.js.org/index.html)
+
+[react native 官网](https://facebook.github.io/react-native/)
 
 <h1>工具</h1>
 
@@ -202,6 +222,12 @@ title: about
 <http://emacsist.com/>
 
 <https://github.com/syl20bnr/spacemacs/>
+
+<h2 id="git">Git相关</h2>
+
+[git book](https://git-scm.com/book/zh/v2)
+
+[git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
 
 <h2 id="Ant相关">Ant相关</h2>
 
@@ -291,29 +317,21 @@ title: about
 
 [Gaccob 的博客 - 游戏后台开发](http://www.gaccob.com/)
 
-<h1 id="杂项">杂项</h1>
+[技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
 
-[git book](https://git-scm.com/book/zh/v2)
+<h1 id="杂项">杂项</h1>
 
 [玩转苹果](http://www.ifunmac.com/)
 
-[nightcode-clojure的IDE](https://sekao.net/nightcode/)
+[强迫症的 Mac 设置指南](https://github.com/macdao/ocds-guide-to-setting-up-mac)
 
 [stackshare](http://stackshare.io/)
-
-[强迫症的 Mac 设置指南](https://github.com/macdao/ocds-guide-to-setting-up-mac)
 
 [showterm](http://showterm.io/)
 
 [assciinema](https://asciinema.org/)
 
 [Gradle学习系列](http://www.cnblogs.com/davenkin/p/gradle-learning-1.html)
-
-[Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
-
-[技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
-
-[git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
 
 [极客学院](http://www.jikexueyuan.com/)
 
@@ -335,7 +353,6 @@ title: about
 
 <h2 id="Swift相关学习教程">Swift相关学习教程</h2>
 
-[react native 官网](https://facebook.github.io/react-native/)
 
 [OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
 
