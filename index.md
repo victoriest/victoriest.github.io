@@ -159,7 +159,7 @@ title: about
 
 [React 学习指南](http://www.zhuowenli.com/frontend/react-guide.html)
 
-[视频React.js中文教程]](http://www.tudou.com/listplay/ah20h1-t4V4.html)
+[视频React.js中文教程](http://www.tudou.com/listplay/ah20h1-t4V4.html)
 
 [React.js快速开始](http://www.phperz.com/article/15/0712/140537.html)
 
