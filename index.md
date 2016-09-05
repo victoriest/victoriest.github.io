@@ -3,6 +3,7 @@ layout: page
 title: about
 ---
 # 目录
+-------
 * [开发语言](#Golang)
     * [Golang](#Golang)
     * [Clojure](#Clojure)
@@ -29,70 +30,81 @@ title: about
 <h1 id="开发语言">开发语言</h1>
 
 <h2 id="Golang">Golang</h2>
-
-[goprotobuf](https://code.google.com/p/goprotobuf/)
-
-[Go怎么写测试用例](https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/11.3.md)
-
-[golang的服务器](https://github.com/linjianzao/gonet)
-
-[一种用于网游服务器的支持多路复用的网络协议处框架](http://blog.sina.com.cn/s/blog_9be3b8f10101dfpt.html)
-
-[葡萄引擎项目 -> 非常简单的Golang服 + C#客户端. TCP协](http://blog.csdn.net/spiritring/article/details/12621023)
-
-[Go 语言包管理 无需 Git 和 Hg 等版本管理工具，就可以下载指定版本的 Go 语言包](http://gopm.io/)
-
-[Golang通过Thrift框架完美实现跨语言调用](http://www.open-open.com/lib/view/open1380527669353.html)
-
-[比较靠谱的orm框架](https://github.com/jinzhu/gorm)
-
-[XORM - eXtra ORM for Go 一个简单而强大的 Go 语言 ORM 框架](http://xorm.io/)
+-------
+[golang中国](http://golangtc.com/)
 
 [study golang](http://studygolang.com/)
 
-[Go实战开发](https://github.com/astaxie/Go-in-Action)
-
-[config文件读取库](https://github.com/Unknwon/goconfig)
-
-[Go 语言中实现优雅的停止程序](http://www.oschina.net/translate/golang-graceful-stop)
-
-[Go程序如何安全退出(CTRL+C)](http://my.oschina.net/chai2010/blog/125853)
-
-[beego](http://beego.me/)
-
 [go by example](https://gobyexample.com/)
 
-[golang中国](http://golangtc.com/)
+<h3>第三方库</h3>
+
+- [goprotobuf](https://github.com/golang/protobuf)
+protobuff的golang实现
+
+- [goconfig](https://github.com/Unknwon/goconfig)
+config文件读取库
+
+- [gopm](http://gopm.io/)
+Go 语言包管理-无需 Git 和 Hg 等版本管理工具，就可以下载指定版本的 Go 语言包
+
+- [gorm](https://github.com/jinzhu/gorm)
+比较靠谱的orm框架
+
+- [XORM - eXtra ORM for Go](http://xorm.io/)
+XORM - eXtra ORM for Go 一个简单而强大的 Go 语言 ORM 框架
+
+- [beego](http://beego.me/)
+一个使用 Go 的思维来帮助您构建并开发 Go 应用程序的开源框架
+
+<h3>hit point</h3>
+
+- [Go实战开发](https://github.com/astaxie/Go-in-Action)
+
+- [Go 语言中实现优雅的停止程序](http://www.oschina.net/translate/golang-graceful-stop)
+
+- [Go程序如何安全退出(CTRL+C)](http://my.oschina.net/chai2010/blog/125853)
+
+- [Golang通过Thrift框架完美实现跨语言调用](http://www.open-open.com/lib/view/open1380527669353.html)
 
 <h2 id="Clojure">Clojure</h2>
-
+-------
 [clojure-doc](http://clojure-doc.org/)
+
+[clojure 最美文档](https://devdocs.elibing.com/clojure~1.8/)
+
+[4clojure - 在线clojure习题](http://www.4clojure.com/)
 
 [nightcode-clojure的IDE](https://sekao.net/nightcode/)
 
 [SICP Distilled](http://www.sicpdistilled.com/)
 
-##### clojure长连接服务器的相关思考
-在考虑是否能用clojure实现一个长连接的服务器, google一下key word:"clojure netty"
-* [clojure netty](https://github.com/cymen/clojure-netty)
-* [a simple netty HTTP server in clojure](http://eigenjoy.com/2010/07/30/a-simple-netty-http-server-in-clojure/)
-* [asynchronous communication for clojure](https://github.com/ztellman/aleph)
+<h3>教程</h3>
 
-[clojure 最美文档](https://devdocs.elibing.com/clojure~1.8/)
+- [braveclojure](http://www.braveclojure.com/)
+一本比较好的入门在线读物
 
-[Clojure 的洞穴](http://wangjinquan.me/show/Clojure%20%E7%9A%84%E6%B4%9E%E7%A9%B4)
+- [Clojure – Functional Programming for the JVM中文版](http://xumingming.sinaapp.com/302/clojure-functional-programming-for-the-jvm-clojure-tutorial/)
+Clojure入门教程
 
-[Clojure入门教程: Clojure – Functional Programming for the JVM中文版](http://xumingming.sinaapp.com/302/clojure-functional-programming-for-the-jvm-clojure-tutorial/)
+- [Clojure 的洞穴](http://wangjinquan.me/show/Clojure%20%E7%9A%84%E6%B4%9E%E7%A9%B4)
+ 本系列文章通过用Clojure语言开发一个探险游戏来帮助读者学习Clojure程序设计
 
-[Clojure Handbook](http://qiujj.com/static/clojure-handbook.html)
+- [Clojure Handbook](http://qiujj.com/static/clojure-handbook.html)
+clojure速查手册
 
-[clojure学习资源](http://chunyemen.org/archives/642)
+<h3>hit point</h3>
 
-[4clojure - 在线clojure习题](http://www.4clojure.com/)
+- [clojure学习资源](http://chunyemen.org/archives/642)
 
-[braveclojure - 一本比较好的入门在线读物](http://www.braveclojure.com/)
+- [clojure netty](https://github.com/cymen/clojure-netty)
+
+- [a simple netty HTTP server in clojure](http://eigenjoy.com/2010/07/30/a-simple-netty-http-server-in-clojure/)
+
+- [asynchronous communication for clojure](https://github.com/ztellman/aleph)
 
 <h2 id="Java">Java</h2>
+-------
 
 [Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
 
@@ -123,8 +135,6 @@ title: about
 
 [Google Guava官方教程](http://ifeve.com/google-guava/)
 
-[jeewx-api 1.0.1 正式发布，捷微微信接口 API](http://www.oschina.net/news/60836/jeewx-api-1-0-1)
-
 [Netty 4.0 新的特性及需要注意的地方](http://www.oschina.net/translate/netty-4-0-new-and-noteworthy)
 
 [Netty5.x中新增和值得注意的点](http://www.coderli.com/netty-5-new-and-noteworthy/)
@@ -138,7 +148,7 @@ title: about
 <http://j.outofmemory.cn/>
 
 <h2 id="js">JavaScript</h2>
-
+-------
 [动态可视化库visjs](http://visjs.org/)
 
 [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
@@ -168,7 +178,7 @@ title: about
 <h2 id="IDEs">IDEs</h2>
 
 <h3 id="Sublime Text">Sublime Text</h3>
-
+-------
 [sublime text 3](http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/)
 
 [Sublime Text 2 入门及技巧](http://lucifr.com/2011/08/31/sublime-text-2-tricks-and-tips/)
@@ -178,6 +188,7 @@ title: about
 [Sublime Text 使用介绍、全套快捷键及插件推荐](http://www.daqianduan.com/4820.html)
 
 <h3 id="IntelliJ IDEA">IntelliJ IDEA</h3>
+-------
 
 [idea主题网站](http://color-themes.com/)
 
@@ -188,7 +199,7 @@ title: about
 [Cursive is the Clojure IDE that understands your code(IDEA的一个clojure插件)](https://cursiveclojure.com/)
 
 <h3 id="Vim">Vim</h3>
-
+-------
 [linux系统中VIM编辑器推荐安装插件](http://blog.csdn.net/gsls181711/article/details/40540787)
 
 [vim-airline - 狀態列顯示的好幫手](http://terrychen.logdown.com/posts/2014/10/18/vim-airline-status-bar-helper)
@@ -224,7 +235,7 @@ title: about
 [vim插件推荐](http://vimawesome.com/)
 
 <h3 id="Emacs">Emacs</h3>
-
+-------
 [一年成为Emacs高手](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org)
 
 [从零开始——Emacs 安装配置使用教程](http://www.jianshu.com/p/b4cf683c25f3)
@@ -288,7 +299,7 @@ title: about
 <https://docker.cn/p/docker-base-dockerfile-java-dev>
 
 <h1 id="优秀技术博客">优秀技术博客</h1>
-
+-------
 [worldhello](http://www.worldhello.net/)
 
 [雁起平沙的网络日志](http://yanping.me/cn/)
@@ -334,7 +345,7 @@ title: about
 [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
 
 <h1 id="杂项">杂项</h1>
-
+-------
 [玩转苹果](http://www.ifunmac.com/)
 
 [强迫症的 Mac 设置指南](https://github.com/macdao/ocds-guide-to-setting-up-mac)
@@ -412,10 +423,6 @@ title: about
 [MMORPG服务器架构](http://www.blogjava.net/landon/archive/2012/07/14/383092.html)
 
 [11平台天梯原理分析](http://www.cnblogs.com/DebugLZQ/archive/2012/05/06/2486138.html)
-
-[一种用于网游服务器的支持多路复用的网络协议处框架](http://blog.sina.com.cn/s/blog_9be3b8f10101dfpt.html)
-
-[葡萄引擎项目 -> 非常简单的Golang服 + C#客户端. TCP协](http://blog.csdn.net/spiritring/article/details/12621023)
 
 [Alloy Game Engine让游戏制作变得超级容易](https://github.com/AlloyTeam/AlloyGameEngine)
 
