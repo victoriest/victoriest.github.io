@@ -173,6 +173,10 @@ clojure速查手册
 
 [React.js快速开始](http://www.phperz.com/article/15/0712/140537.html)
 
+[React Slingshot!](https://github.com/coryhouse/react-slingshot)
+
+[前端工程化实践 之 整合 gulp/webpack](http://gold.xitu.io/entry/5774ed3da633bd0057fe07f4)
+
 <h1>工具</h1>
 
 <h2 id="IDEs">IDEs</h2>
@@ -346,6 +350,10 @@ clojure速查手册
 
 <h1 id="杂项">杂项</h1>
 -------
+
+[electron](http://electron.atom.io/)
+Build cross platform desktop apps with JavaScript, HTML, and CSS
+
 [玩转苹果](http://www.ifunmac.com/)
 
 [强迫症的 Mac 设置指南](https://github.com/macdao/ocds-guide-to-setting-up-mac)
