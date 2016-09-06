@@ -149,6 +149,24 @@ clojure速查手册
 
 <h2 id="js">JavaScript</h2>
 -------
+
+[Bower](https://bower.io/)
+一个可以帮助你管理你的应用的前端依赖库的包管理器
+
+[gulp](http://gulpjs.com/)
+gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器
+
+[webpack](http://webpack.github.io/)
+webpack是近期最火的一款模块加载器兼打包工具，它能把各种资源，例如JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理
+
+[livereload](http://livereload.com/)
+livereload是一个web开发辅助工具，当我们修改完html、css和js的时候会自动刷新浏览器，解放码农的双手。 这样在双屏切图、写js代码的时候会提高很多效率。
+
+[RequireJS](http://requirejs.org/)
+RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避免不必要的js文件加载，提升网页浏览速度。
+
+[gulp example](https://github.com/AnnaSu/gulp-example/blob/master/README.md)
+
 [动态可视化库visjs](http://visjs.org/)
 
 [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
