@@ -8,8 +8,9 @@ title: about
     * [Golang](#Golang)
     * [Clojure](#Clojure)
     * [Java](#Java)
-    * [JavaScript](#js)
+    * [JavaScript前端开发](#js)
 * [工具](#IDEs)
+    * [ProtoBuff](#ProtoBuff)
     * [IDEs](#IDEs)
     	* [Sublime Text](#Sublime Text)
     	* [IntelliJ IDEA](#IntelliJ IDEA)
@@ -106,34 +107,39 @@ clojure速查手册
 <h2 id="Java">Java</h2>
 -------
 
+<http://j.outofmemory.cn/>
+
+[http://www.importnew.com/](http://www.importnew.com/)
+
+<h3>第三方库</h3>
+
+- [amoeba](http://docs.hexnova.com/amoeba/)
+分布式数据库
+
+- [Akka](http://akka.io/)
+更加简单的可伸缩性、容错性、并发性、远程调用的Actor模型应用
+
+- [quartz](http://quartz-scheduler.org/documentation/quartz-2.1.x/quick-start)
+作业调度框架
+
+- [cassandra](http://cassandra.apache.org/)
+分布式缓存
+
+- [中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
+    
+- [Google Guava官方教程](http://ifeve.com/google-guava/)
+
+- [使用Spring进行面向切面编程（AOP）](http://shouce.jb51.net/spring/aop.html)
+
+- [聊一聊Spring AOP](http://yangfei520.blog.51cto.com/1041581/1273069)
+
+- [跟我学Shiro](http://jinnianshilongnian.iteye.com/blog/2018398)
+
+<h3>hit point</h3>
+
+[Better Java](https://www.seancassidy.me/better-java.html#style)
+
 [Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
-
-[中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
-
-[跟我学Shiro](http://jinnianshilongnian.iteye.com/blog/2018398)
-
-##### spring aop
-前段时间有些需要用spring aop实现的一些工作, 故查了一下资料:
-[使用Spring进行面向切面编程（AOP）](http://shouce.jb51.net/spring/aop.html)
-[聊一聊Spring AOP](http://yangfei520.blog.51cto.com/1041581/1273069)
-
-[分布式数据库](http://docs.hexnova.com/amoeba/)
-
-[cassandra分布式缓存](http://cassandra.apache.org/)
-
-[Akka -- 更加简单的可伸缩性、容错性、并发性、远程调用的Actor模型应用](http://akka.io/)
-
-[quartz -- 作业调度框架](http://quartz-scheduler.org/documentation/quartz-2.1.x/quick-start)
-
-[Protocol Buffer技术详解(语言规范)](http://www.cnblogs.com/stephen-liu74/archive/2013/01/02/2841485.html)
-
-[protobuf在netty里面的应用举例](http://blog.csdn.net/goldenfish1919/article/details/6719276)
-
-[google Protocol Buffers 入门](http://shitouer.cn/2013/04/google-protocol-buffers-tutorial/)
-
-[google protobuf与as3的通信协议](http://blog.csdn.net/luna84/article/details/8694767)
-
-[Google Guava官方教程](http://ifeve.com/google-guava/)
 
 [Netty 4.0 新的特性及需要注意的地方](http://www.oschina.net/translate/netty-4-0-new-and-noteworthy)
 
@@ -141,13 +147,7 @@ clojure速查手册
 
 [使用Netty实现通用二进制协议的高效数据传输](http://www.blogjava.net/hankchen/archive/2012/02/04/369378.html)
 
-[http://www.importnew.com/](http://www.importnew.com/)
-
-[Better Java](https://www.seancassidy.me/better-java.html#style)
-
-<http://j.outofmemory.cn/>
-
-<h2 id="js">JavaScript</h2>
+<h2 id="js">JavaScript前端开发</h2>
 -------
 
 [Bower](https://bower.io/)
@@ -196,6 +196,16 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 [前端工程化实践 之 整合 gulp/webpack](http://gold.xitu.io/entry/5774ed3da633bd0057fe07f4)
 
 <h1>工具</h1>
+
+<h2 id="ProtoBuff">ProtoBUff</h2>
+
+[Protocol Buffer技术详解(语言规范)](http://www.cnblogs.com/stephen-liu74/archive/2013/01/02/2841485.html)
+
+[protobuf在netty里面的应用举例](http://blog.csdn.net/goldenfish1919/article/details/6719276)
+
+[google Protocol Buffers 入门](http://shitouer.cn/2013/04/google-protocol-buffers-tutorial/)
+
+[google protobuf与as3的通信协议](http://blog.csdn.net/luna84/article/details/8694767)
 
 <h2 id="IDEs">IDEs</h2>
 
