@@ -104,12 +104,13 @@ clojure速查手册
 
 - [asynchronous communication for clojure](https://github.com/ztellman/aleph)
 
+- [Cursive is the Clojure IDE that understands your code(IDEA的一个clojure插件)](https://cursiveclojure.com/)
+
 <h2 id="Java">Java</h2>
 -------
 
-<http://j.outofmemory.cn/>
-
-[http://www.importnew.com/](http://www.importnew.com/)
+[importnew](http://www.importnew.com/)
+java为主的技术站点
 
 <h3>第三方库</h3>
 
@@ -137,15 +138,15 @@ clojure速查手册
 
 <h3>hit point</h3>
 
-[Better Java](https://www.seancassidy.me/better-java.html#style)
+- [Better Java](https://www.seancassidy.me/better-java.html#style)
 
-[Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
+- [Java 开发必会的 Linux 命令](http://www.oschina.net/news/69068/javaer-have-to-learn-linux-command)
 
-[Netty 4.0 新的特性及需要注意的地方](http://www.oschina.net/translate/netty-4-0-new-and-noteworthy)
+- [Netty 4.0 新的特性及需要注意的地方](http://www.oschina.net/translate/netty-4-0-new-and-noteworthy)
 
-[Netty5.x中新增和值得注意的点](http://www.coderli.com/netty-5-new-and-noteworthy/)
+- [Netty5.x中新增和值得注意的点](http://www.coderli.com/netty-5-new-and-noteworthy/)
 
-[使用Netty实现通用二进制协议的高效数据传输](http://www.blogjava.net/hankchen/archive/2012/02/04/369378.html)
+- [使用Netty实现通用二进制协议的高效数据传输](http://www.blogjava.net/hankchen/archive/2012/02/04/369378.html)
 
 <h2 id="js">JavaScript前端开发</h2>
 -------
@@ -228,43 +229,34 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [Keyboard Shortcuts You Cannot Miss](https://www.jetbrains.com/idea/help/keyboard-shortcuts-you-cannot-miss.html)
 
-[Cursive is the Clojure IDE that understands your code(IDEA的一个clojure插件)](https://cursiveclojure.com/)
-
 <h3 id="Vim">Vim</h3>
 -------
-[linux系统中VIM编辑器推荐安装插件](http://blog.csdn.net/gsls181711/article/details/40540787)
 
-[vim-airline - 狀態列顯示的好幫手](http://terrychen.logdown.com/posts/2014/10/18/vim-airline-status-bar-helper)
-
-[Vim - 适合自己的，才是最好的](http://geekplux.com/2015/06/06/vim-those-fit-yourself-are-the-best.html)
+[vim插件推荐](http://vimawesome.com/)
 
 [vi/vim使用进阶: 目录](http://easwy.com/blog/archives/advanced-vim-skills-catalog/)
 
-[无插件Vim编程技巧](http://coolshell.cn/articles/11312.html)
-
 [vim scripts](http://vim-scripts.org/vim/scripts.html)
 
-[所需即所获：像 IDE 一样使用 vim](https://github.com/yangyangwithgnu/use_vim_as_ide)
+<h4>hit point</h4>
 
-[将你的Vim 打造成轻巧强大的IDE](http://yuez.me/jiang-ni-de-vim-da-zao-cheng-qing-qiao-qiang-da-de-ide/)
+- [Vim - 适合自己的，才是最好的](http://geekplux.com/2015/06/06/vim-those-fit-yourself-are-the-best.html)
 
-[vim的简略配置](http://blog.kelu.org/linux/2015/01/12/vim-simple-config.html)
+- [无插件Vim编程技巧](http://coolshell.cn/articles/11312.html)
 
-[vim-go](https://github.com/fatih/vim-go)
+- [配置 VIM 的 Go 语言开发环境](http://wuwen.org/article/38/setup-vim-go-dev-environment.html)
 
-[配置 VIM 的 Go 语言开发环境](http://wuwen.org/article/38/setup-vim-go-dev-environment.html)
+- [Golang开发环境搭建-Vim篇](http://tonybai.com/2014/11/07/golang-development-environment-for-vim/)
 
-[vim安装markdown插件](http://www.jianshu.com/p/24aefcd4ca93)
+- [所需即所获：像 IDE 一样使用 vim](https://github.com/yangyangwithgnu/use_vim_as_ide)
 
-[My Clojure Toolchain: Vim](http://blog.venanti.us/clojure-vim/)
+- [将你的Vim 打造成轻巧强大的IDE](http://yuez.me/jiang-ni-de-vim-da-zao-cheng-qing-qiao-qiang-da-de-ide/)
 
-[Writing Clojure in Vim](https://robots.thoughtbot.com/writing-clojure-in-vim)
+- [My Clojure Toolchain: Vim](http://blog.venanti.us/clojure-vim/)
 
-[Programming Clojure with Vim (2013 edition)](http://www.deepbluelambda.org/programming/clojure/programming-clojure-with-vim-2013-edition)
+- [Writing Clojure in Vim](https://robots.thoughtbot.com/writing-clojure-in-vim)
 
-[Golang开发环境搭建-Vim篇](http://tonybai.com/2014/11/07/golang-development-environment-for-vim/)
-
-[vim插件推荐](http://vimawesome.com/)
+- [Programming Clojure with Vim (2013 edition)](http://www.deepbluelambda.org/programming/clojure/programming-clojure-with-vim-2013-edition)
 
 <h3 id="Emacs">Emacs</h3>
 -------
@@ -332,59 +324,70 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 <h1 id="优秀技术博客">优秀技术博客</h1>
 -------
-[worldhello](http://www.worldhello.net/)
+- [worldhello](http://www.worldhello.net/)
+蒋鑫 - git权威指南 作者, 博客内容以版本控制工具使用, 软件工程内容为主
 
-[雁起平沙的网络日志](http://yanping.me/cn/)
+- [雁起平沙的网络日志](http://yanping.me/cn/)
+雁起平沙 - jekyll+gitpage博客环境, R语言
 
-[https://blog.soimort.org/](https://blog.soimort.org/)
+- [Lambda in the Funhouse](https://blog.soimort.org/)
+函数式编程相关的内容
 
-[子龙山人](https://zilongshanren.com)
+- [子龙山人](https://zilongshanren.com)
+emacs, vim 使用达人; 21天学会emacs系列视频作者
 
-[Vimer的程序世界](http://www.vimer.cn)
+- [Vimer的程序世界](http://www.vimer.cn)
+vim使用者, 游戏服务器开发
 
-[codepiano](http://blog.codepiano.com/)
+- [codepiano](http://blog.codepiano.com/)
+vim使用者
 
-[代码时间](http://codetimecn.com/)
+- [代码时间](http://codetimecn.com/)
+采访各路大神的播客节目网站
 
-[adit的博客 函数式相关](http://adit.io/index.html)
+- [adit的博客](http://adit.io/index.html)
+函数式相关内容
 
-[riotgames的技术博客](http://engineering.riotgames.com/)
+- [deepinmind](http://it.deepinmind.com/)
+支付宝工程师有孚, 主要内容为java
 
-[并发编程网](http://ifeve.com/)
+- [四火的唠叨](http://www.raychase.net/)
+四火，Amazon程序员 全栈工程师
 
-[阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
+- [riotgames的技术博客](http://engineering.riotgames.com/)
+拳头公司, 嗯
 
-[酷 壳 – CoolShell.cn](http://coolshell.cn/)
+- [MacTalk-池建强的随想录](http://macshuo.com/)
+MacTalk作者, 软文为主
 
-[http://it.deepinmind.com/](http://it.deepinmind.com/)
+- [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
+杂谈
 
-[MacTalk-池建强的随想录](http://macshuo.com/)
+- [BlueDavy之技术blog](http://bluedavy.me/)
+java技术栈
 
-[何登成的技术博客](http://hedengcheng.com/)
+- [后端技术 by Tim Yang](http://timyang.net/)
+杂谈
 
-[http://yes2.me/](http://yes2.me/)
+- [Gaccob 的博客](http://www.gaccob.com/)
+游戏后台开发, 好长时间没更新了
 
-[http://mindhacks.cn/](http://mindhacks.cn/)
-
-[四火的唠叨](http://www.raychase.net/)
-
-[BlueDavy之技术blog](http://bluedavy.me/)
-
-[后端技术 by Tim Yang](http://timyang.net/)
-
-[Gaccob 的博客 - 游戏后台开发](http://www.gaccob.com/)
-
-[技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
+- [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
 
 <h1 id="杂项">杂项</h1>
 -------
 
-[electron](http://electron.atom.io/)
-Build cross platform desktop apps with JavaScript, HTML, and CSS
+[并发编程网](http://ifeve.com/)
+
+[酷 壳 – CoolShell.cn](http://coolshell.cn/)
+
+[out of memory 程序资讯网站](http://j.outofmemory.cn/)
+以java为主, 且有其他咨询的综合资讯站
 
 [玩转苹果](http://www.ifunmac.com/)
 
-[强迫症的 Mac 设置指南](https://github.com/macdao/ocds-guide-to-setting-up-mac)
+[electron](http://electron.atom.io/)
+Build cross platform desktop apps with JavaScript, HTML, and CSS
 
 [stackshare](http://stackshare.io/)
 
