@@ -18,7 +18,7 @@ excerpt_separator: <!--more-->
 因为需要启动两个tomcat实例, 所以需要修改其中一个实例的配置文件, 以避免端口号占用. (tomcat配置文件在/tomcat/conf/server.xml)
 
 ### apache配置
-```
+```xml
 LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
@@ -50,7 +50,7 @@ Allow from all
 * status=+H, 的意义为热备份(Hot Standby), 当主节点down掉, 才会访问+H的节点
 
 另外, 还需要在linux系统中, 设置一下:
-```
+```config
 /usr/sbin/setsebool httpd_can_network_connect 1
 ```
 
