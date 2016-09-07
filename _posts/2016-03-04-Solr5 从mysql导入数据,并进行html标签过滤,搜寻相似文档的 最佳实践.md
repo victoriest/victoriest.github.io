@@ -55,6 +55,7 @@ excerpt_separator: <!--more-->
 ```
 
 其中, data-config.xml文件是需要我们手动在solrconfig.xml中新建的, 内容如下:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <dataConfig>
