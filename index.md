@@ -196,6 +196,10 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [前端工程化实践 之 整合 gulp/webpack](http://gold.xitu.io/entry/5774ed3da633bd0057fe07f4)
 
+[React 技术栈系列教程](http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html)
+
+[es5标准](http://yanhaijing.com/es5/#20)
+
 <h1>工具</h1>
 
 <h2 id="ProtoBuff">ProtoBUff</h2>
