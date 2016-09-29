@@ -22,6 +22,7 @@ title: about
 	* [Storm相关](#Storm相关)
     * [Docker](#Docker)
 * [优秀技术博客](#优秀技术博客)
+* [机器学习](#ML)
 * [杂项](#杂项)
 	* [mac/ios开发相关](#mac/ios)
 	* [mysql数据库配置部署相关](#mysql数据库配置部署相关)
@@ -377,6 +378,14 @@ java技术栈
 游戏后台开发, 好长时间没更新了
 
 - [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
+
+<h1 id="ML">机器学习</h1>
+
+[10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
+
+[机器学习最佳入门学习资料汇总](http://article.yeeyan.org/view/22139/410514)
+
+[R语言官方文档](https://cran.r-project.org/other-docs.html)
 
 <h1 id="杂项">杂项</h1>
 -------
