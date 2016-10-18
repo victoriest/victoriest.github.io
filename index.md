@@ -335,9 +335,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 - [雁起平沙的网络日志](http://yanping.me/cn/)
 雁起平沙 - jekyll+gitpage博客环境, R语言
 
-- [Lambda in the Funhouse](https://blog.soimort.org/)
-函数式编程相关的内容
-
 - [子龙山人](https://zilongshanren.com)
 emacs, vim 使用达人; 21天学会emacs系列视频作者
 
