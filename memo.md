@@ -329,6 +329,8 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 <h1 id="优秀技术博客">优秀技术博客</h1>
 -------
+- [我爱计算机](http://www.52cs.org/)
+
 - [worldhello](http://www.worldhello.net/)
 蒋鑫 - git权威指南 作者, 博客内容以版本控制工具使用, 软件工程内容为主
 
@@ -386,6 +388,9 @@ java技术栈
 
 <h1 id="杂项">杂项</h1>
 -------
+[微广场](http://www.iwgc.cn/)
+
+[Best Free Apps For Mac](http://xclient.info/)
 
 [并发编程网](http://ifeve.com/)
 
