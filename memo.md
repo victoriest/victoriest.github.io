@@ -329,6 +329,9 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 <h1 id="优秀技术博客">优秀技术博客</h1>
 -------
+- [粉丝日志](http://blog.fens.me/)
+跨界的IT博客|Hadoop家族, R, RHadoop, Nodejs, AngularJS, NoSQL, IT金融
+
 - [花钱的年华](http://calvin1978.blogcn.com/)
 江南白衣，公众号：春天的旁边  java & python相关
 
