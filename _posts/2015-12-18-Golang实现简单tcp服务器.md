@@ -1,3 +1,13 @@
+---
+layout: post
+title: "Golang实现简单tcp服务器"
+date: 2015-11-18
+description: Golang实现简单tcp服务器
+tags:
+ - golang
+excerpt_separator: <!--more-->
+---
+
 ## 概述
 
 Golang作为一门近些年来非常风光的开发语言, 其实用范围很广, 图形界面, web框架, 图像引擎等等.
@@ -12,6 +22,9 @@ goroutine是一种轻量型的线程, 作为golang语言的语言特性, 可以�
 实验01:
 
 在**实验环境**的**主文件夹**里, 建立一个名为test.go的文本文档, 并开始编写以下代码
+
+<!--more-->
+
 ```go
 	package main
 
