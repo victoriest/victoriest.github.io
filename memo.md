@@ -333,6 +333,15 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 <h1 id="优秀技术博客">优秀技术博客</h1>
 -------
+- [http://www.jianshu.com/users/90ab66c248e6/latest_articles](http://www.jianshu.com/users/90ab66c248e6/latest_articles)
+java后端相关博客
+
+- [鸟窝](http://colobu.com/)
+golang相关的一个博客
+
+- [码农周刊](http://weekly.manong.io/)
+码农周刊是一份专为程序员打造的IT技术周刊。我们会为你精选一周IT技术干货，每周一发送
+
 - [brook's blog](https://uedsky.com/)
 讲前端的博客
 
