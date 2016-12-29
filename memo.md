@@ -86,7 +86,7 @@ XORM - eXtra ORM for Go 一个简单而强大的 Go 语言 ORM 框架
 - [braveclojure](http://www.braveclojure.com/)
 一本比较好的入门在线读物
 
-- [Clojure – Functional Programming for the JVM中文版](http://xumingming.sinaapp.com/302/clojure-functional-programming-for-the-jvm-clojure-tutorial/)
+- [Clojure – Functional Programming for the JVM中文版](http://java.ociweb.com/mark/clojure/article_cn.html)
 Clojure入门教程
 
 - [Clojure 的洞穴](http://wangjinquan.me/show/Clojure%20%E7%9A%84%E6%B4%9E%E7%A9%B4)
