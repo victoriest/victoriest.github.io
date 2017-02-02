@@ -37,7 +37,7 @@ electron不能直接利用edge.js调用.net的dll, 需要用electron-edge
 ##实现
 
 ### c#部分实现
-```CSharp
+```csharp
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -60,7 +60,7 @@ namespace TestEdgeForNodejs
 ### js部分实现
 
 main.js
-```js
+```javascript
 const edge = require('electron-edge');
 const electron=require("electron");
 const app=electron.app;
@@ -130,7 +130,18 @@ index.html
 </html>
 ```
 
-## 不足
+### 运行
+在命令行中, 进入electron工程所在的目录.
+```
+electron .
+```
 
-# 结论
+### 数据通讯
+通过edge-electron可以进行双向的数据传递[https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js](https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js)
+
+### 不足
+到目前为止, 还没有找到类似于在electron中监听c#dll中发出的event的方法. 而目前客户端代码中大量使用了这种形式来控制UI显示状态, 如若转换架构, 涉及到修改重构的代码量会比较大.
+
+### 阶段性结论
+在找到能够监听c#dll发出的event的方法(或等价方法)前, 暂不考虑此方案. 
 <!--more-->
