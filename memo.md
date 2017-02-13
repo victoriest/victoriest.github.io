@@ -411,8 +411,14 @@ java技术栈
 
 [R语言官方文档](https://cran.r-project.org/other-docs.html)
 
+[TensorFlow的中文网站](http://tensorfly.cn/tfdoc/get_started/introduction.html)
+
 <h1 id="杂项">杂项</h1>
 -------
+[优达学城 - 各个大牛公司出的技术教程视频](https://cn.udacity.com/)
+
+[Datacamp 关于python与R语言的机器学习相关的视频教程](https://www.datacamp.com/courses/)
+
 [微信公众号阅读器](https://next.36kr.com/posts/collections/271)
 
 [微广场](http://www.iwgc.cn/)
