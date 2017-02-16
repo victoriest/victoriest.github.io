@@ -34,7 +34,7 @@ electron不能直接利用edge.js调用.net的dll, 需要用electron-edge
 
 # 调查
 
-##实现
+## 实现
 
 ### c#部分实现
 ```csharp

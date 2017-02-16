@@ -2,6 +2,7 @@
 layout: page
 title: Blog archive
 ---
+
 <div class="page-content wc-container">
 	<div class="post">
 		<h1>Blog Archive</h1>  
@@ -15,5 +16,7 @@ title: Blog archive
 				{% endif %}
 			<li><a href="{{ post.url | prepend: site.baseurl | prepend: site.url}}">{{ post.title }}</a></li>
 	{% endfor %}
+	<!--
 	</div>
 </div>
+-->
