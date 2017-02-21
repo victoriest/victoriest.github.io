@@ -24,7 +24,7 @@ social:
   # linkedin:
   # instagram: 
   # lastfm:
-  # rss:
+  rss: feed.xml
 
 # Google Analytics key, leave blank to ignore
 google_analytics_key:
@@ -51,3 +51,6 @@ kramdown:
   hard_wrap: true
 
 # exclude: ['README.md', 'LICENSE']
+
+gems:
+  - jekyll-feed
