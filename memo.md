@@ -29,6 +29,94 @@ title: about
     * [个人站点搭建(jekyll & git-page)](#jekyll)
 * [游戏开发](#游戏开发)
 
+<h1 id="杂项">杂项</h1>
+-------
+[http://www.icourse163.org/](http://www.icourse163.org/)
+
+[mooc 国内的在线教育视频门户网站](http://mooc.guokr.com/course/)
+
+[coursera 优秀的国外在线教育视频网站](https://www.coursera.org/)
+
+[优达学城 - 各个大牛公司出的技术教程视频](https://cn.udacity.com/)
+
+[Datacamp 关于python与R语言的机器学习相关的视频教程](https://www.datacamp.com/courses/)
+
+[微信公众号阅读器](https://next.36kr.com/posts/collections/271)
+
+[微广场](http://www.iwgc.cn/)
+
+[Best Free Apps For Mac](http://xclient.info/)
+
+[并发编程网](http://ifeve.com/)
+
+[酷 壳 – CoolShell.cn](http://coolshell.cn/)
+
+[out of memory 程序资讯网站](http://j.outofmemory.cn/)
+以java为主, 且有其他咨询的综合资讯站
+
+[玩转苹果](http://www.ifunmac.com/)
+
+[electron](http://electron.atom.io/)
+Build cross platform desktop apps with JavaScript, HTML, and CSS
+
+[stackshare](http://stackshare.io/)
+
+[showterm](http://showterm.io/)
+
+[assciinema](https://asciinema.org/)
+
+[Gradle学习系列](http://www.cnblogs.com/davenkin/p/gradle-learning-1.html)
+
+[极客学院](http://www.jikexueyuan.com/)
+
+[慧智网 - 一个在线学习it技能的网站](http://www.hubwiz.com/)
+
+[百度的api store](http://apistore.baidu.com/)
+
+[零基础入门学习汇编语言](http://www.tudou.com/playlist/id/14918629/)
+
+[100万并发连接服务器笔记之1M并发连接目标达成](http://www.blogjava.net/yongboy/archive/2013/04/11/397677.html)
+
+[免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
+
+[大数据/数据挖掘/推荐系统/机器学习相关资源](https://github.com/Flowerowl/Big-Data-Resources)
+
+[直播写代码的网站](https://www.livecoding.tv)
+
+[StuQ 技能图](https://git.oschina.net/stuq/skill-map/)
+
+<h2 id="mac/ios">mac/ios开发相关</h2>
+
+[OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
+
+[apple官方开发者页面](https://developer.apple.com/programs/)
+
+[马上着手开发Mac应用程序](http://www.cocoachina.com/industry/20131211/7517.html)
+
+[Swift学习教程](http://letsswift.com/category/swiftguide/language-guide/page/3/)
+
+[戴维营教育-零基础iOS8-Swift编程开发教程](http://www.swiftv.cn/course/hwlrt694)
+
+[10个最佳的 Swift 教程实例](http://www.oschina.net/translate/best-swift-tutorials-with-examples)
+
+<h2 id="mysql数据库配置部署相关">mysql数据库配置部署相关</h2>
+
+[mysql主从复制](http://369369.blog.51cto.com/319630/790921)
+
+[高性能Mysql主从架构的复制原理及配置详解](http://blog.csdn.net/hguisu/article/details/7325124)
+
+[在linux同一台主机下面搭建两个mysql 实例并实现主从复制 (一)](http://www.it165.net/database/html/201404/6178.html)
+
+[在linux同一台主机下面搭建两个mysql 实例并实现主从复制(二)](http://www.it165.net/database/html/201404/6179.html)
+
+<h2 id="jekyll">个人站点搭建(jekyll & git-page)</h2>
+
+[通过GitHub Pages建立个人站点（详细步骤）](http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
+
+[http://jekyllcn.com/](http://jekyllcn.com/)
+
+[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)
+
 <h1 id="开发语言">开发语言</h1>
 
 <h2 id="Golang">Golang</h2>
@@ -412,94 +500,6 @@ java技术栈
 [R语言官方文档](https://cran.r-project.org/other-docs.html)
 
 [TensorFlow的中文网站](http://tensorfly.cn/tfdoc/get_started/introduction.html)
-
-<h1 id="杂项">杂项</h1>
--------
-[http://www.icourse163.org/](http://www.icourse163.org/)
-
-[mooc 国内的在线教育视频门户网站](http://mooc.guokr.com/course/)
-
-[coursera 优秀的国外在线教育视频网站](https://www.coursera.org/)
-
-[优达学城 - 各个大牛公司出的技术教程视频](https://cn.udacity.com/)
-
-[Datacamp 关于python与R语言的机器学习相关的视频教程](https://www.datacamp.com/courses/)
-
-[微信公众号阅读器](https://next.36kr.com/posts/collections/271)
-
-[微广场](http://www.iwgc.cn/)
-
-[Best Free Apps For Mac](http://xclient.info/)
-
-[并发编程网](http://ifeve.com/)
-
-[酷 壳 – CoolShell.cn](http://coolshell.cn/)
-
-[out of memory 程序资讯网站](http://j.outofmemory.cn/)
-以java为主, 且有其他咨询的综合资讯站
-
-[玩转苹果](http://www.ifunmac.com/)
-
-[electron](http://electron.atom.io/)
-Build cross platform desktop apps with JavaScript, HTML, and CSS
-
-[stackshare](http://stackshare.io/)
-
-[showterm](http://showterm.io/)
-
-[assciinema](https://asciinema.org/)
-
-[Gradle学习系列](http://www.cnblogs.com/davenkin/p/gradle-learning-1.html)
-
-[极客学院](http://www.jikexueyuan.com/)
-
-[慧智网 - 一个在线学习it技能的网站](http://www.hubwiz.com/)
-
-[百度的api store](http://apistore.baidu.com/)
-
-[零基础入门学习汇编语言](http://www.tudou.com/playlist/id/14918629/)
-
-[100万并发连接服务器笔记之1M并发连接目标达成](http://www.blogjava.net/yongboy/archive/2013/04/11/397677.html)
-
-[免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
-
-[大数据/数据挖掘/推荐系统/机器学习相关资源](https://github.com/Flowerowl/Big-Data-Resources)
-
-[直播写代码的网站](https://www.livecoding.tv)
-
-[StuQ 技能图](https://git.oschina.net/stuq/skill-map/)
-
-<h2 id="mac/ios">mac/ios开发相关</h2>
-
-[OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
-
-[apple官方开发者页面](https://developer.apple.com/programs/)
-
-[马上着手开发Mac应用程序](http://www.cocoachina.com/industry/20131211/7517.html)
-
-[Swift学习教程](http://letsswift.com/category/swiftguide/language-guide/page/3/)
-
-[戴维营教育-零基础iOS8-Swift编程开发教程](http://www.swiftv.cn/course/hwlrt694)
-
-[10个最佳的 Swift 教程实例](http://www.oschina.net/translate/best-swift-tutorials-with-examples)
-
-<h2 id="mysql数据库配置部署相关">mysql数据库配置部署相关</h2>
-
-[mysql主从复制](http://369369.blog.51cto.com/319630/790921)
-
-[高性能Mysql主从架构的复制原理及配置详解](http://blog.csdn.net/hguisu/article/details/7325124)
-
-[在linux同一台主机下面搭建两个mysql 实例并实现主从复制 (一)](http://www.it165.net/database/html/201404/6178.html)
-
-[在linux同一台主机下面搭建两个mysql 实例并实现主从复制(二)](http://www.it165.net/database/html/201404/6179.html)
-
-<h2 id="jekyll">个人站点搭建(jekyll & git-page)</h2>
-
-[通过GitHub Pages建立个人站点（详细步骤）](http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
-
-[http://jekyllcn.com/](http://jekyllcn.com/)
-
-[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)
 
 <h3>jekyll主题相关</h3>
 
