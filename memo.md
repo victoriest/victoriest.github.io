@@ -415,6 +415,12 @@ java技术栈
 
 <h1 id="杂项">杂项</h1>
 -------
+[http://www.icourse163.org/](http://www.icourse163.org/)
+
+[mooc 国内的在线教育视频门户网站](http://mooc.guokr.com/course/)
+
+[coursera 优秀的国外在线教育视频网站](https://www.coursera.org/)
+
 [优达学城 - 各个大牛公司出的技术教程视频](https://cn.udacity.com/)
 
 [Datacamp 关于python与R语言的机器学习相关的视频教程](https://www.datacamp.com/courses/)
