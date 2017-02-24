@@ -29,6 +29,78 @@ title: about
     * [个人站点搭建(jekyll & git-page)](#jekyll)
 * [游戏开发](#游戏开发)
 
+<h1 id="优秀技术博客">优秀技术博客</h1>
+-------
+- [http://www.jianshu.com/users/90ab66c248e6/latest_articles](http://www.jianshu.com/users/90ab66c248e6/latest_articles)
+java后端相关博客
+
+- [鸟窝](http://colobu.com/)
+golang相关的一个博客
+
+- [码农周刊](http://weekly.manong.io/)
+码农周刊是一份专为程序员打造的IT技术周刊。我们会为你精选一周IT技术干货，每周一发送
+
+- [brook's blog](https://uedsky.com/)
+讲前端的博客
+
+- [颜海镜](http://yanhaijing.com/)
+颜海镜 专注Web前端
+
+- [粉丝日志](http://blog.fens.me/)
+跨界的IT博客|Hadoop家族, R, RHadoop, Nodejs, AngularJS, NoSQL, IT金融
+
+- [花钱的年华](http://calvin1978.blogcn.com/)
+江南白衣，公众号：春天的旁边  java & python相关
+
+- [我爱计算机](http://www.52cs.org/)
+
+- [worldhello](http://www.worldhello.net/)
+蒋鑫 - git权威指南 作者, 博客内容以版本控制工具使用, 软件工程内容为主
+
+- [雁起平沙的网络日志](http://yanping.me/cn/)
+雁起平沙 - jekyll+gitpage博客环境, R语言
+
+- [子龙山人](https://zilongshanren.com)
+emacs, vim 使用达人; 21天学会emacs系列视频作者
+
+- [Vimer的程序世界](http://www.vimer.cn)
+vim使用者, 游戏服务器开发
+
+- [codepiano](http://blog.codepiano.com/)
+vim使用者
+
+- [代码时间](http://codetimecn.com/)
+采访各路大神的播客节目网站
+
+- [adit的博客](http://adit.io/index.html)
+函数式相关内容
+
+- [deepinmind](http://it.deepinmind.com/)
+支付宝工程师有孚, 主要内容为java
+
+- [四火的唠叨](http://www.raychase.net/)
+四火，Amazon程序员 全栈工程师
+
+- [riotgames的技术博客](http://engineering.riotgames.com/)
+拳头公司, 嗯
+
+- [MacTalk-池建强的随想录](http://macshuo.com/)
+MacTalk作者, 软文为主
+
+- [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
+杂谈
+
+- [BlueDavy之技术blog](http://bluedavy.me/)
+java技术栈
+
+- [后端技术 by Tim Yang](http://timyang.net/)
+杂谈
+
+- [Gaccob 的博客](http://www.gaccob.com/)
+游戏后台开发, 好长时间没更新了
+
+- [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
+
 <h1 id="杂项">杂项</h1>
 -------
 [http://www.icourse163.org/](http://www.icourse163.org/)
@@ -395,8 +467,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [Storm开发环境快速搭建（单机、集群模式)](http://www.flyne.org/article/181)
 
-[徐明明的博客 - 里面有不少关于storm 的翻译与原创文章](http://xumingming.sinaapp.com/category/storm/)
-
 [zookeeper入门（1）在单机上实现ZooKeeper伪机群/伪集群部署](http://blog.csdn.net/poechant/article/details/6633923)
 
 [Storm集群安装部署步骤](http://www.cnblogs.com/panfeng412/archive/2012/11/30/how-to-install-and-deploy-storm-cluster.html)
@@ -418,78 +488,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 [一站式 Docker 服务](http://www.dockerpool.com/)
 
 <https://docker.cn/p/docker-base-dockerfile-java-dev>
-
-<h1 id="优秀技术博客">优秀技术博客</h1>
--------
-- [http://www.jianshu.com/users/90ab66c248e6/latest_articles](http://www.jianshu.com/users/90ab66c248e6/latest_articles)
-java后端相关博客
-
-- [鸟窝](http://colobu.com/)
-golang相关的一个博客
-
-- [码农周刊](http://weekly.manong.io/)
-码农周刊是一份专为程序员打造的IT技术周刊。我们会为你精选一周IT技术干货，每周一发送
-
-- [brook's blog](https://uedsky.com/)
-讲前端的博客
-
-- [颜海镜](http://yanhaijing.com/)
-颜海镜 专注Web前端
-
-- [粉丝日志](http://blog.fens.me/)
-跨界的IT博客|Hadoop家族, R, RHadoop, Nodejs, AngularJS, NoSQL, IT金融
-
-- [花钱的年华](http://calvin1978.blogcn.com/)
-江南白衣，公众号：春天的旁边  java & python相关
-
-- [我爱计算机](http://www.52cs.org/)
-
-- [worldhello](http://www.worldhello.net/)
-蒋鑫 - git权威指南 作者, 博客内容以版本控制工具使用, 软件工程内容为主
-
-- [雁起平沙的网络日志](http://yanping.me/cn/)
-雁起平沙 - jekyll+gitpage博客环境, R语言
-
-- [子龙山人](https://zilongshanren.com)
-emacs, vim 使用达人; 21天学会emacs系列视频作者
-
-- [Vimer的程序世界](http://www.vimer.cn)
-vim使用者, 游戏服务器开发
-
-- [codepiano](http://blog.codepiano.com/)
-vim使用者
-
-- [代码时间](http://codetimecn.com/)
-采访各路大神的播客节目网站
-
-- [adit的博客](http://adit.io/index.html)
-函数式相关内容
-
-- [deepinmind](http://it.deepinmind.com/)
-支付宝工程师有孚, 主要内容为java
-
-- [四火的唠叨](http://www.raychase.net/)
-四火，Amazon程序员 全栈工程师
-
-- [riotgames的技术博客](http://engineering.riotgames.com/)
-拳头公司, 嗯
-
-- [MacTalk-池建强的随想录](http://macshuo.com/)
-MacTalk作者, 软文为主
-
-- [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
-杂谈
-
-- [BlueDavy之技术blog](http://bluedavy.me/)
-java技术栈
-
-- [后端技术 by Tim Yang](http://timyang.net/)
-杂谈
-
-- [Gaccob 的博客](http://www.gaccob.com/)
-游戏后台开发, 好长时间没更新了
-
-- [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
 
 <h1 id="ML">机器学习</h1>
 
