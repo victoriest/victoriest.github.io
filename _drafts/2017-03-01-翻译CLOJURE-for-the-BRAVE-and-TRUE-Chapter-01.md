@@ -1,0 +1,224 @@
+---
+layout: post
+title: 翻译CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01
+date: 2017-02-04
+description: 翻译CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01
+tags:
+ - clojure
+excerpt_separator: <!--more-->
+---
+
+# Building, Running, and the REPL
+
+这一章里, 你将花费少量时间使用快速简单的方法, 来熟悉构建和运行一个Clojure程序. 让一个程序真正跑起来感觉很棒. 达到这个目标后, 可以让你去试验以及分享自己的工作, 并可以在还用着老旧语言的同事们面前装B. 这可以让你保持动力.
+
+同时你也会学习到如何使用REPL(Read-Eval-Print)在一个运行过程中的进程立即执行指定代码, 这让你可以快速的验证你对语言的理解并让学习更加高效. 
+
+但首先, 我将简要介绍Clojure. 接着, 我将介绍Leiningen, 它基本上算是Clojure的标准构建工具. 在本章结束时, 您将学会如何执行以下操作:
+
+* 使用Leiningen创建一个Clojure工程
+* 将工程打包成一个可执行的jar文件
+* 执行jar文件
+* 在Clojure REPL中执行键入的代码
+
+## 首先得首先: 什么是Clojure?
+
+Clojure was forged in a mythic volcano by Rich Hickey. Using an alloy of Lisp, functional programming, and a lock of his own epic hair, he crafted a language that’s delightful yet powerful. Its Lisp heritage gives you the power to write code more expressively than is possible in most non-Lisp languages, and its distinct take on functional programming will sharpen your thinking as a programmer. Plus, Clojure gives you better tools for tackling complex domains (like concurrent programming) that are traditionally known to drive developers into years of therapy.
+
+When talking about Clojure, though, it’s important to keep in mind the distinction between the Clojure language and the Clojure compiler. The Clojure language is a Lisp dialect with a functional emphasis whose syntax and semantics are independent of any implementation. The compiler is an executable JAR file, clojure.jar, which takes code written in the Clojure language and compiles it to Java Virtual Machine ( JVM) bytecode. You’ll see Clojure used to refer to both the language and the compiler, which can be confusing if you’re not aware that they’re separate things. But now that you’re aware, you’ll be fine.
+
+This distinction is necessary because, unlike most programming languages like Ruby, Python, C, and a bazillion others, Clojure is a hosted language. Clojure programs are executed within a JVM and rely on the JVM for core features like threading and garbage collection. Clojure also targets JavaScript and the Microsoft Common Language Runtime (CLR), but this book only focuses on the JVM implementation.
+
+We’ll explore the relationship between Clojure and the JVM more later on, but for now the main concepts you need to understand are these:
+
+* JVM processes execute Java bytecode.
+* Usually, the Java Compiler produces Java bytecode from Java source code.
+* JAR files are collections of Java bytecode.
+* Java programs are usually distributed as JAR files.
+* The Java program clojure.jar reads Clojure source code and produces Java bytecode.
+* That Java bytecode is then executed by the same JVM process already running clojure.jar.
+
+Clojure continues to evolve. As of this writing, it’s at version 1.7.0, and development is going strong. If you’re reading this book in the far future and Clojure has a higher version number, don’t worry! This book covers Clojure’s fundamentals, which shouldn’t change from one version to the next. There’s no need for your robot butler to return this book to the bookstore.
+
+Now that you know what Clojure is, let’s actually build a freakin’ Clojure program!
+
+## Leiningen
+
+These days, most Clojurists use Leiningen to build and manage their projects. You can read a full description of Leiningen in Appendix A, but for now we’ll focus on using it for four tasks:
+
+1. Creating a new Clojure project
+2. Running the Clojure project
+3. Building the Clojure project
+4. Using the REPL
+
+Before continuing, make sure you have Java version 1.6 or later installed. You can check your version by running java -version in your terminal, and download the latest Java Runtime Environment (JRE) from http://www.oracle.com/technetwork/java/javase/downloads/index.html. Then, install Leiningen using the instructions on the Leiningen home page at http://leiningen.org/ (Windows users, note there’s a Windows installer). When you install Leiningen, it automatically downloads the Clojure compiler, clojure.jar.
+
+### Creating a New Clojure Project
+
+Creating a new Clojure project is very simple. A single Leiningen command creates a project skeleton. Later, you’ll learn how to do tasks like incorporate Clojure libraries, but for now, these instructions will enable you to execute the code you write.
+
+Go ahead and create your first Clojure project by typing the following in your terminal:
+
+```
+lein new app clojure-noob
+```
+
+This command should create a directory structure that looks similar to this (it’s okay if there are some differences):
+
+```
+| .gitignore
+| doc
+| | intro.md
+➊ | project.clj
+| README.md
+➋ | resources
+| src
+| | clojure_noob
+➌ | | | core.clj
+➍ | test
+| | clojure_noob
+| | | core_test.clj
+```
+
+This project skeleton isn’t inherently special or Clojure-y. It’s just a convention used by Leiningen. You’ll be using Leiningen to build and run Clojure apps, and Leiningen expects your app to have this structure. The first file of note is project.clj at ➊, which is a configuration file for Leiningen. It helps Leiningen answer such questions as “What dependencies does this project have?” and “When this Clojure program runs, what function should run first?” In general, you’ll save your source code in src/<project_name>. In this case, the file src/clojure_noob/core.clj at ➌ is where you’ll be writing your Clojure code for a while. The test directory at ➍ obviously contains tests, and resources at ➋ is where you store assets like images.
+
+### Running the Clojure Project
+
+Now let’s actually run the project. Open src/clojure_noob/core.clj in your favorite editor. You should see this:
+
+```clojure
+➊ (ns clojure-noob.core
+  (:gen-class))
+
+➋ (defn -main
+  "I don't do a whole lot...yet."
+  [& args]
+➌   (println "Hello, World!"))
+```
+
+The lines at ➊ declare a namespace, which you don’t need to worry about right now. The -main function at ➋ is the entry point to your program, a topic that is covered in Appendix A. For now, replace the text "Hello, World!" at ➌ with "I'm a little teapot!". The full line should read (println "I'm a little teapot!")).
+
+Next, navigate to the clojure_noob directory in your terminal and enter:
+
+```
+lein run
+```
+
+You should see the output "I'm a little teapot!" Congratulations, little teapot, you wrote and executed a program!
+
+You’ll learn more about what’s actually happening in the program as you read through the book, but for now all you need to know is that you created a function, -main, and that function runs when you execute lein run at the command line.
+
+### Building the Clojure Project
+
+Using lein run is great for trying out your code, but what if you want to share your work with people who don’t have Leiningen installed? To do that, you can create a stand-alone file that anyone with Java installed (which is basically everyone) can execute. To create the file, run this:
+
+```
+lein uberjar
+```
+
+This command creates the file target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar. You can make Java execute it by running this:
+
+```
+java -jar target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar
+```
+
+Look at that! The file target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar is your new, award-winning Clojure program, which you can distribute and run on almost any platform.
+
+You now have all the basic details you need to build, run, and distribute (very) basic Clojure programs. In later chapters, you’ll learn more details about what Leiningen is doing when you run the preceding commands, gaining a complete understanding of Clojure’s relationship to the JVM and how you can run production code.
+
+Before we move on to Chapter 2 and discuss the wonder and glory of Emacs, let’s go over another important tool: the REPL.
+
+### Using the REPL
+
+The REPL is a tool for experimenting with code. It allows you to interact with a running program and quickly try out ideas. It does this by presenting you with a prompt where you can enter code. It then reads your input, evaluates it, prints the result, and loops, presenting you with a prompt again.
+
+This process enables a quick feedback cycle that isn’t possible in most other languages. I strongly recommend that you use it frequently because you’ll be able to quickly check your understanding of Clojure as you learn. Besides that, REPL development is an essential part of the Lisp experience, and you’d really be missing out if you didn’t use it.
+
+To start a REPL, run this:
+
+```
+lein repl
+```
+
+The output should look like this:
+
+```
+nREPL server started on port 28925
+REPL-y 0.1.10
+Clojure 1.7.0
+    Exit: Control+D or (exit) or (quit)
+Commands: (user/help)
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+          (user/sourcery function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+Examples from clojuredocs.org: [clojuredocs or cdoc]
+          (user/clojuredocs name-here)
+          (user/clojuredocs "ns-here" "name-here")
+clojure-noob.core=>
+```
+
+The last line, `clojure-noob.core=>`, tells you that you’re in the `clojure-noob.core` namespace. You’ll learn about namespaces later, but for now notice that the namespace basically matches the name of your src/clojure_noob/core.clj file. Also, notice that the REPL shows the version as Clojure 1.7.0, but as mentioned earlier, everything will work okay no matter which version you use.
+
+The prompt also indicates that your code is loaded in the REPL, and you can execute the functions that are defined. Right now only one function, `-main`, is defined. Go ahead and execute it now:
+
+```clojure
+clojure-noob.core=> (-main)
+I'm a little teapot!
+nil
+```
+
+Well done! You just used the REPL to evaluate a function call. Try a few more basic Clojure functions:
+
+```clojure
+clojure-noob.core=> (+ 1 2 3 4)
+10
+clojure-noob.core=> (* 1 2 3 4)
+24
+clojure-noob.core=> (first [1 2 3 4])
+1
+```
+
+Awesome! You added some numbers, multiplied some numbers, and took the first element from a vector. You also had your first encounter with weird Lisp syntax! All Lisps, Clojure included, employ prefix notation, meaning that the operator always comes first in an expression. If you’re unsure about what that means, don’t worry. You’ll learn all about Clojure’s syntax soon.
+
+Conceptually, the REPL is similar to Secure Shell (SSH). In the same way that you can use SSH to interact with a remote server, the Clojure REPL allows you to interact with a running Clojure process. This feature can be very powerful because you can even attach a REPL to a live production app and modify your program as it runs. For now, though, you’ll be using the REPL to build your knowledge of Clojure syntax and semantics.
+
+One more note: going forward, this book will present code without REPL prompts, but please do try the code! Here’s an example:
+
+```clojure
+(do (println "no prompt here!")
+   (+ 1 3))
+; => no prompt here!
+; => 4
+```
+
+When you see code snippets like this, lines that begin with `; =>` indicate the output of the code being run. In this case, the text `no prompt here` should be printed, and the return value of the code is 4.
+
+## Clojure Editors
+
+At this point you should have the basic knowledge you need to begin learning the Clojure language without having to fuss with an editor or integrated development environment (IDE). But if you do want a good tutorial on a powerful editor, Chapter 2 covers Emacs, the most popular editor among Clojurists. You absolutely do not need to use Emacs for Clojure development, but Emacs offers tight integration with the Clojure REPL and is well-suited to writing Lisp code. What’s most important, however, is that you use whatever works for you.
+
+If Emacs isn’t your cup of tea, here are some resources for setting up other text editors and IDEs for Clojure development:
+
+* This YouTube video will show you how to set up Sublime Text 2 for Clojure development: http://www.youtube.com/watch?v=wBl0rYXQdGg/.
+* Vim has good tools for Clojure development. This article is a good starting point: http://mybuddymichael.com/writings/writing-clojure-with-vim-in-2013.html.
+* Counterclockwise is a highly recommended Eclipse plug-in: https://github.com/laurentpetit/ccw/wiki/GoogleCodeHome.
+* Cursive Clojure is the recommended IDE for those who use IntelliJ: https://cursiveclojure.com/
+* Nightcode is a simple, free IDE written in Clojure: https://github.com/oakes/Nightcode/.
+
+## Summary
+
+I’m so proud of you, little teapot. You’ve run your first Clojure program! Not only that, but you’ve become acquainted with the REPL, one of the most important tools for developing Clojure software. Amazing! It brings to mind the immortal lines from “Long Live” by one of my personal heroes:
+
+```
+You held your head like a hero
+On a history book page
+It was the end of a decade
+But the start of an age
+—Taylor Swift
+```
+
+Bravo!
+
+<!--more-->
