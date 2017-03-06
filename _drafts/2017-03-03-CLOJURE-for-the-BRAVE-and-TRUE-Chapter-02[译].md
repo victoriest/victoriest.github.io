@@ -8,25 +8,26 @@ tags:
 excerpt_separator: <!--more-->
 ---
 
-# Do Things: A Clojure Crash Course
+# 搞事情 : Clojure急速教程
 
-It’s time to learn how to actually do things with Clojure! Hot damn! Although you’ve undoubtedly heard of Clojure’s awesome concurrency support and other stupendous features, Clojure’s most salient characteristic is that it is a Lisp. In this chapter, you’ll explore the elements that compose this Lisp core: syntax, functions, and data. Together they will give you a solid foundation for representing and solving problems in Clojure.
+是时候学着用Clojure搞些事情了! 虽然你肯定知道Clojure的并发支持和其他的一些特性很叼, 但Clojure的最突出的特性是: 它是个Lisp. 本章中, 你将探索关于Lisp的核心元素:语法, 函数和数据(syntax, functions, and data). 它们会为你使用Clojure提供坚实的基础.
 
-After laying this groundwork, you will be able to write some super important code. In the last section, you’ll tie everything together by creating a model of a hobbit and writing a function to hit it in a random spot. Super! Important!
+在打下基础后, 你将会开始写一些超关键的代码. 本章的最后一节中, 你将运用你学到的所有知识来创建一个hobbit的模型( a model of a hobbit)并提供一个随机点击的函数. 
 
-As you move through the chapter, I recommend that you type the examples in a REPL and run them. Programming in a new language is a skill, and just like yodeling or synchronized swimming, you have to practice to learn it. By the way, Synchronized Swimming for Yodelers for the Brave and True will be published in August of 20never. Keep an eye out for it!
+当读完本章后, 我建议你在REPL中实践这些示例. 学习一门新的语言就像骑车游泳一样, 你必须自己去实践. 
 
-## Syntax
+## 语法
 
-Clojure’s syntax is simple. Like all Lisps, it employs a uniform structure, a handful of special operators, and a constant supply of parentheses delivered from the parenthesis mines hidden beneath the Massachusetts Institute of Technology, where Lisp was born.
+Clojure的语法很简单. 像所有其他的Lisp方言一样, 它们有统一的结构, 少量的特殊操作符, 以及无尽的圆括号...
 
 ### Forms
 
-All Clojure code is written in a uniform structure. Clojure recognizes two kinds of structures:
+所有的Clojure代码由两种结构组成:
 
-Literal representations of data structures (like numbers, strings, maps, and vectors)
-Operations
-We use the term form to refer to valid code. I’ll also sometimes use expression to refer to Clojure forms. But don’t get too hung up on the terminology. Clojure evaluates every form to produce a value. These literal representations are all valid forms:
+* 数据(numbers, strings, maps, and vectors)
+* 操作符
+
+我们使用术语**form**来指代有效的代码. 有时, 我们也使用**expression**来引用**form**. Clojure会计算(**evaluates **)每个**form**的值. 以下是一些有效**form**的例子:
 
 ```clojure
 1
@@ -34,13 +35,13 @@ We use the term form to refer to valid code. I’ll also sometimes use expressio
 ["a" "vector" "of" "strings"]
 ```
 
-Your code will rarely contain free-floating literals, of course, because they don’t actually do anything on their own. Instead, you’ll use literals in operations. Operations are how you do things. All operations take the form opening parenthesis, operator, operands, closing parenthesis:
+你的代码很少会单独出现类似于上面的数据, 因为, 它们单独存在是并不能有什么作用. 所以, 你需要使用操作符(operations). **Operations**告诉你具体搞什么事情. 所有操作有以下形式:
 
 ```clojure
 (operator operand1 operand2 ... operandn)
 ```
 
-Notice that there are no commas. Clojure uses whitespace to separate operands, and it treats commas as whitespace. Here are some example operations:
+需注意的是, operator之间是没有逗号的, Clojure使用空格来隔开它们, 并且会把逗号视为空格. 示例如下:
 
 ```clojure
 (+ 1 2 3)
@@ -50,35 +51,36 @@ Notice that there are no commas. Clojure uses whitespace to separate operands, a
 ; => "It was the panda in the library with a dust buster"
 ```
 
-In the first operation, the operator `+` adds the operands `1`, `2`, and `3`. In the second operation, the operator `str` concatenates three strings to form a new string. Both are valid forms. Here’s something that is not a form because it doesn’t have a closing parenthesis:
+第一个form, 将运算符`+`会依次对运算数`1`, `2`, `3`做加法运算. 第二个form, 函数`str`拼接三个字符串构成新字符串. 它们都是有效的form. 下面的这个不是一个有效的form, 因为它没有右括号：
 
 ```clojure
 (+
 ```
 
-Clojure’s structural uniformity is probably different from what you’re used to. In other languages, different operations might have different structures depending on the operator and the operands. For example, JavaScript employs a smorgasbord of infix notation, dot operators, and parentheses:
+Clojure的语法结构可能让你有点不适. 其他的语言里, 不同的操作符的操作数可能不相同. 比如如下的js代码, 用中缀记法来表达`+`, 用`.`和圆括号来表达函数调用:
 
-```clojure
+```js
 1 + 2 + 3
 "It was the panda ".concat("in the library ", "with a dust buster")
 ```
 
-Clojure’s structure is very simple and consistent by comparison. No matter which operator you’re using or what kind of data you’re operating on, the structure is the same.
+Clojure的语法结构非常简单且统一, 不管什么操作, 它的结构都是统一的. 
 
-### Control Flow
+### 控制流
 
-Let’s look at three basic control flow operators: `if`, `do`, and `when`. Throughout the book you’ll encounter more, but these will get you started.
+我们先从3个基本的控制流操作符开始 : `if`, `do`, `when`. 
 
 #### if
 
-This is the general structure for an `if` expression:
+下面是一个`if`表达式的基本结构:
 
 ```clojure
 (if boolean-form
   then-form
   optional-else-form)
- ```
-A Boolean form is just a form that evaluates to a truthy or falsey value. You’ll learn about truthiness and falsiness in the next section. Here are a couple of `if` examples:
+```
+
+一个**boolean-form**是一个只会返回`true`或`false`的form. 下一节里你会学到关于真值和假值的知识. 下面是几个关于`if`的例子:
 
 ```clojure
 (if true
@@ -91,10 +93,9 @@ A Boolean form is just a form that evaluates to a truthy or falsey value. You’
   "By Aquaman's trident!")
 ; => "By Aquaman's trident!"
 ```
+第一个例子会返回`"By Zeus's hammer!"`, 因为boolean-form的计算结果是`true`; 第二个例子则相反, boolean-form的计算结果是`false`, 所以它返回`"By Aquaman's trident!"`.
 
-The first example returns `"By Zeus's hammer!"` because the Boolean form evaluates to `true`, a truthy value, and the second example returns `"By Aquaman's trident!"` because its Boolean form, `false`, evaluates to a falsey value.
-
-You can also omit the `else` branch. If you do that and the Boolean expression is false, Clojure returns `nil`, like this:
+你可以忽略`else`语句分支, 但如果boolean-form的计算结果是`false`, 则会返回`nil`. 像这样:
 
 ```clojure
 (if false
@@ -102,7 +103,7 @@ You can also omit the `else` branch. If you do that and the Boolean expression i
 ; => nil
 ```
 
-Notice that if uses operand position to associate operands with the then and else branches: the first operand is the then branch, and the second operand is the (optional) else branch. As a result, each branch can have only one form. This is different from most languages. For example, you can write this in Ruby:
+需要注意与大多数语言不通的是, **then-form**和**else-form**分别只能有一个表达式(form). 比如在ruby中你可以这样写:
 
 ```ruby
 if true
@@ -113,12 +114,11 @@ else
   other_doer.do_thing(2)
 end
 ```
-
-To get around this apparent limitation, you can use the `do` operator.
+但在Clojure中, 想要`if`分支或者`else`分支中有多个表达式的话, 则需要运算符`do`.
 
 #### do
 
-The `do` operator lets you wrap up multiple forms in parentheses and run each of them. Try the following in your REPL:
+运算符`do`允许你执行括号内的多个form:
 
 ```clojure
 (if true
@@ -130,11 +130,9 @@ The `do` operator lets you wrap up multiple forms in parentheses and run each of
 ; => "By Zeus's hammer!"
 ```
 
-This operator lets you do multiple things in each of the `if` expression’s branches. In this case, two things happen: `Success!` is printed in the REPL, and `"By Zeus's hammer!"` is returned as the value of the entire `if` expression.
-
 #### when
 
-The `when` operator is like a combination of `if` and `do`, but with no `else` branch. Here’s an example:
+`when`就像`if`和`do`的组合, 但是它没有else分支, 例:
 
 ```clojure
 (when true
@@ -144,11 +142,11 @@ The `when` operator is like a combination of `if` and `do`, but with no `else` b
 ; => "abra cadabra"
 ```
 
-Use when if you want to do multiple things when some condition is true, and you always want to return nil when the condition is false.
+如果`when`判断结果为`false`, 则表达式返回`nil`. 
 
 #### nil, true, false, Truthiness, Equality, and Boolean Expressions
 
-Clojure has `true` and `false` values. `nil` is used to indicate no value in Clojure. You can check if a value is `nil` with the appropriately named `nil?` function:
+Clojure中 真值, 假值, 空值分别以`true`,`false`,`nil`表示. 可用使用函数`nil?`判断一个值是否为空:
 
 ```clojure
 (nil? 1)
@@ -158,7 +156,7 @@ Clojure has `true` and `false` values. `nil` is used to indicate no value in Clo
 ; => true
 ```
 
-Both `nil` and `false` are used to represent logical falsiness, whereas all other values are logically truthy. Truthy and falsey refer to how a value is treated in a Boolean expression, like the first expression passed to `if`:
+逻辑计算中, `nil`和`false`都为假, 其他值为真. 例:
 
 ```clojure
 (if "bears eat beets"
@@ -171,9 +169,7 @@ Both `nil` and `false` are used to represent logical falsiness, whereas all othe
 ; => "nil is falsey"
 ```
 
-In the first example, the string `"bears eat beets"` is considered truthy, so the `if` expression evaluates to `"bears beets Battlestar Galactica"`. The second example shows a falsey value as falsey.
-
-Clojure’s equality operator is `=`:
+Clojure中表达式是否相等的比较运算符用`=`表示:
 
 ```clojure
 (= 1 1)
@@ -186,9 +182,9 @@ Clojure’s equality operator is `=`:
 ; => false
 ```
 
-Some other languages require you to use different operators when comparing values of different types. For example, you might have to use some kind of special string equality operator made just for strings. But you don’t need anything weird or tedious like that to test for equality when using Clojure’s built-in data structures.
+一些其他的语言可能会使用不同的比较运算符来对应不同的数据结构, 比如可能使用特定的比较函数来比较字符串. 但在Clojure中, 你不必担心这个问题, clojure的内建数据结构都会使用同一的比较运算符. 
 
-Clojure uses the Boolean operators `or` and `and`. `or` returns either the first truthy value or the last value. `and` returns the first falsey value or, if no values are falsey, the last truthy value. Let’s look at `or` first:
+Clojure提供运算符`or`, `and`; `or`返回form中第一个真值或最后一个值; `and`返回第一个假值或最后一个值:
 
 ```clojure
 (or false nil :large_I_mean_venti :why_cant_I_just_say_large)
@@ -199,11 +195,7 @@ Clojure uses the Boolean operators `or` and `and`. `or` returns either the first
 
 (or nil)
 ; => nil
-```
 
-In the first example, the return value is `:large_I_mean_venti` because it’s the first truthy value. The second example has no truthy values, so `or` returns the last value, which is `false`. In the last example, once again no truthy values exist, and `or` returns the last value, which is `nil`. Now let’s look at `and`:
-
-```clojure
 (and :free_wifi :hot_coffee)
 ; => :hot_coffee
 
@@ -211,11 +203,7 @@ In the first example, the return value is `:large_I_mean_venti` because it’s t
 ; => nil
 ```
 
-In the first example, and returns the last truthy value, :hot_coffee. In the second example, and returns nil, which is the first falsey value.
-
-#### Naming Values with def
-
-You use `def` to bind a name to a value in Clojure:
+#### 用`def`给value起名字
 
 ```clojure
 (def failed-protagonist-names
@@ -225,11 +213,11 @@ failed-protagonist-names
 ; => ["Larry Potter" "Doreen the Explorer" "The Incredible Bulk"]
 ```
 
-In this case, you’re binding the name `failed-protagonist-names` to a vector containing three strings (you’ll learn about vectors in “Vectors” on page 45).
+上例中, 我们给一个含有3个字符串的vector绑定到名称`failed-protagonist-names`上. (vector后面会讲到)
 
-Notice that I’m using the term bind, whereas in other languages you’d say you’re assigning a value to a variable. Those other languages typically encourage you to perform multiple assignments to the same variable.
+注意, 我们使用术语**绑定**(bind), 在其他语言中被称为赋值给一个变量, 因为通常在其他语言里变量可以多次赋值的. (译者: 不变性, 是函数式语言的主要特点之一)
 
-For example, in Ruby you might perform multiple assignments to a variable to build up its value:
+在ruby中, 你可以为一个变量多次赋值:
 
 ```ruby
 severity = :mild
@@ -240,8 +228,7 @@ else
   error_message = error_message + "DOOOOOOOMED!"
 end
 ```
-
-You might be tempted to do something similar in Clojure:
+你可以在Clojure中做类似的事情:
 
 ```clojure
 (def severity :mild)
@@ -251,7 +238,7 @@ You might be tempted to do something similar in Clojure:
   (def error-message (str error-message "DOOOOOOOMED!")))
 ```
 
-However, changing the value associated with a name like this can make it harder to understand your program’s behavior because it’s more difficult to know which value is associated with a name or why that value might have changed. Clojure has a set of tools for dealing with change, which you’ll learn about in Chapter 10. As you learn Clojure, you’ll find that you’ll rarely need to alter a name/value association. Here’s one way you could write the preceding code:
+更改一个名称所关联的值, 会使程序的变得难以理解. 虽然Clojure提供了一系列的工具来处理类似于变量的东西, 但随着你深入学习, 你会发现你很少需要改变一个名字所代表的的值. 这里提供一个上例中比较好的解决方法:
 
 ```clojure
 (defn error-message
@@ -265,13 +252,13 @@ However, changing the value associated with a name like this can make it harder 
 ; => "OH GOD! IT'S A DISASTER! WE'RE MILDLY INCONVENIENCED!"
 ```
 
-Here, you create a function, error-message, which accepts a single argument, severity, and uses that to determine which string to return. You then call the function with :mild for the severity. You’ll learn all about creating functions in “Functions” on page 48; in the meantime, you should treat def as if it’s defining constants. In the next few chapters, you’ll learn how to work with this apparent limitation by embracing the functional programming paradigm.
+这里, 我们创建了一个名为`error-message`的函数, 它接受单个参数`severity`, 并用这个参数判断返回哪个字符串. 后面你会学到如何创建一个函数, 这里你需要知道`def`是用来定义常量的. 接下来的几章里, 你会学到如何利用函数式编程的特性来取代变量. 
 
-### Data Structures
+### 数据结构
 
-Clojure comes with a handful of data structures that you’ll use the majority of the time. If you’re coming from an object-oriented background, you’ll be surprised at how much you can do with the seemingly basic types presented here.
+Clojure提供了几个最常用的数据结构. 如果你有过面向对象编程语言的背景, 你会惊讶于这些看似简单的结构能够做如此多的事情. 
 
-All of Clojure’s data structures are immutable, meaning you can’t change them in place. For example, in Ruby you could do the following to reassign the failed protagonist name at index 0:
+所有的Clojure的数据结构都是不可变的, 下面是个ruby的例子, 它修改数组下表为0的元素的值:
 
 ```ruby
 failed_protagonist_names = [
@@ -289,13 +276,11 @@ failed_protagonist_names
 # ]
 ```
 
-Clojure has no equivalent for this. You’ll learn more about why Clojure was implemented this way in Chapter 10, but for now it’s fun to learn just how to do things without all that philosophizing. Without further ado, let’s look at numbers in Clojure.
+Clojure中没有等效的表达, 你会在第10章中知道在clojure中如何实现上述功能. 
 
-#### Numbers
+#### 数字
 
-Clojure has pretty sophisticated numerical support. I won’t spend much time dwelling on the boring technical details (like coercion and contagion), because that will get in the way of doing things. If you’re interested in said boring details, check out the documentation at http://clojure.org/data_structures#Data%20Structures-Numbers. Suffice it to say, Clojure will merrily handle pretty much anything you throw at it.
-
-In the meantime, we’ll work with integers and floats. We’ll also work with ratios, which Clojure can represent directly. Here’s an integer, a float, and a ratio, respectively:
+Clojure对数字有复杂的支持, 我们不会花时间在它的技术系节里, 因为这会影响我们"搞事情". 如果你对这些细节感兴趣, 看看文档<http://clojure.org/data_structures#Data%20Structures-Numbers>. 所以你只要知道Clojure会给你正确的结果就够了. 比如下面, 整数, 浮点数, 以及比率:
 
 ```clojure
 93
@@ -303,9 +288,9 @@ In the meantime, we’ll work with integers and floats. We’ll also work with r
 1/5
 ```
 
-#### Strings
+#### 字符串
 
-Strings represent text. The name comes from the ancient Phoenicians, who one day invented the alphabet after an accident involving yarn. Here are some examples of string literals:
+字符串你懂的, 这个名字来自古老的腓尼基人; 下面是几个例子:
 
 ```clojure
 "Lord Voldemort"
@@ -313,7 +298,7 @@ Strings represent text. The name comes from the ancient Phoenicians, who one day
 "\"Great cow of Moscow!\" - Hermes Conrad"
 ```
 
-Notice that Clojure only allows double quotes to delineate strings. `'Lord Voldemort'`, for example, is not a valid string. Also notice that Clojure doesn’t have string interpolation. It only allows concatenation via the `str` function:
+Clojure值允许使用双引号来代表字符串. 如`'Lord Voldemort'`并不是一个合法的字符串. 而且Clojure中没有插入字符串的方法, 只有拼接字符串的方法`str`:
 
 ```clojure
 (def name "Chewbacca")
@@ -323,41 +308,40 @@ Notice that Clojure only allows double quotes to delineate strings. `'Lord Volde
 
 #### Maps
 
-Maps are similar to dictionaries or hashes in other languages. They’re a way of associating some value with some other value. The two kinds of maps in Clojure are hash maps and sorted maps. I’ll only cover the more basic hash maps. Let’s look at some examples of map literals. Here’s an empty map:
+Maps类似于其他语言的字典(dictionaries)或哈希(hashes). 他是关联两个值的方式之一. Clojure有两种Map : hash map和sorted map. 下面是个空的map:
 
 ```clojure
 {}
 ```
 
-In this example, `:first-name` and `:last-name` are keywords (I’ll cover those in the next section):
+下例中,  `:first-name` and `:last-name` 是关键字:
 
 ```clojure
 {:first-name "Charlie"
  :last-name "McFishwich"}
  ```
 
-Here we associate `"string-key"` with the `+` function:
+我们可以将`"string-key"`和运算符`+`关联起来:
 
 ```clojure
 {"string-key" +}
 ```
 
-Maps can be nested:
+Map可以嵌套:
 
 ```clojure
 {:name {:first "John" :middle "Jacob" :last "Jingleheimerschmidt"}}
 ```
+map的值中可以是任何类型(strings, numbers, maps, vectors, even functions). 
 
-Notice that map values can be of any type—strings, numbers, maps, vectors, even functions. Clojure don’t care!
-
-Besides using map literals, you can use the `hash-map` function to create a map:
+除了使用`{}`, 你还可以用`hash-map`函数来创建一个map:
 
 ```clojure
 (hash-map :a 1 :b 2)
 ; => {:a 1 :b 2}
 ```
 
-You can look up values in maps with the `get` function:
+用`get`方法在map中获取一个元素的值:
 
 ```clojure
 (get {:a 0 :b 1} :b)
@@ -367,9 +351,7 @@ You can look up values in maps with the `get` function:
 ; => {:c "ho hum"}
 ```
 
-In both of these examples, we asked `get` for the value of the `:b` key in the given map—in the first case it returns `1`, and in the second case it returns the nested map `{:c "ho hum"}`.
-
-`get` will return `nil` if it doesn’t find your key, or you can give it a default value to return, such as `"unicorns?"`:
+如果没有指定的键`get`方法返回`nil`, 或者你可以指定一个默认值 如下例中的`"unicorns?"`:
 
 ```clojure
 (get {:a 0 :b 1} :c)
@@ -379,23 +361,23 @@ In both of these examples, we asked `get` for the value of the `:b` key in the g
 ; => "unicorns?"
 ```
 
-The `get-in` function lets you look up values in nested maps:
+`get-in`函数可以获取嵌套Map的值:
 
 ```clojure
 (get-in {:a 0 :b {:c "ho hum"}} [:b :c])
 ; => "ho hum"
 ```
 
-Another way to look up a value in a map is to treat the map like a function with the key as its argument:
+下面是另一种从Map取值的方式:
 
 ```clojure
 ({:name "The Human Coffeepot"} :name)
 ; => "The Human Coffeepot"
 ```
 
-Another cool thing you can do with maps is use keywords as functions to look up their values, which leads to the next subject, keywords.
+你可以使用关键字作为函数来查找他们的值. 
 
-#### Keywords
+#### 关键字
 
 Clojure keywords are best understood by seeing how they’re used. They’re primarily used as keys in maps, as you saw in the preceding section. Here are some more examples of keywords:
 
