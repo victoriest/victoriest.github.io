@@ -379,7 +379,7 @@ map的值中可以是任何类型(strings, numbers, maps, vectors, even function
 
 #### 关键字
 
-Clojure keywords are best understood by seeing how they’re used. They’re primarily used as keys in maps, as you saw in the preceding section. Here are some more examples of keywords:
+如你所见关键字就是看起来如下这样. 它主要用作为key在map中:
 
 ```clojure
 :a
@@ -388,79 +388,78 @@ Clojure keywords are best understood by seeing how they’re used. They’re pri
 :_?
 ```
 
-Keywords can be used as functions that look up the corresponding value in a data structure. For example, you can look up `:a` in a map:
+关键字可以作为查找数据结构中对应的值的函数. 如下例, `a`可以查找map中的值:
 
 ```clojure
 (:a {:a 1 :b 2 :c 3})
 ; => 1
 ```
 
-This is equivalent to:
+等效于:
 
 ```clojure
 (get {:a 1 :b 2 :c 3} :a)
 ; => 1
 ```
 
-You can provide a default value, as with `get:`
+像使用`get`一样, 你可以给一个默认值, 当它找不到相应键的时候会返回默认值:
 
 ```clojure
 (:d {:a 1 :b 2 :c 3} "No gnome knows homes like Noah knows")
 ; => "No gnome knows homes like Noah knows"
 ```
 
-Using a keyword as a function is pleasantly succinct, and Real Clojurists do it all the time. You should do it too!
+把关键字当做函数在Clojure开发者中非常常见, 你也应该加入他们. 
 
 #### Vectors
 
-A vector is similar to an array, in that it’s a 0-indexed collection. For example, here’s a vector literal:
+vector非常像数组, 下标从0开始. 如下例:
 
 ```clojure
 [3 2 1]
 ```
 
-Here we’re returning the 0th element of a vector:
+我们返回vector中下标0的元素可以用`get`:
 
 ```clojure
 (get [3 2 1] 0)
 ; => 3
 ```
 
-Here’s another example of getting by index:
+另外的一些例子:
 
 ```clojure
 (get ["a" {:name "Pugsley Winterbottom"} "c"] 1)
 ; => {:name "Pugsley Winterbottom"}
 ```
+vector中的元素可以是任何类型, 并且不同的类型可以混到一个vector里. 并且我们同样使用`get`函数来查找数组中的元素. 
 
-You can see that vector elements can be of any type, and you can mix types. Also notice that we’re using the same `get` function as we use when looking up values in maps.
-
-You can create vectors with the `vector` function:
+使用`vector`函数来创建一个vector:
 
 ```clojure
 (vector "creepy" "full" "moon")
 ; => ["creepy" "full" "moon"]
 ```
 
-You can use the conj function to add additional elements to the vector. Elements are added to the end of a vector:
+使用`conj`函数来向vector中添加元素到vector的末尾: 
 
 ```clojure
 (conj [1 2 3] 4)
 ; => [1 2 3 4]
 ```
 
-Vectors aren’t the only way to store sequences; Clojure also has lists.
+除了vector, list也是Clojure用来储存序列的数据结构.
 
 #### Lists
 
-Lists are similar to vectors in that they’re linear collections of values. But there are some differences. For example, you can’t retrieve list elements with `get`. To write a list literal, just insert the elements into parentheses and use a single quote at the beginning:
+list与vector类似. 但也有不同. 比如, 你不用使用`get`方法获取list的中的元素. 在一对圆括号前加上`'`, 他就是个list了:
 
 ```clojure
 '(1 2 3 4)
 ; => (1 2 3 4)
 ```
 
-Notice that when the REPL prints out the list, it doesn’t include the single quote. We’ll come back to why that happens later, in Chapter 7. If you want to retrieve an element from a list, you can use the `nth` function:
+REPL中, list的输出不包含`'`. 这个第七章的时候讲. 如果你想获取list中的某个元素, 可以使用`nth`函数:
 
 ```clojure
 (nth '(:a :b :c) 0)
@@ -470,56 +469,54 @@ Notice that when the REPL prints out the list, it doesn’t include the single q
 ; => :c
 ```
 
-I don’t cover performance in detail in this book because I don’t think it’s useful to focus on it until after you’ve become familiar with a language. However, it’s good to know that using `nth` to retrieve an element from a list is slower than using `get` to retrieve an element from a vector. This is because Clojure has to traverse all n elements of a list to get to the nth, whereas it only takes a few hops at most to access a vector element by its index.
+在你熟悉一门语言之前, 我是不会去谈论一些性能细节的, 没必要. 但你最好知道, 从一个vector中使用`get`获取元素要比list中使用'nth'获取元素速度要快一些. 因为list需要遍历n个元素, 而vector只需要获取下标的索引.
 
-List values can have any type, and you can create lists with the list function:
+list的元素可以是任何类型, 使用`list`函数可以创建一个list:
 
 ```clojure
 (list 1 "two" {3 4})
 ; => (1 "two" {3 4})
 ```
 
-Elements are added to the beginning of a list:
+用`conj`添加元素到list中, 会添加到list的头, 而不是尾:
 
 ```clojure
 (conj '(1 2 3) 4)
 ; => (4 1 2 3)
 ```
 
-When should you use a list and when should you use a vector? A good rule of thumb is that if you need to easily add items to the beginning of a sequence or if you’re writing a macro, you should use a list. Otherwise, you should use a vector. As you learn more, you’ll get a good feel for when to use which.
+那么, 什么时候改使用list而什么是偶使用vector呢? 如果你需要方便的将元素添加到一个序列的开头, 或者你正在编写一个宏, 你需要的是list. 其他情况, 则用vector. 随着学习的深入, 你自然而然就知道该用啥了. 
 
 #### Sets
 
-Sets are collections of unique values. Clojure has two kinds of sets: hash sets and sorted sets. I’ll focus on hash sets because they’re used more often. Here’s the literal notation for a hash set:
+set是一种序列对象, 序列中每个值都是唯一的, 不重复. 有两种set: hash set 和 sorted set. 先来关注下我们最常用的hash set:
 
 ```clojure
 #{"kurt vonnegut" 20 :icicle}
 ```
 
-You can also use `hash-set` to create a set:
+同样, 使用`hash-set`也可以来创建一个set:
 
 ```clojure
 (hash-set 1 1 2 2)
 ; => #{1 2}
 ```
 
-Note that multiple instances of a value become one unique value in the set, so we’re left with a single `1` and a single `2`. If you try to add a value to a set that already contains that value (such as `:b` in the following code), it will still have only one of that value:
+set中的值是唯一的, 所以上例中, 只有一个`1`和一个`2`. 如果你添加重复的元素, 会忽略重复的元素:
 
 ```clojure
 (conj #{:a :b} :b)
 ; => #{:a :b}
 ```
 
-You can also create sets from existing vectors and lists by using the `set` function:
+你可以通过`set`函数从已有的vector或list创建一个set:
 
 ```clojure
 (set [3 3 3 4 4])
 ; => #{3 4}
 ```
 
-You can check for set membership using the `contains?` function, by using get, or by using a keyword as a function with the set as its argument. `contains?` returns `true` or `false`, whereas get and keyword lookup will return the value if it exists, or `nil` if it doesn’t.
-
-Here’s how you’d use `contains?`:
+使用`contains?`函数判断一个元素是否在集合中存在:
 
 ```clojure
 (contains? #{:a :b} :a)
@@ -532,14 +529,14 @@ Here’s how you’d use `contains?`:
 ; => true
 ```
 
-Here’s how you’d use a keyword:
+set使用关键字的例子:
 
 ```clojure
 (:a #{:a :b})
 ; => :a
 ```
 
-And here’s how you’d use `get`:
+使用`get`的例子:
 
 ```clojure
 (get #{:a :b} :a)
@@ -552,36 +549,35 @@ And here’s how you’d use `get`:
 ; => nil
 ```
 
-Notice that using `get` to test whether a set contains `nil` will always return `nil`, which is confusing. `contains?` may be the better option when you’re testing specifically for set membership.
+注意，使用`get`来查看set是否包含nil将总是返回nil，这是令人困惑的. `contains?`可能是更好的选择.
 
 #### Simplicity
 
-You may have noticed that the treatment of data structures so far doesn’t include a description of how to create new types or classes. The reason is that Clojure’s emphasis on simplicity encourages you to reach for the built-in data structures first.
+你可能注意到了迄今为止讲到的的所有数据类型中, 没有提到关于如何创建一个新类型或者class. 因为, Clojure世界中会鼓励你去优先使用内建对象. 
 
-If you come from an object-oriented background, you might think that this approach is weird and backward. However, what you’ll find is that your data does not have to be tightly bundled with a class for it to be useful and intelligible. Here’s an epigram loved by Clojurists that hints at the Clojure philosophy:
+如果你之前是有OO背景的开发者, 你可能觉得很怪. 然而, 数据和数据类型的分离可是使其更加方便和易懂. 下面的话正代表了CLojure的哲学:
 
 ```
 It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures.
 —Alan Perlis
 ```
+你会慢慢的了解到更多的Clojure的哲学. 现在你知道了, 使用基本的数据结构可以使你的代码变得可重用. 
 
-You’ll learn more about this aspect of Clojure’s philosophy in the coming chapters. For now, keep an eye out for the ways that you gain code reusability by sticking to basic data structures.
-
-This concludes our Clojure data structures primer. Now it’s time to dig in to functions and learn how to use these data structures!
+到此为止就是所有的Clojure的数据结构了. 接下来该学着如何使用它们了. 
 
 ### Functions
 
-One of the reasons people go nuts over Lisps is that these languages let you build programs that behave in complex ways, yet the primary building block—the function—is so simple. This section initiates you into the beauty and elegance of Lisp functions by explaining the following:
+许多人坚持使用Lisp语系语言的原因之一, 就是它的主要构件模块function很简单, 但却能建立复杂的程序. 本节会介绍关于lisp函数的如下方面:
 
-* Calling functions
-* How functions differ from macros and special forms
-* Defining functions
-* Anonymous functions
-* Returning functions
+* 调用函数
+* 函数与宏(macros)和特殊表单(special forms)的区别
+* 定义函数
+* 匿名函数
+* 返回一个函数
 
 #### Calling Functions
 
-By now you’ve seen many examples of function calls:
+迄今为止我们已经看过不少函数调用的示例了:
 
 ```clojure
 (+ 1 2 3 4)
@@ -589,25 +585,25 @@ By now you’ve seen many examples of function calls:
 (first [1 2 3 4])
 ```
 
-Remember that all Clojure operations have the same syntax: opening parenthesis, operator, operands, closing parenthesis. Function call is just another term for an operation where the operator is a function or a function expression (an expression that returns a function).
+记住所有的Clojure命令都有相同的语法:`(operator operands1 ...)`. 函数的调用只是把**operator**换成了函数, 或者函数表达式(返回值是一个函数的表达式). 
 
-This lets you write some pretty interesting code. Here’s a function expression that returns the + (addition) function:
+这让我们可以写一些非常有意思的代码. 如下是个返回`+`函数的一个函数表达式(function expresssion):
 
 ```clojure
 (or + -)
 ; => #<core$_PLUS_ clojure.core$_PLUS_@76dace31>
 ```
 
-That return value is the string representation of the addition function. Because the return value of or is the first truthy value, and here the addition function is truthy, the addition function is returned. You can also use this expression as the operator in another expression:
+这个返回值是`+`函数的字符串形式的描述. 你还可以使用这个表达式作为另一个表达式的运算符:
 
 ```clojure
 ((or + -) 1 2 3)
 ; => 6
 ```
 
-Because `(or + -)` returns `+`, this expression evaluates to the sum of `1`, `2`, and `3`, returning `6`.
+`(or + -)` 返回 `+`, 所以这个表达式的结果是把 `1`, `2`, `3`相加, 返回6. 
 
-Here are a couple more valid function calls that each return `6`:
+下面是一些其他的合法调用:
 
 ```clojure
 ((and (= 1 1) +) 1 2 3)
@@ -617,27 +613,26 @@ Here are a couple more valid function calls that each return `6`:
 ; => 6
 ```
 
-In the first example, the return value of `and` is the first falsey value or the last truthy value. In this case, `+` is returned because it’s the last truthy value, and is then applied to the arguments `1 2 3`, returning `6`. In the second example, the return value of `first` is the first element in a sequence, which is `+` in this case.
-
-However, these aren’t valid function calls, because numbers and strings aren’t functions:
+数字和字符串不能作为函数, 以下是些非法示例:
 
 ```clojure
 (1 2 3 4)
 ("test" 1 2 3)
 ```
 
-If you run these in your REPL, you’ll get something like this:
+如果你在REPL中执行它们, 会返回类似于这样的东西:
 
 ClassCastException java.lang.String cannot be cast to clojure.lang.IFn
 ```clojure
 user/eval728 (NO_SOURCE_FILE:1)
 ```
 
-You’re likely to see this error many times as you continue with Clojure: <x> cannot be cast to clojure.lang.IFn just means that you’re trying to use something as a function when it’s not.
+你在今后可能会经常看到类似的提示: <x> cannot be cast to clojure.lang.IFn, 意思就是你把一个不是函数的东西当做函数来用了.
 
-Function flexibility doesn’t end with the function expression! Syntactically, functions can take any expressions as arguments—including other functions. Functions that can either take a function as an argument or return a function are called higher-order functions. Programming languages with higher-order functions are said to support first-class functions because you can treat functions as values in the same way you treat more familiar data types like numbers and vectors.
 
-Take the `map` function (not to be confused with the map data structure), for instance. `map` creates a new list by applying a function to each member of a collection. Here, the `inc` function increments a number by 1:
+函数的灵活性并不仅仅只是函数表达式! 在语法意义上，函数可以将任何表达式作为参数 - 包括其他函数. 可以将函数作为参数或返回函数这样的函数被称为高阶函数(higher-order functions). 具有高阶函数的编程语言被称为first-class functions, 这些语言可以用与操作数字和vector一样的方式去操作函数. 
+
+`map`函数(别与数据结构map搞混了)会分别对集合内的每个对象求值并返回一根新的list. 如下例, 对vector里的每个元素+1:
 
 ```clojure
 (inc 1.1)
@@ -647,13 +642,13 @@ Take the `map` function (not to be confused with the map data structure), for in
 ; => (1 2 3 4)
 ```
 
-(Note that `map` doesn’t return a vector, even though we supplied a vector as an argument. You’ll learn why in Chapter 4. For now, just trust that this is okay and expected.)
+注意及时你参数传入一个vector, `map`也不会返回一个vector, 细节将在第4章里讲到. 
 
-Clojure’s support for first-class functions allows you to build more power­ful abstractions than you can in languages without them. Those unfamiliar with this kind of programming think of functions as allowing you to generalize operations over data instances. For example, the `+` function abstracts addition over any specific numbers.
+Clojure将函数作为一等公民, 这为clojure带来在相较其他语言里更强大的抽象能力. Those unfamiliar with this kind of programming think of functions as allowing you to generalize operations over data instances. For example, the `+` function abstracts addition over any specific numbers.
 
 By contrast, Clojure (and all Lisps) allows you to create functions that generalize over processes. `map` allows you to generalize the process of transforming a collection by applying a function—any function—over any collection.
 
-The last detail that you need know about function calls is that Clojure evaluates all function arguments recursively before passing them to the function. Here’s how Clojure would evaluate a function call whose arguments are also function calls:
+另外有个细节, Clojure的函数调用会递归的计算每个函数参数内表达式的值:
 
 ```clojure
 (+ (inc 199) (/ 100 (- 7 2)))
@@ -662,8 +657,7 @@ The last detail that you need know about function calls is that Clojure evaluate
 (+ 200 20) ; evaluated (/ 100 5)
 220 ; final evaluation
 ```
-
-The function call kicks off the evaluation process, and all subforms are evaluated before applying the + function.
+函数调用启动了计算, 并且会计算每个子表达式的值. 
 
 #### Function Calls, Macro Calls, and Special Forms
 
