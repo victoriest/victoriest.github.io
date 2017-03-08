@@ -661,43 +661,43 @@ By contrast, Clojure (and all Lisps) allows you to create functions that general
 
 #### Function Calls, Macro Calls, and Special Forms
 
-In the previous section, you learned that function calls are expressions that have a function expression as the operator. The two other kinds of expressions are macro calls and special forms. You’ve already seen a couple of special forms: definitions and `if` expressions.
+上一节里, 你了解了函数调用以及将函数表达式作为操作符的形式的函数调用. 另外两种表达式为宏调用和特殊form. 其实你已经见过了一些特殊form: 定义 和 `if`表达式. 
 
-You’ll learn everything there is to know about macro calls and special forms in Chapter 7. For now, the main feature that makes special forms “special” is that, unlike function calls, they don’t always evaluate all of their operands.
+第7章中, 你会学习所有关于宏调用和特殊form的知识. 而特殊form相较于函数调用的最主要的特殊之处在于, **特殊form并不总是计算所有的子表达式**. 
 
-Take `if`, for example. This is its general structure:
+用`if`作为例子, 他的一般形式是这样的:
 
 ```clojure
 (if boolean-form
   then-form
   optional-else-form)
-  ```
+```
 
-Now imagine you had an if statement like this:
+假如你写了一个如下的`if`语句:
 
 ```clojure
 (if good-mood
   (tweet walking-on-sunshine-lyrics)
   (tweet mopey-country-song-lyrics))
-  ```
+```
 
-Clearly, in an `if` expression like this, we want Clojure to evaluate only one of the two branches. If Clojure evaluated both `tweet` function calls, your Twitter followers would end up very confused.
+显然, 这个`if`表达式中我们希望Clojure只计算两个选择分支中的一个分支的内容. 如果Clojure执行所有的两个分支, 关注你Twitter人会懵逼. 
 
-Another feature that differentiates special forms is that you can’t use them as arguments to functions. In general, special forms implement core Clojure functionality that just can’t be implemented with functions. Clojure has only a handful of special forms, and it’s pretty amazing that such a rich language is implemented with such a small set of building blocks.
+另一个特殊form的特征: 不能将他们作为函数的参数. 通常, 特殊form实现了函数不能实现的Clojure的核心功能. (译者: 下面又是对Clojure的惊叹, 不翻译了)
 
-Macros are similar to special forms in that they evaluate their operands differently from function calls, and they also can’t be passed as arguments to functions. But this detour has taken long enough; it’s time to learn how to define functions!
+宏与特殊form类似, 不能作为函数参数传入. 
 
 #### Defining Functions
 
-Function definitions are composed of five main parts:
+函数定义有5部分:
 
-* defn
-* Function name
-* A docstring describing the function (optional)
-* Parameters listed in brackets
-* Function body
+* defn关键字
+* 函数名
+* 描述函数的文档字符串（可选）
+* 参数列表
+* 函数体
 
-Here’s an example of a function definition and a sample call of the function:
+下面是个函数定义以及调用这个函数的例子:
 
 ```clojure
 ➊ (defn too-enthusiastic
@@ -709,14 +709,11 @@ Here’s an example of a function definition and a sample call of the function:
 (too-enthusiastic "Zelda")
 ; => "OH. MY. GOD! Zelda YOU ARE MOST DEFINITELY LIKE THE BEST MAN SLASH WOMAN EVER I LOVE YOU AND WE SHOULD RUN AWAY SOMEWHERE"
 ```
+第➊行, `too-enthusiastic`是这个函数的名字, ➋是函数的描述文档. ➌是函数的参数列表, ➍为函数体. 下面我们深入到每个部分看一下. 
 
-At ➊, `too-enthusiastic` is the name of the function, and it’s followed by a descriptive docstring at ➋. The parameter, `name`, is given at ➌, and the function body at ➍ takes the parameter and does what it says on the tin—returns a cheer that might be a bit too enthusiastic.
+#### 描述函数的文档
 
-Let’s dive deeper into the docstring, parameters, and function body.
-
-#### The Docstring
-
-The docstring is a useful way to describe and document your code. You can view the docstring for a function in the REPL with `(doc` fn-name`)`—for example, `(doc map)`. The docstring also comes into play if you use a tool to generate documentation for your code.
+描述文档是以一个给你的函数添加文档的好方法, 在REPL里 使用`doc`函数来查看某个函数的描述文档. 比如`(doc map)`, 可以查看函数`map`的文档. 
 
 #### Parameters and Arity
 
