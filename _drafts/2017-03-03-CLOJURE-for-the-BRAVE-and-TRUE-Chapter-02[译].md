@@ -717,7 +717,7 @@ By contrast, Clojure (and all Lisps) allows you to create functions that general
 
 #### Parameters and Arity
 
-Clojure functions can be defined with zero or more parameters. The values you pass to functions are called arguments, and the arguments can be of any type. The number of parameters is the function’s arity. Here are some function definitions with different arities:
+Clojure函数可以定义零到多个参数, 参数的可以是任意的数据类型的. 下面是些例子:
 
 ```clojure
 (defn no-params
@@ -732,9 +732,9 @@ Clojure functions can be defined with zero or more parameters. The values you pa
   "together to spite you! " x y))
   ```
 
-In these examples, `no-params` is a 0-arity function, `one-param` is 1-arity, and `two-params` is 2-arity.
-
 Functions also support arity overloading. This means that you can define a function so a different function body will run depending on the arity. Here’s the general form of a multiple-arity function definition. Notice that each arity definition is enclosed in parentheses and has an argument list:
+
+函数支持参数重载, 意味着你可以根据参数数量不同定义不同的函数实现. 如下例:
 
 ```clojure
 (defn multi-arity
@@ -749,7 +749,8 @@ Functions also support arity overloading. This means that you can define a funct
      (do-things first-arg)))
      ```
 
-Arity overloading is one way to provide default values for arguments. In the following example, `"karate"` is the default argument for the `chop-type` parameter:
+
+参数重载是一种为参数提供默认值的方法. 如下例, "karate"是参数`chop-type`的默认值:
 
 ```clojure
 (defn x-chop
@@ -760,7 +761,7 @@ Arity overloading is one way to provide default values for arguments. In the fol
      (x-chop name "karate")))
      ```
 
-If you call `x-chop` with two arguments, the function works just as it would if it weren’t a multiple-arity function:
+如果你传入两个参数, 函数就会忽略默认值"karate":
 
 ```clojure
 (x-chop "Kanye West" "slap")
@@ -768,16 +769,14 @@ If you call `x-chop` with two arguments, the function works just as it would if 
 
 ```
 
-If you call `x-chop` with only one argument, `x-chop` will actually call itself with the second argument `"karate"` supplied:
+如果你只传入一个参数:
 
 ```clojure
 (x-chop "Kanye East")
 ; => "I karate chop Kanye East! Take that!"
 ```
 
-It might seem unusual to define a function in terms of itself like this. If so, great! You’re learning a new way to do things!
-
-You can also make each arity do something completely unrelated:
+你也可以让每个参数重载的函数体做完全不一样的事情:
 
 ```clojure
 (defn weird-arity
@@ -789,8 +788,6 @@ You can also make each arity do something completely unrelated:
   ([number]
      (inc number)))
      ```
-
-The 0-arity body returns a wise quote, and the 1-arity body increments a number. Most likely, you wouldn’t want to write a function like this, because it would be confusing to have two function bodies that are completely unrelated.
 
 Clojure also allows you to define variable-arity functions by including a rest parameter, as in “put the rest of these arguments in a list with the following name.” The rest parameter is indicated by an ampersand (&), as shown at ➊:
 
