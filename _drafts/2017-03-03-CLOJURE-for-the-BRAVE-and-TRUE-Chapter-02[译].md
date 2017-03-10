@@ -730,7 +730,7 @@ Clojure函数可以定义零到多个参数, 参数的可以是任意的数据�
   [x y]
   (str "Two parameters! That's nothing! Pah! I will smoosh them "
   "together to spite you! " x y))
-  ```
+```
 
 Functions also support arity overloading. This means that you can define a function so a different function body will run depending on the arity. Here’s the general form of a multiple-arity function definition. Notice that each arity definition is enclosed in parentheses and has an argument list:
 
@@ -747,7 +747,7 @@ Functions also support arity overloading. This means that you can define a funct
   ;; 1-arity arguments and body
   ([first-arg]
      (do-things first-arg)))
-     ```
+```
 
 
 参数重载是一种为参数提供默认值的方法. 如下例, "karate"是参数`chop-type`的默认值:
@@ -759,7 +759,7 @@ Functions also support arity overloading. This means that you can define a funct
      (str "I " chop-type " chop " name "! Take that!"))
   ([name]
      (x-chop name "karate")))
-     ```
+```
 
 如果你传入两个参数, 函数就会忽略默认值"karate":
 
@@ -787,10 +787,9 @@ Functions also support arity overloading. This means that you can define a funct
      at your dangling unmentionables! - the Tick")
   ([number]
      (inc number)))
-     ```
+```
 
-Clojure also allows you to define variable-arity functions by including a rest parameter, as in “put the rest of these arguments in a list with the following name.” The rest parameter is indicated by an ampersand (&), as shown at ➊:
-
+Clojure也可以定义一个不定参数的函数. 不定参数列表之前以`&`标注, 如下例➊处:
 
 ```clojure
 (defn codger-communication
@@ -805,9 +804,9 @@ Clojure also allows you to define variable-arity functions by including a rest p
 ; => ("Get off my lawn, Billy!!!"
       "Get off my lawn, Anne-Marie!!!"
       "Get off my lawn, The Incredible Bulk!!!")
-      ```
+```
 
-As you can see, when you provide arguments to variable-arity functions, the arguments are treated as a list. You can mix rest parameters with normal parameters, but the rest parameter has to come last:
+如你所见, 不定参数会表现为list形式. 普通参数与不定参数都存在的参数列表中, 不定参数必须最后:
 
 ```clojure
 (defn favorite-things
@@ -819,11 +818,11 @@ As you can see, when you provide arguments to variable-arity functions, the argu
 ; => "Hi, Doreen, here are my favorite things: gum, shoes, kara-te"
 ```
 
-Finally, Clojure has a more sophisticated way of defining parameters, called destructuring, which deserves its own subsection.
+Clojure还有一种更加复杂的参数定义方法, 称为解构(destructuring). 
 
 #### Destructuring
 
-The basic idea behind destructuring is that it lets you concisely bind names to values within a collection. Let’s look at a basic example:
+解构的基本意图是给一个集合中的多个元素绑定名称. 
 
 ```clojure
 ;; Return the first element of a collection
@@ -834,10 +833,9 @@ The basic idea behind destructuring is that it lets you concisely bind names to 
 (my-first ["oven" "bike" "war-axe"])
 ; => "oven"
 ```
+`my-first`函数中的`first-thing`与传入的vector中的第一个元素绑定. 
 
-Here, the `my-first` function associates the symbol `first-thing` with the first element of the vector that was passed in as an argument. You tell `my-first` to do this by placing the symbol `first-thing` within a vector.
-
-That vector is like a huge sign held up to Clojure that says, “Hey! This function is going to receive a list or a vector as an argument. Make my life easier by taking apart the argument’s structure for me and associating meaningful names with different parts of the argument!” When destructuring a vector or list, you can name as many elements as you want and also use rest parameters:
+那个向量就像一个巨大的标志，对Clojure说: "嘿! 此函数将接收列表或向量作为参数. 通过拆开我的参数结构, 并将有意义的名称与参数的不同部分相关联, 使我的生活更容易! "当解构矢量或列表时, 可以命名任意多的元素, 并使用rest参数(以下为机翻):
 
 ```clojure
 (defn chooser
@@ -853,11 +851,11 @@ That vector is like a huge sign held up to Clojure that says, “Hey! This funct
 ; => Your second choice is: Handsome Jack
 ; => We're ignoring the rest of your choices. Here they are in case \
      you need to cry over them: Pigpen, Aquaman
-     ```
+```
 
-Here, the rest parameter `unimportant-choices` handles any number of additional choices from the user after the first and second.
+上例中, 不定参数`unimportant-choices`用来处理剩下的vector中除了前两个元素的其余元素.
 
-You can also destructure maps. In the same way that you tell Clojure to destructure a vector or list by providing a vector as a parameter, you destructure maps by providing a map as a parameter:
+你还可以解构map:
 
 ```clojure
 (defn announce-treasure-location
@@ -866,22 +864,22 @@ You can also destructure maps. In the same way that you tell Clojure to destruct
   (println (str "Treasure lng: " lng)))
 
 (announce-treasure-location {:lat 28.22 :lng 81.33})
-; => Treasure lat: 100
-; => Treasure lng: 50
+; => Treasure lat: 28.22
+; => Treasure lng: 81.33
 ```
 
-Let’s look at the line at ➊ in more detail. This is like telling Clojure, “Yo! Clojure! Do me a flava and associate the name lat with the value corresponding to the key `:lat`. Do the same thing with `lng` and `:lng`, okay?”
+看看➊行. `lat`为map中`:lat`所代表的值, `lng`为map中`:lng`所代表的值.
 
-We often want to just break keywords out of a map, so there’s a shorter syntax for that. This has the same result as the previous example:
+通常我们只是想在map中获取值忽略键, 所以下面是简化的写法:
 
 ```clojure
 (defn announce-treasure-location
   [{:keys [lat lng]}]
   (println (str "Treasure lat: " lat))
   (println (str "Treasure lng: " lng)))
-  ```
+```
 
-You can retain access to the original map argument by using the `:as` keyword. In the following example, the original map is accessed with `treasure-location`:
+你可以使用`:as`关键字来保留经过解构后的map的原本的数据:
 
 ```clojure
 (defn receive-treasure-location
@@ -891,13 +889,11 @@ You can retain access to the original map argument by using the `:as` keyword. I
 
   ;; One would assume that this would put in new coordinates for your ship
   (steer-ship! treasure-location))
-  ```
+```
 
-In general, you can think of destructuring as instructing Clojure on how to associate names with values in a list, map, set, or vector. Now, on to the part of the function that actually does something: the function body!
+#### 函数体
 
-#### Function Body
-
-The function body can contain forms of any kind. Clojure automatically returns the last form evaluated. This function body contains just three forms, and when you call the function, it spits out the last form, `"joe"`:
+函数体是可以包含任何form的, 并且返回最后一个form的计算结果. 如下例:
 
 ```clojure
 (defn illustrative-function
@@ -910,7 +906,7 @@ The function body can contain forms of any kind. Clojure automatically returns t
 ; => "joe"
 ```
 
-Here’s another function body, which uses an `if` expression:
+下面是另外一个使用`if`的例子:
 
 ```clojure
 (defn number-comment
@@ -926,24 +922,22 @@ Here’s another function body, which uses an `if` expression:
 ; => "Oh my gosh! What a big number!"
 ```
 
-#### All Functions Are Created Equal
+#### 所有函数都是平等的
 
-One final note: Clojure has no privileged functions. `+` is just a function, `-` is just a function, and `inc` and `map` are just functions. They’re no better than the functions you define yourself. So don’t let them give you any lip!
+最后, Clojure没有特殊的的函数. `+`是个函数, `-`是个函数, `inc`和`map`也都是只是个函数. 与你所定义的函数是一样的. 
 
-More important, this fact helps demonstrate Clojure’s underlying simplicity. In a way, Clojure is very dumb. When you make a function call, Clojure just says, “map? Sure, whatever! I’ll just apply this and move on.” It doesn’t care what the function is or where it came from; it treats all functions the same. At its core, Clojure doesn’t give two burger flips about addition, multiplication, or mapping. It just cares about applying functions.
+这也佐证了Clojure的简单性. 某种程度上, Clojure很蠢, 当你调用一个函数, Clojure只会认为"map? 我才不管呢, 我只是继续执行它而已."  所以你不必担心有没有特殊的函数, 它的规则会不会与其他函数不同.  在Clojure里, 他们都用相同的方式工作. 
 
-As you continue to program with Clojure, you’ll see that this simplicity is ideal. You don’t have to worry about special rules or syntax for working with different functions. They all work the same!
+#### 匿名函数
 
-#### Anonymous Functions
-
-In Clojure, functions don’t need to have names. In fact, you’ll use anonymous functions all the time. How mysterious! You create anonymous functions in two ways. The first is to use the `fn` form:
+Clojure中, 可以不给函数命名. 这样的函数称为匿名函数. 创建一个匿名函数有两种途径, 其中之一为使用`fn`:
 
 ```clojure
 (fn [param-list]
   function body)
-  ```
+```
 
-Looks a lot like defn, doesn’t it? Let’s try a couple of examples:
+看起来很像`defn`, 再看看其他的下面的例子:
 
 ```clojure
 (map (fn [name] (str "Hi, " name))
@@ -954,7 +948,7 @@ Looks a lot like defn, doesn’t it? Let’s try a couple of examples:
 ; => 24
 ```
 
-You can treat fn nearly identically to the way you treat defn. The parameter lists and function bodies work exactly the same. You can use argument destructuring, rest parameters, and so on. You could even associate your anonymous function with a name, which shouldn’t come as a surprise (if that does come as a surprise, then . . . Surprise!):
+你使用`fn`的方式几乎和`defn`相同. 参数列表, 函数体的工作方式近乎相同, 也可以使用解构, 和不定参数. 你甚至可以为你的匿名函数起个名字!
 
 ```clojure
 (def my-special-multiplier (fn [x] (* x 3)))
@@ -962,20 +956,16 @@ You can treat fn nearly identically to the way you treat defn. The parameter lis
 ; => 36
 ```
 
-Clojure also offers another, more compact way to create anonymous functions. Here’s what an anonymous function looks like:
+Clojure提供另一种更加简洁的方式定义一个匿名函数. 如下:
 
 ```clojure
 #(* % 3)
-```
 
-Whoa, that looks weird. Go ahead and apply that weird-looking function:
-
-```clojure
 (#(* % 3) 8)
 ; => 24
 ```
 
-Here’s an example of passing an anonymous function as an argument to map:
+这里有一个将匿名函数作为参数传递给map的例子:
 
 ```clojure
 (map #(str "Hi, " %)
@@ -983,9 +973,9 @@ Here’s an example of passing an anonymous function as an argument to map:
 ; => ("Hi, Darth Vader" "Hi, Mr. Magoo")
 ```
 
-This strange-looking style of writing anonymous functions is made possible by a feature called reader macros. You’ll learn all about those in Chapter 7. Right now, it’s okay to learn how to use just these anonymous functions.
+这种奇怪的编写匿名函数的风格是通过一个名为reader macros的功能实现的. 你将学习第7章中的所有内容. 现在, 可以学习如何使用这些匿名函数. 
 
-You can see that this syntax is definitely more compact, but it’s also a little odd. Let’s break it down. This kind of anonymous function looks a lot like a function call, except that it’s preceded by a hash mark, `#`:
+你可以看到, 这种语法肯定更紧凑, 但它也有点奇怪. 它看起来很像一个函数调用, 除了开头的`#`外:
 
 ```clojure
 ;; Function call
@@ -995,29 +985,27 @@ You can see that this syntax is definitely more compact, but it’s also a littl
 #(* % 3)
 ```
 
-This similarity allows you to more quickly see what will happen when this anonymous function is applied. “Oh,” you can say to yourself, “this is going to multiply its argument by three.”
-
-As you may have guessed by now, the percent sign, `%`, indicates the argument passed to the function. If your anonymous function takes multiple arguments, you can distinguish them like this: %1, %2, %3, and so on. % is equivalent to %1:
+这样的结构可以使匿名函数可以更清晰的解析出匿名函数. `%`是表示传递给函数的参数. 如果有多个参数需要传递, 则可以这样:%1, %2, %3
 
 ```clojure
 (#(str %1 " and " %2) "cornbread" "butter beans")
 ; => "cornbread and butter beans"
 ```
 
-You can also pass a rest parameter with `%&`:
+等效于`%&`:
 
 ```clojure
 (#(identity %&) 1 "blarg" :yip)
 ; => (1 "blarg" :yip)
 ```
 
-In this case, you applied the identity function to the rest argument. Identity returns the argument it’s given without altering it. Rest arguments are stored as lists, so the function application returns a list of all the arguments.
+在这种情况下, identity函数使用了不定参数列表. Identity返回它给出的参数而不改变它. Rest参数存储为列表, 因此函数应用程序返回所有参数的列表. 
 
-If you need to write a simple anonymous function, using this style is best because it’s visually compact. On the other hand, it can easily become unreadable if you’re writing a longer, more complex function. If that’s the case, use `fn`.
+如果你需要写一个简单的匿名函数, 使用这种风格是最好的, 因为它在视觉上紧凑. 另一方面, 如果你正在写一个更长, 更复杂的函数, 它很容易变得不可读. 如果是这样, 请使用fn
 
 #### Returning Functions
 
-By now you’ve seen that functions can return other functions. The returned functions are closures, which means that they can access all the variables that were in scope when the function was created. Here’s a standard example:
+到目前为止, 你已经看到函数可以返回其他函数. 返回的函数是闭包, 这意味着它们可以访问创建函数时在作用域中的所有变量.
 
 ```clojure
 (defn inc-maker
@@ -1031,11 +1019,9 @@ By now you’ve seen that functions can return other functions. The returned fun
 ; => 10
 ```
 
-Here, `inc-by` is in scope, so the returned function has access to it even when the returned function is used outside `inc-maker`.
-
 ### Pulling It All Together
 
-Okay! It's time to use your newfound knowledge for a noble purpose: smacking around hobbits! To hit a hobbit, you’ll first model its body parts. Each body part will include its relative size to indicate how likely it is that that part will be hit. To avoid repetition, the hobbit model will include only entries for left foot, left ear, and so on. Therefore, you’ll need a function to fully symmetrize the model, creating right foot, right ear, and so forth. Finally, you’ll create a function that iterates over the body parts and randomly chooses the one hit. Along the way, you’ll learn about a few new Clojure tools: `let` expressions, loops, and regular expressions. Fun!
+现在可以利用新所学的知识实现一些功能了: 做一个打地鼠的游戏(原文为打霍比特人! 我不知道霍比特人招谁惹谁了). 首先, 你需要创建一个模型用来描述地鼠的身体的各个部分. 每个身体部位包含了部位大小以及被击中的可能性等参数. 为了尽可能的重用, 地鼠的模型将仅包含左脚, 左耳等属性. 所以, 你需要一个函数来创建右脚, 右耳等属性. 最后, 你还需要创建一个函数, 它会遍历身体的每个部分并随机选择一个并hit it. 此外, 你将学习一些新的Clojure知识点: `let`表达式, 循环以及正则表达式. 
 
 #### The Shire’s Next Top Model
 
