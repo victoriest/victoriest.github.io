@@ -1025,7 +1025,7 @@ Clojure提供另一种更加简洁的方式定义一个匿名函数. 如下:
 
 #### The Shire’s Next Top Model
 
-For our hobbit model, we’ll eschew such hobbit characteristics as joviality and mischievousness and focus only on the hobbit’s tiny body. Here’s the hobbit model:
+下面就是我们的地鼠的模型(霍比特人!):
 
 ```clojure
 (def asym-hobbit-body-parts [{:name "head" :size 3}
@@ -1038,7 +1038,7 @@ For our hobbit model, we’ll eschew such hobbit characteristics as joviality an
                              {:name "left-upper-arm" :size 3}
                              {:name "chest" :size 10}
                              {:name "back" :size 10}
-                             {:name "left-forearm" :size 3}
+                             {:name "left-forearm" :size 3}d
                              {:name "abdomen" :size 6}
                              {:name "left-kidney" :size 1}
                              {:name "left-hand" :size 2}
@@ -1049,11 +1049,12 @@ For our hobbit model, we’ll eschew such hobbit characteristics as joviality an
                              {:name "left-foot" :size 2}])
 ```
 
-This is a vector of maps. Each map has the name of the body part and relative size of the body part. (I know that only anime characters have eyes one-third the size of their head, but just go with it, okay?)
+这是包含map的数组(vector). 每个map有关于身体部位的描述以及其大小. 
 
-Conspicuously missing is the hobbit’s right side. Let’s fix that. Listing 3-1 is the most complex code you’ve seen so far, and it introduces some new ideas. But don’t worry, because we’ll examine it in great detail.
+我们只定义了身体的左边部分, 而忽略了右边的(如右眼, 右耳之类的), 我们来完成它. 下面这段代码是你迄今为止见过的最复杂的, 并且引入了一些新的概念. 让我们一句一句的看看:
 
 ```clojure
+;; 3-1. The matching-part and symmetrize-body-parts functions
 (defn matching-part
   [part]
   {:name (clojure.string/replace (:name part) #"^left-" "right-")
@@ -1070,10 +1071,8 @@ Conspicuously missing is the hobbit’s right side. Let’s fix that. Listing 3-
         (recur remaining
                (into final-body-parts
                      (set [part (matching-part part)])))))))
-                     ```
-3-1. The matching-part and symmetrize-body-parts functions
-
-When we call the function `symmetrize-body-parts` on `asym-hobbit-body-parts`, we get a fully symmetrical hobbit:
+```
+当我们调用函数`symmetrize-body-parts`并把`asym-hobbit-body-parts`作为参数传入后, 我们就会获得一个完整的(包含左右躯体的)地鼠对象:
 
 ```clojure
 (symmetrize-body-parts asym-hobbit-body-parts)
@@ -1108,15 +1107,15 @@ When we call the function `symmetrize-body-parts` on `asym-hobbit-body-parts`, w
       {:name "right-achilles", :size 1}
       {:name "left-foot", :size 2}
       {:name "right-foot", :size 2}]
-      ```
+```
 
-Let’s break down this code!
+我们开始啃代码:
 
 #### let
 
-In the mass of craziness in Listing 3-1, you can see a form of the structure `(let ...)`. Let’s build up an understanding of `let` one example at a time, and then examine the full example from the program once we’re familiar with all the pieces.
+在上面的代码中你会发现有一个以关键字let开始的表单, 我们先举个例子弄懂这个let, 再去管上面代码的其他的部分.
 
-`let` binds names to values. You can think of `let` as short for let it be, which is also a beautiful Beatles song about programming. Here’s an example:
+`let`是将值绑定到一个名字的方法, 如:
 
 ```clojure
 (let [x 3]
@@ -1130,7 +1129,7 @@ In the mass of craziness in Listing 3-1, you can see a form of the structure `(l
 ; => ("Pongo" "Perdita")
 ```
 
-In the first example, you bind the name x to the value 3. In the second, you bind the name dalmatians to the result of the expression (take 2 dalmatian-list), which was the list ("Pongo" "Perdita"). let also introduces a new scope:
+在第一个例子中, 我们将值`3`绑定到`x`上. 第二个例子, 将会把`(take 2 dalmatian-list)`的计算结果作为值绑定到`dalmatians`上. 来看看let的作用域:
 
 ```clojure
 (def x 0)
@@ -1138,9 +1137,9 @@ In the first example, you bind the name x to the value 3. In the second, you bin
 ; => 1
 ```
 
-Here, you first bind the name x to the value 0 using def. Then, let creates a new scope in which the name x is bound to the value 1. I think of scope as the context for what something refers to. For example, in the phrase “please clean up these butts,” butts means something different depending on whether you’re working in a maternity ward or on the custodial staff of a cigarette manufacturers convention. In this code snippet, you’re saying, “I want x to be 0 in the global context, but within the context of this let expression, it should be 1.”
+首先, 我们使用`def`将`x`绑定值为`0`. 接着, 使用`let`绑定值为`1`(在一个新的作用域里). 所谓作用域, 类似于上下文的名称含义. For example, 在短语"please clean up these butts", "butts" 这个词, 在你身处一个产科病房和在香烟库房的时候意义是不同的. 这段代码中, `x`在全局的值为`0`, 在let表达式内的值为`1`. (译者: 其实罗里吧嗦就是个局部变量的概念)
 
-You can reference existing bindings in your let binding:
+你可以将一个已有的绑定名称应用到新的绑定中:
 
 ```clojure
 (def x 0)
@@ -1148,48 +1147,45 @@ You can reference existing bindings in your let binding:
 ; => 1
 ```
 
-In this example, the x in (inc x) refers to the binding created by (def x 0). The resulting value is 1, which is then bound to the name x within a new scope created by let. Within the confines of the let form, x refers to 1, not 0.
+本例中, `(inc x)`中的`x`是指的`(def x 0)`中定义的`x`. 所以计算结果为1. 在`let`的作用域内 `x`的值为1而不是0.
 
-You can also use rest parameters in let, just like you can in functions:
+`let`中, 一样可以使用后不定参数:
 
 ```clojure
 (let [[pongo & dalmatians] dalmatian-list]
   [pongo dalmatians])
 ; => ["Pongo" ("Perdita" "Puppy 1" "Puppy 2")]
 ```
-
-Notice that the value of a let form is the last form in its body that is evaluated. let forms follow all the destructuring rules introduced in “Calling Functions” on page 48. In this case, [pongo & dalmatians] destructured dalmatian-list, binding the string "Pongo" to the name pongo and the list of the rest of the dalmatians to dalmatians. The vector [pongo dalmatians] is the last expression in let, so it’s the value of the let form.
+注意, `let`form的值是最后一个被计算的表达式的值. let form 遵从所有的解构规则. 本例中, [pongo & dalmatians] 是 `dalmatian-list`的解构, 将"Pongo"绑定到`pongo`上,`dalmatian-list`其他值绑定到`dalmatians`上. 因为`[pongo dalmatians]`是`let`的最后一个表达式, 所以let form的值就是`[pongo dalmatians]`.
 
 let forms have two main uses. First, they provide clarity by allowing you to name things. Second, they allow you to evaluate an expression only once and reuse the result. This is especially important when you need to reuse the result of an expensive function call, like a network API call. It’s also important when the expression has side effects.
 
-Let’s have another look at the let form in our symmetrizing function so we can understand exactly what’s going on:
+来看看代码3-1中的`let`form到底起到什么作用:
 
 ```clojure
 (let [[part & remaining] remaining-asym-parts]
   (recur remaining
          (into final-body-parts
                (set [part (matching-part part)]))))    
-               ```
+```
 
-This code tells Clojure, “Create a new scope. Within it, associate part with the first element of remaining-asym-parts. Associate remaining with the rest of the elements in remaining-asym-parts.”
-
-As for the body of the let expression, you’ll learn about the meaning of recur in the next section. The function call
+这段代码告诉Clojure, 创建一个新的作用域, 在此作用域里, 将`remaining-asym-parts`的第一个元素命名为`part`, 剩余元素命名为`remaining`. 函数体中的`recur`后文会讲. 
 
 ```clojure
 (into final-body-parts
   (set [part (matching-part part)]))
-  ```
+```
 
-first tells Clojure, “Use the set function to create a set consisting of part and its matching part. Then use the function into to add the elements of that set to the vector final-body-parts.” You create a set here to ensure you’re adding unique elements to final-body-parts because part and (matching-part part) are sometimes the same thing, as you’ll see in the upcoming section on regular expressions. Here’s a simplified example:
+`set`函数创建一个set结构用来储存`part`. 然后, `into`是将生成的set添加到`final-body-parts`中去. 这里使用set是为了用来排除`part`和`(matching-part part)`中的重复元素, 下面是个关于`into`的例子:
 
 ```clojure
-(into [] (set [:a :a]))
+(into []  (set [:a :a]))
 ; => [:a]
 ```
 
-First, (set [:a :a]) returns the set #{:a}, because sets don’t contain duplicate elements. Then (into [] #{:a}) returns the vector [:a].
+首先, `(set [:a :a])`返回set`#{:a}`, 然后`(into [] #{:a})`计算的`[:a]`.
 
-Back to let: notice that part is used multiple times in the body of the let. If we used the original expressions instead of using the names part and remaining, it would be a mess! Here’s an example:
+说回到`let`: `part`在函数体里使用了多次, 如果不用let, 代码将变得难以读懂:
 
 ```clojure
 (recur (rest remaining-asym-parts)
@@ -1197,7 +1193,7 @@ Back to let: notice that part is used multiple times in the body of the let. If 
              (set [(first remaining-asym-parts) (matching-part (first remaining-asym-parts))])))
              ```
 
-So, let is a handy way to introduce local names for values, which helps simplify the code.
+所以, `let`是个通过引入局部变量, 使代码变得易读的有效方法.
 
 #### loop
 
@@ -1320,7 +1316,7 @@ Now let’s go back to the full symmetrizer and analyze it in more detail:
 ➎         (recur remaining 
                (into final-body-parts
                      (set [part (matching-part part)]))
-                    ```
+```
 
 The symmetrize-body-parts function (starting at ➊) employs a general strategy that is common in functional programming. Given a sequence (in this case, a vector of body parts and their sizes), the function continuously splits the sequence into a head and a tail. Then it processes the head, adds it to some result, and uses recursion to continue the process with the tail.
 
