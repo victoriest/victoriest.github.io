@@ -8,6 +8,8 @@ tags:
 excerpt_separator: <!--more-->
 ---
 
+
+
 # 搞事情 : Clojure急速教程
 
 是时候学着用Clojure搞些事情了! 虽然你肯定知道Clojure的并发支持和其他的一些特性很叼, 但Clojure的最突出的特性是: 它是个Lisp. 本章中, 你将探索关于Lisp的核心元素:语法, 函数和数据(syntax, functions, and data). 它们会为你使用Clojure提供坚实的基础.
@@ -1191,13 +1193,13 @@ let forms have two main uses. First, they provide clarity by allowing you to nam
 (recur (rest remaining-asym-parts)
        (into final-body-parts
              (set [(first remaining-asym-parts) (matching-part (first remaining-asym-parts))])))
-             ```
+```
 
 所以, `let`是个通过引入局部变量, 使代码变得易读的有效方法.
 
 #### loop
 
-In our symmetrize-body-parts function we use loop, which provides another way to do recursion in Clojure. Let’s look at a simple example:
+在函数`symmetrize-body-parts`中我们使用到了`loop`, `loop`提供了一种递归循环的实现方式. 看看下例:
 
 ```clojure
 (loop [iteration 0]
@@ -1212,10 +1214,9 @@ In our symmetrize-body-parts function we use loop, which provides another way to
 ; => Iteration 4
 ; => Goodbye!
 ```
+第一行中, `loop [iteration 0]`, 初始化值并开始循环. 第一次循环中, `iteration`的值为0. 然后第二行, 会有一个打印输出. 第三行, 检查`iteration`的值是否大于3, 如果大于3就跳出循环. 如果不大于3, 就重复这个过程. 这很像`loop`创建了一个参数是`iteration`的匿名函数, 而`recur`则像把值`(inc iteration)`作为参数传给这个匿名函数并调用它. 
 
-The first line, loop [iteration 0], begins the loop and introduces a binding with an initial value. On the first pass through the loop, iteration has a value of 0. Next, it prints a short message. Then, it checks the value of iteration. If the value is greater than 3, it’s time to say Goodbye. Otherwise, we recur. It’s as if loop creates an anonymous function with a parameter named iteration, and recur allows you to call the function from within itself, passing the argument (inc iteration).
-
-You could in fact accomplish the same thing by just using a normal function definition:
+你可以通过使用普通的函数定义来完成同样的事情:
 
 ```clojure
 (defn recursive-printer
@@ -1235,9 +1236,9 @@ You could in fact accomplish the same thing by just using a normal function defi
 ; => Goodbye!
 ```
 
-But as you can see, this is a bit more verbose. Also, loop has much better performance. In our symmetrizing function, we’ll use loop to go through each element in the asymmetrical list of body parts.
+如你所见, 这样的实现使代码看起来更加冗长. 而且, loop的性能更好. In our symmetrizing function, we’ll use loop to go through each element in the asymmetrical list of body parts.
 
-#### Regular Expressions
+#### 正则表达式
 
 Regular expressions are tools for performing pattern matching on text. The literal notation for a regular expression is to place the expression in quotes after a hash mark:
 
@@ -1462,9 +1463,13 @@ These exercises are meant to be a fun way to test your Clojure knowledge and to 
 5. Create a function that’s similar to symmetrize-body-parts except that it has to work with weird space aliens with radial symmetry. Instead of two eyes, arms, legs, and so on, they have five.
 6. Create a function that generalizes symmetrize-body-parts and the function you created in Exercise 5. The new function should take a collection of body parts and the number of matching body parts to add. If you’re completely new to Lisp languages and functional programming, it probably won’t be obvious how to do this. If you get stuck, just move on to the next chapter and revisit the problem later.## 译后文
 
-本文原文链接:<http://www.braveclojure.com/do-things/>
-学习Clojure的计划已经失败了太多次了, 这次又要挑战一回. 突然萌生出, 找本好的不枯燥的入门读物来翻译一下的想法, 边学边翻译. 希望这次能坚持下去. 23333...
-
-作者的网站:<http://www.braveclojure.com/>
+> 译后续
+>
+> 本文原文链接:<http://www.braveclojure.com/do-things/>
+> 学习Clojure的计划已经失败了太多次了, 这次又要挑战一回. 突然萌生出, 找本好的不枯燥的入门读物来翻译一下的想法, 边学边翻译. 希望这次能坚持下去. 23333...
+>
+> 开始这一章翻译的时候, 才知道看懂E文和翻译出来完全不是一回事, 现在读一遍自己的译文是在是太生硬了, 而且还有几段文字实在不知道咋翻译. 不过好歹大体上弄出来了, 如果有谁看不爽了请轻拍. 
+>
+> 作者的网站:<http://www.braveclojure.com/>
 
 <!--more-->
