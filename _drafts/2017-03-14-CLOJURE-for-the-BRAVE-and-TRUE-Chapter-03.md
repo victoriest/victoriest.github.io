@@ -8,9 +8,7 @@ tags:
 excerpt_separator: <!--more-->
 ---
 
-Core Functions in Depth
-
-If you’re a huge fan of the angsty, teenager-centric, quasi–soap opera The Vampire Diaries like I am, you’ll remember the episode where the lead protagonist, Elena, starts to question her pale, mysterious crush’s behavior: “Why did he instantly vanish without a trace when I scraped my knee?” and “How come his face turned into a grotesque mask of death when I nicked my finger?” and so on.
+# 深入函数核心
 
 You might be asking yourself similar questions if you’ve started playing with Clojure’s core functions. “Why did map return a list when I gave it a vector?” and “How come reduce treats my map like a list of vectors?” and so on. (With Clojure, though, you’re at least spared from contemplating the profound existential horror of being a 17-year-old for eternity.)
 
