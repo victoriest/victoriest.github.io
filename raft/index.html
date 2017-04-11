@@ -1,0 +1,1747 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Victoriest's Lab</title>
+  <meta name="theme-color" content="#222222" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://victoriest.me/js/jquery.min.js"></script>
+  <script src="http://victoriest.me/js/bootstrap.min.js"></script>
+  <script src="http://victoriest.me/js/header.js"></script>
+  <script src="http://victoriest.me/js/toc.js"></script>
+  <link href="http://victoriest.me/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/theme.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/syntax.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+
+  
+
+
+ <script type="text/javascript">
+  WebFontConfig = {
+    google: {
+      families: ['Ubuntu::latin']
+    }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://victoriest.me/">Victoriest's Lab</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://victoriest.me/index.html">Home</a></li>
+          <li><a href="http://victoriest.me/memo.html">Memo</a></li>
+          <li><a href="http://victoriest.me/archive.html">Archive</a></li>
+          <!--<li><a href="http://victoriest.me/tags.html">Tags</a></li>-->
+          <li><a href="http://victoriest.me/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="wrapper">
+  <div class="content">
+    <div class="container container-center">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="well">
+            
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">
+      CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译]
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-03-03'>2017-03-03</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/clojure">clojure</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译] -->
+    <!-- </p> -->
+    <h1 id="clojure">搞事情 : Clojure急速教程</h1>
+
+<p>是时候学着用Clojure搞些事情了! 虽然你肯定知道Clojure的并发支持和其他的一些特性很叼, 但Clojure的最突出的特性是: 它是个Lisp. 本章中, 你将探索关于Lisp的核心元素:语法, 函数和数据(syntax, functions, and data). 它们会为你使用Clojure提供坚实的基础.</p>
+
+<p>在打下基础后, 你将会开始写一些超关键的代码. 本章的最后一节中, 你将运用你学到的所有知识来创建一个hobbit的模型( a model of a hobbit)并提供一个随机点击的函数.</p>
+
+<p>当读完本章后, 我建议你在REPL中实践这些示例. 学习一门新的语言就像骑车游泳一样, 你必须自己去实践.</p>
+
+<h2 id="section">语法</h2>
+
+<p>Clojure的语法很简单. 像所有其他的Lisp方言一样, 它们有统一的结构, 少量的特殊操作符, 以及无尽的圆括号…</p>
+
+<h3 id="forms">Forms</h3>
+
+<p>所有的Clojure代码由两种结构组成:</p>
+
+<ul>
+  <li>数据(numbers, strings, maps, and vectors)</li>
+  <li>操作符</li>
+</ul>
+
+<p>我们使用术语<strong>form</strong>来指代有效的代码. 有时, 我们也使用<strong>expression</strong>来引用<strong>form</strong>. Clojure会计算(<strong>evaluates **)每个</strong>form<strong>的值. 以下是一些有效</strong>form**的例子:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="mi">1</span><span class="w">
+</span><span class="s">"a string"</span><span class="w">
+</span><span class="p">[</span><span class="s">"a"</span><span class="w"> </span><span class="s">"vector"</span><span class="w"> </span><span class="s">"of"</span><span class="w"> </span><span class="s">"strings"</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>你的代码很少会单独出现类似于上面的数据, 因为, 它们单独存在是并不能有什么作用. 所以, 你需要使用操作符(operations). <strong>Operations</strong>告诉你具体搞什么事情. 所有操作有以下形式:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">operator</span><span class="w"> </span><span class="n">operand1</span><span class="w"> </span><span class="n">operand2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">operandn</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>需注意的是, operator之间是没有逗号的, Clojure使用空格来隔开它们, 并且会把逗号视为空格. 示例如下:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span><span class="c1">; =&gt; 6
+</span><span class="w">
+</span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"It was the panda "</span><span class="w"> </span><span class="s">"in the library "</span><span class="w"> </span><span class="s">"with a dust buster"</span><span class="p">)</span><span class="w">
+</span><span class="c1">; =&gt; "It was the panda in the library with a dust buster"
+</span></code></pre>
+</div>
+
+<p>第一个form, 将运算符<code class="highlighter-rouge">+</code>会依次对运算数<code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">3</code>做加法运算. 第二个form, 函数<code class="highlighter-rouge">str</code>拼接三个字符串构成新字符串. 它们都是有效的form. 下面的这个不是一个有效的form, 因为它没有右括号：</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nb">+</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Clojure的语法结构可能让你有点不适. 其他的语言里, 不同的操作符的操作数可能不相同. 比如如下的js代码, 用中缀记法来表达<code class="highlighter-rouge">+</code>, 用<code class="highlighter-rouge">.</code>和圆括号来表达函数调用:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="s2">"It was the panda "</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s2">"in the library "</span><span class="p">,</span> <span class="s2">"with a dust buster"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Clojure的语法结构非常简单且统一, 不管什么操作, 它的结构都是统一的.</p>
+
+<h3 id="section-1">控制流</h3>
+
+<p>我们先从3个基本的控制流操作符开始 : <code class="highlighter-rouge">if</code>, <code class="highlighter-rouge">do</code>, <code class="highlighter-rouge">when</code>.</p>
+
+<h4 id="if">if</h4>
+
+<p>下面是一个<code class="highlighter-rouge">if</code>表达式的基本结构:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="n">boolean-form</span><span class="w">
+  </span><span class="n">then-form</span><span class="w">
+  </span><span class="n">optional-else-form</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>一个<strong>boolean-form</strong>是一个只会返回<code class="highlighter-rouge">true</code>或<code class="highlighter-rouge">false</code>的form. 下一节里你会学到关于真值和假值的知识. 下面是几个关于<code class="highlighter-rouge">if</code>的例子:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="n">true</span><span class="w">
+  </span><span class="s">"By Zeus's hammer!"</span><span class="w">
+  </span><span class="s">"By Aquaman's trident!"</span><span class="p">)</span><span class="w">
+</span><span class="c1">; =&gt; "By Zeus's hammer!"
+</span><span class="w">
+</span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="n">false</span><span class="w">
+  </span><span class="s">"By Zeus's hammer!"</span><span class="w">
+  </span><span class="s">"By Aquaman's trident!"</span><span class="p">)</span><span class="w">
+</span><span class="c1">; =&gt; "By Aquaman's trident!"
+</span></code></pre>
+</div>
+<p>第一个例子会返回<code class="highlighter-rouge">"By Zeus's hammer!"</code>, 因为boolean-form的计算结果是<code class="highlighter-rouge">true</code>; 第二个例子则相反, boolean-form的计算结果是<code class="highlighter-rouge">false</code>, 所以它返回<code class="highlighter-rouge">"By Aquaman's trident!"</code>.</p>
+
+<p>你可以忽略<code class="highlighter-rouge">else</code>语句分支, 但如果boolean-form的计算结果是<code class="highlighter-rouge">false</code>, 则会返回<code class="highlighter-rouge">nil</code>. 像这样:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="n">false</span><span class="w">
+  </span><span class="s">"By Odin's Elbow!"</span><span class="p">)</span><span class="w">
+</span><span class="c1">; =&gt; nil
+</span></code></pre>
+</div>
+
+<p>需要注意与大多数语言不通的是, <strong>then-form</strong>和<strong>else-form</strong>分别只能有一个表达式(form). 比如在ruby中你可以这样写:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="kp">true</span>
+  <span class="n">doer</span><span class="p">.</span><span class="nf">do_thing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">doer</span><span class="p">.</span><span class="nf">do_thing</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">else</span>
+  <span class="n">other_doer</span><span class="p">.</span><span class="nf">do_thing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">other_doer</span><span class="p">.</span><span class="nf">do_thing</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>但在Clojure中, 想要<code class="highlighter-rouge">if</code>分支或者<code class="highlighter-rouge">else</code>分支中有多个表达式的话, 则需要运算符<code class="highlighter-rouge">do</code>.</p>
+
+
+<a href="http://victoriest.me/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">
+      CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译]
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-03-02'>2017-03-02</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/clojure">clojure</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译] -->
+    <!-- </p> -->
+    <h1 id="building-running-and-the-repl">Building, Running, and the REPL</h1>
+
+<p>这一章里, 你将花费少量时间使用快速简单的方法, 来熟悉构建和运行一个Clojure程序. 让一个程序真正跑起来感觉很棒. 达到这个目标后, 可以让你去试验以及分享自己的工作, 并可以在还用着老旧语言的同事们面前装B. 这可以让你保持动力.</p>
+
+<p>同时你也会学习到如何使用REPL(Read-Eval-Print)在一个运行过程中的进程立即执行指定代码, 这让你可以快速的验证你对语言的理解并让学习更加高效.</p>
+
+<p>但首先, 我将简要介绍Clojure. 接着, 我将介绍Leiningen, 它基本上算是Clojure的标准构建工具. 在本章结束时, 您将学会如何执行以下操作:</p>
+
+<ul>
+  <li>使用Leiningen创建一个Clojure工程</li>
+  <li>将工程打包成一个可执行的jar文件</li>
+  <li>执行jar文件</li>
+  <li>在Clojure REPL中执行键入的代码</li>
+</ul>
+
+<h2 id="clojure">首先的首先: 什么是Clojure?</h2>
+
+<p>Clojure由Rich Hickey创造, 一个类似于Lisp的函数式编程语言, 美丽而功能强大.(译者:原文的描述太中二, 这里只概括一下大意, 你们懂就行了.) Lisp语系相对于非lisp语系而言, 提供了更强大的表达能力, 他独特的函数式编程思想会迫使你像个程序员一样思考. 此外, Clojure为您提供了更好的工具来解决复杂的领域的问题(如并发编程), 这些问题通常会耗费开发者很长时间.</p>
+
+<p>当我们谈论Clojure是, 区分Clojure语言与Clojure编译器是相当重要的. Clojure语言是一个有着函数式特点的Lisp方言, 其语法以及语义是独立于其任何实现存在的. 而Clojure编译器是一个可执行的jar文件 - clojure.jar, 它会将用Clojure语言编写的代码编译为JVM的字节码. Clojure这个名字我们通常指代编译器和语言, 但记住这是两个不同的东西.</p>
+
+<p>这种区分是必要的, 因为与大多数编程语言(如Ruby, Python, C和其他语言)不同, Clojure是一种托管语言.</p>
+
+<p>我们稍后将探讨Clojure和JVM之间的关系，但是现在你需要理解的主要概念是这些:</p>
+
+<ul>
+  <li>JVM进程执行Java字节码</li>
+  <li>通常, Java字节码是由Java源码通过Java编译器编译而成</li>
+  <li>Jar文件是一个java字节码的集合</li>
+  <li>Java程序通常被发布成Jar文件</li>
+  <li>Java程序clojure.jar读取Clojure源代码并生成Java字节码</li>
+  <li>编译出来的Java字节码会在clojure.jar同个JVM进程中执行</li>
+</ul>
+
+<p>Clojure在持续快速的更新, 在写这篇文章时, 它的版本是1.7.0. 如果你在读这本书时, Clojure有更高的版本号, 不要担心!<br />
+这本书涵盖了Clojure的基础知识, 不太可能在版本更替中过时.</p>
+
+<p>既然你已经知道CLojure是什么了, 接下来该弄个CLojure程序出来了.</p>
+
+<h2 id="leiningen">Leiningen</h2>
+
+<p>近来, 大多数Clojure开发者使用Leiningen构建和管理他们的工程. 你可以在附录A中得到Leiningen的完整描述, 但现在我们将专注于使用它来完成四个任务:</p>
+
+<ol>
+  <li>创建一个Clojure工程</li>
+  <li>运行这个工程</li>
+  <li>编译这个工程</li>
+  <li>使用REPL</li>
+</ol>
+
+<p>在继续之前, 请确保已安装Java 1.6或更高版本. 您可以通过在终端中运行java -version来检查您的版本, 并从<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>下载最新的Java运行时环境(JRE). 然后, 使用Leiningen主页<a href="http://leiningen.org/">http://leiningen.org/</a>上的说明安装Leiningen(Windows用户，请注意有一个Windows安装程序). 当你安装Leiningen时, 它会自动下载Clojure编译器clojure.jar.<br />
+(上段为机翻)</p>
+
+<h3 id="clojure-1">创建一个Clojure工程</h3>
+
+<p>创建一个新的Clojure项目非常简单. 单个Leiningen命令创建项目骨架. 稍后, 您将学习如何执行诸如合并Clojure库等任务, 但现在, 这些指令将使您能够执行您编写的代码.</p>
+
+<p>继续，通过在终端中键入以下内容创建你的第一个Clojure项目:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein new app clojure-noob
+</code></pre>
+</div>
+
+<p>该命令会创建一个类似于如下的目录结构(可能会有些差异, 但不必在意):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>| .gitignore
+| doc
+| | intro.md
+➊ | project.clj
+| README.md
+➋ | resources
+| src
+| | clojure_noob
+➌ | | | core.clj
+➍ | test
+| | clojure_noob
+| | | core_test.clj
+</code></pre>
+</div>
+
+<p>这个结构并不是Clojure的约束或规定, 这只是Leiningen的一个约定的目录结构而已. 你将使用Leiningen来构建和运行Clojure应用程序, Leiningen希望你的应用程序具有这种结构. ➊处的文件就是Leiningen的配置文件. 它告诉Leiningen: “这个项目有什么依赖项?”或者”这个Clojure程序的入口函数是什么?”. 通常, 源代码保存在src/[project_name]目录下. 这里, 接下来你会在➌ 处的src/clojure_noob/core.clj文件写一些代码. ➍ 是存放测试代码的地方, 而➋ 存放你的资源文件.</p>
+
+<h3 id="clojure-2">运行Clojure工程</h3>
+
+<p>现在我们来让这个工程跑起来. 用你顺手的编辑器打开src/clojure_noob/core.clj, 你会看到:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="err">➊</span><span class="w"> </span><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">clojure-noob.core</span><span class="w">
+  </span><span class="p">(</span><span class="no">:gen-class</span><span class="p">))</span><span class="w">
+
+</span><span class="err">➋</span><span class="w"> </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">-main</span><span class="w">
+  </span><span class="s">"I don't do a whole lot...yet."</span><span class="w">
+  </span><span class="p">[</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">]</span><span class="w">
+</span><span class="err">➌</span><span class="w">   </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Hello, World!"</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>在➊的行声明一个命名空间, 你现在先别管它.  在➋ 处的-main方法是该程序的入口,  附录A中有一个话题会提到它. 现在, 将 ➌处的”Hello, world!” 替换为”I’m a little teapot!”. 整行内容将会是 (println “I’m a little teapot!”)).</p>
+
+<p>接下来, 在终端下进入目录clojure_noob并输入以下命令:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein run
+</code></pre>
+</div>
+
+<p>你将会看到输出一句”I’m a little teapot!”. 那么恭喜, 你成功执行了一个Clojure程序.</p>
+
+<p>你将在接下来的章节里会了解更多的的时候更多地了解程序中发生了什么，但是现在你需要知道的是，你创建了一个函数-main，当你在命令行执行lein run时运行该函数.</p>
+
+<h3 id="clojure-3">编译Clojure工程</h3>
+
+<p>使用<code class="highlighter-rouge">lein run</code>可以很好的测试你的代码, 但你想在没有安装Leiningen的机器上分享运行你的程序, 你可以创建一个任何安装了JVM都可以执行的可执行jar文件. 以下是创建命令:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein uberjar
+</code></pre>
+</div>
+
+<p>此命令会创建一个文件在如下位置<code class="highlighter-rouge">target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar</code>. 你可以通过java命令运行它:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>java -jar target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar
+</code></pre>
+</div>
+
+<p>看吧! 这个jar文件是一个可以再几乎任何平台上运行的Clojure程序.</p>
+
+<p>现在你有了构建, 运行和发布Clojure程序所需的所有基础知识. 再后面的章节中, 你会深入了解到Leiningen的一些命令的细节, 从而全面了解Clojure与JVM的关系以及如何运行代码的.</p>
+
+<p>在开始第二章的Emacs学习之前, 先看看一个非常重要的工具:REPL. (译者: 遗憾的是, 我并不打算翻译第二章)</p>
+
+<h3 id="repl">使用REPL</h3>
+
+<p>REPL是一个用于试验代码的工具, 它允许你与正在运行的程序交互, 并快速尝试你的想法. 他接受你的输入, 执行它, 打印结果, 循环往复.</p>
+
+<p>这个REPL过程可以迅速的反馈结果, 而其他大多数语言中, 是无法实现的. 我强烈建议你经常使用它来快速检查你对Clojure的学习过程中的理解是否正确. 此外, REPL是一个Lisp开发过程中的重要部分, 如果不用真的是你的一大损失.</p>
+
+<p>打开一个REPL, 在命令行中执行:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein repl
+</code></pre>
+</div>
+
+<p>给你的反馈会像下面这样:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>nREPL server started on port 28925
+REPL-y 0.1.10
+Clojure 1.7.0
+    Exit: Control+D or (exit) or (quit)
+Commands: (user/help)
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+          (user/sourcery function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+Examples from clojuredocs.org: [clojuredocs or cdoc]
+          (user/clojuredocs name-here)
+          (user/clojuredocs "ns-here" "name-here")
+clojure-noob.core=&gt;
+</code></pre>
+</div>
+
+<p>最后一行<code class="highlighter-rouge">clojure-noob.core=&gt;</code>告诉我们, 我们当前在一个叫<code class="highlighter-rouge">clojure-noob.core</code>的名空间下. 稍后咱们会学到名空间, 现在我们只需要知道命名空间基本上与您的src/clojure_noob/core.clj文件的名称相匹配. 另外, REPL显示版本为Clojure 1.7.0, 但如前所述, 无论你使用哪个版本, 都不会有太大出入.</p>
+
+<p>它还提示你的代码已加载到REPL中, 你可以执行已定义的函数. 我们现在只定义了一个函数-main. 执行它:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="n">clojure-noob.core=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">-main</span><span class="p">)</span><span class="w">
+</span><span class="n">I</span><span class="ss">'m</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">teapot!</span><span class="w">
+</span><span class="n">nil</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>做得好! 你刚刚使用了REPL来调用函数. 接下来试下别的Clojure函数:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="n">clojure-noob.core=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">
+</span><span class="mi">10</span><span class="w">
+</span><span class="n">clojure-noob.core=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">
+</span><span class="mi">24</span><span class="w">
+</span><span class="n">clojure-noob.core=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">])</span><span class="w">
+</span><span class="mi">1</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>阔以! 你做了个加法, 做了个乘法, 取了一个向量(vector)中的第一个元素. 并且第一次遇到了古怪的Lisp语法. 你也有你第一次遇到古怪的Lisp语法! <br />
+所有Lisp方言，包括Clojure，采用前置表达式(prefix notation). 如果你不知道这是什么意思, 不要担心, 你会很快学到关于Clojure的语法.</p>
+
+<p>在概念上, REPL类似于Shell(SSH). Shell可以与远程服务器交互类似, Clojure REPL允许你与运行中的Clojure进程交互. 此功能可以非常强大, 因为您甚至可以将REPL附加到实时生产应用程序, 并在运行时修改程序. 从现在开始, 你将使用REPL来学习Clojure的语法和语义.</p>
+
+<p>注意: 现在起, 本书的代码不会显示REPL的提示符, 请动手练习. 如下:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">do</span><span class="w"> </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"no prompt here!"</span><span class="p">)</span><span class="w">
+   </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">
+</span><span class="c1">; =&gt; no prompt here!
+; =&gt; 4
+</span></code></pre>
+</div>
+
+<p>当你看到这样的代码片段, 以<code class="highlighter-rouge">; =&gt;</code>开头的行, 表示代码的输出. 上例中, 代码的返回值为4.</p>
+
+<h2 id="clojure-4">Clojure编辑器</h2>
+
+<p>(译者: 这里作者提到了Emacs, 和一些替代Emacs的推荐):</p>
+
+<ul>
+  <li>油管视频, 使用sublime text搭建clojure开发环境 <a href="http://www.youtube.com/watch?v=wBl0rYXQdGg/">http://www.youtube.com/watch?v=wBl0rYXQdGg/</a></li>
+  <li>Vim的clojure开发环境搭建教程 <a href="http://mybuddymichael.com/writings/writing-clojure-with-vim-in-2013.html">http://mybuddymichael.com/writings/writing-clojure-with-vim-in-2013.html</a></li>
+  <li>Eclipse的插件 <a href="https://github.com/laurentpetit/ccw/wiki/GoogleCodeHome">https://github.com/laurentpetit/ccw/wiki/GoogleCodeHome</a></li>
+  <li>IntelliJ的插件 <a href="https://cursiveclojure.com/">https://cursiveclojure.com/</a></li>
+  <li>Nightcode - 一个轻便的ClojureIDE <a href="https://github.com/oakes/Nightcode/">https://github.com/oakes/Nightcode/</a></li>
+</ul>
+
+<h2 id="section">总结</h2>
+
+<p>(译者: 接写来是作者的幽默感)</p>
+
+<p>I’m so proud of you, little teapot. You’ve run your first Clojure program! Not only that, but you’ve become acquainted with the REPL, one of the most important tools for developing Clojure software. Amazing! It brings to mind the immortal lines from “Long Live” by one of my personal heroes:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>You held your head like a hero
+On a history book page
+It was the end of a decade
+But the start of an age
+—Taylor Swift
+</code></pre>
+</div>
+
+<p>Bravo!</p>
+
+<h2 id="section-1">译后文</h2>
+
+<p>本文原文链接:<a href="http://www.braveclojure.com/getting-started/">http://www.braveclojure.com/getting-started/</a><br />
+学习Clojure的计划已经失败了太多次了, 这次又要挑战一回. 突然萌生出, 找本好的不枯燥的入门读物来翻译一下的想法, 边学边翻译. 希望这次能坚持下去. 23333…</p>
+
+<p>书中透露出的作者的冷幽默我就没有照着翻译了, 还有, 我不打算翻译第二章, 因为, 我是vim党. 还有我觉得学习Clojure已经够麻烦了, 没必要再外带学习一个一样麻烦的编辑器. 需要的自己点链接去:<a href="http://www.braveclojure.com/basic-emacs/">http://www.braveclojure.com/basic-emacs/</a></p>
+
+<p>作者的网站:<a href="http://www.braveclojure.com/">http://www.braveclojure.com/</a></p>
+
+
+<a href="http://victoriest.me/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">
+      我拍照的时候是在拍什么
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-02-02'>2017-02-02</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/摄影">摄影</a></li>
+    
+    <li><a href="http://victoriest.me/tag/jabber">jabber</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   我拍照的时候是在拍什么 -->
+    <!-- </p> -->
+    <p>自从入了个微单之后, 就喜欢拿着随便拍这拍那. 让我这样一个懒宅有出去浪的冲动, 可见摄影对我的吸引力还是非常大的, 至少目前还保持着新鲜感.</p>
+
+<p>也是在这之后, 我也便关注起网上的摄影的社区网站. 上面关于诸如关于摄影器材/拍摄手法比较, 器材党与后期党, N党与C党的争论无休无止, 我似乎看到了程序员社区中类似”XXX是最好的语言”, “XX已死, YY将取代之”争论的影子.  不由得感叹, 吃瓜群众在不同的社区分布还是比较平均的. 不过我要重申一下我对类似争论的看法:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>所有技术之所以存在是有其道理的, 去争论比较技术的好与坏没有任何意义, 这只是我们用来实现我们想完成的事物的一个工具, 既然是工具, 就要挑最适合的.
+</code></pre>
+</div>
+
+<p>这也让我去思考这样的一个问题 : 当我拍照片的时候, 我在拍什么?我想要拍到什么?我想要从这次拍摄中得到什么?</p>
+
+<p>在我还没有入相机之前, 旅游的时候都是用手机随手拍拍. 每当看到一个比较好看的景色, 当你试图找一个好的角度去拍的时候, 会发现你选择的那个角度会有很多其他游客拿着各式各样的设备拍着. 那么, 那么多人拍, 一样的角度, 一样的光线, 一样的景色, 设备还比我专业. 我为什么还要拍我为什么要在旅游的路上扛着不算轻的设备, 拍一些被别人拍过千百遍的东西? <br />
+即使是你想寻求更有特点的角度, 即使是你花大力气后期处理. 效果也不过就是, 发到朋友圈之后, 别人一句”景色拍的不错”有心无意的感叹而已.</p>
+
+<ul>
+  <li>一样的景色, 差别能有多大?<br />
+<img src="http://victoriest.me/images/IMG_3103.jpg" alt="一样的景色, 差别能有多大?" /></li>
+</ul>
+
+<p>我知道很多人很想反驳, 什么大师与庶民区别之类的. 但, 请先收好你们的观点, 我先说说我的:</p>
+
+<p>其实, 在我入手相机的时候, 我的想法很简单 : 我想用更大分辨率的相片记录我走过的路, 能拍到手机拍不到的夜景, 仅此而已. <br />
+自己拍的照片, 是一种记忆的索引, 自己拍照片的过程, 是构建索引的过程, 是将当时的感触与照片联系起来的过程.</p>
+
+<p>当旅行过去几个月甚至几年后, 翻看照片的时候, 我能利用照片回想起当时的情景, 拍照片时候周遭的环境, 与谁在一起, 讲过些什么话, 遇到些什么事, 阳光晒到身上亦或是海边吹过来的海风的感觉. 这些, 即使是顶尖的大师的照片也不能带来.</p>
+
+<p>而那些看到你朋友圈里的照片的人, 是不可能感受到你拍照片时的感触的. 而你收获到的”景色拍的不错”的赞叹, 只是构建回忆的副产品而已. 对我正真有价值的, 是照片构成的索引所指向的回忆.</p>
+
+<p>照片, 是拍给自己看的.</p>
+
+
+<a href="http://victoriest.me/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">
+      客户端软件架构nodejs+edgejs+electron调查报告
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-02-02'>2017-02-02</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/js">js</a></li>
+    
+    <li><a href="http://victoriest.me/tag/nodejs">nodejs</a></li>
+    
+    <li><a href="http://victoriest.me/tag/electron">electron</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   客户端软件架构nodejs+edgejs+electron调查报告 -->
+    <!-- </p> -->
+    <h1 id="section">概述</h1>
+<p>随着扫描客户端功能与算法趋于稳定. 可以预见, 今后会有越来越多关于交互方式/UI样式/个性化方面的需求. <br />
+然而当前客户端使用的架构为单纯的windowsform. 虽然有开发快速, 上手简单的优点; 但缺点是界面单调, 个性化外观定制较难实现.</p>
+
+<p>故需要寻找一套上手门槛低, 方便进行样式调整/个性化定制的客户端架构, nodejs+edgejs+electron便是备选方案之一.</p>
+
+<p>以下便为该架构的调查报告</p>
+
+<h1 id="section-1">准备</h1>
+<h3 id="section-2">需要工具</h3>
+<ul>
+  <li><a href="https://nodejs.org/en/">node.js</a></li>
+  <li><a href="http://electron.atom.io/">electron</a></li>
+  <li><a href="http://tjanczuk.github.io/edge/">edge.js</a></li>
+  <li><a href="https://github.com/kexplo/electron-edge">electron-edge</a></li>
+</ul>
+
+<p>electron的安装容易在运行install.js时卡住. <br />
+解决的方法就是在~/.npmrc里做如下设置</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>electron_mirror="https://npm.taobao.org/mirrors/electron/"
+</code></pre>
+</div>
+
+<p>electron不能直接利用edge.js调用.net的dll, 需要用electron-edge</p>
+
+<h1 id="section-3">调查</h1>
+
+<h2 id="section-4">实现</h2>
+
+<h3 id="c">c#部分实现</h3>
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Windows.Forms</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">TestEdgeForNodejs</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">HelloWorld</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;</span> <span class="nf">HelloWorldMessage</span><span class="p">(</span><span class="kt">object</span> <span class="n">input</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">MessageBox</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="s">"Hello "</span> <span class="p">+</span> <span class="n">input</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre>
+</div>
+<p>利用IDE VS生成dll, 拷贝到electron工程所在的目录中.</p>
+
+<h3 id="js">js部分实现</h3>
+
+<p>main.js</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">edge</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'electron-edge'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">electron</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">"electron"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span><span class="o">=</span><span class="nx">electron</span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">BrowserWindow</span><span class="o">=</span><span class="nx">electron</span><span class="p">.</span><span class="nx">BrowserWindow</span><span class="p">;</span>
+
+<span class="c1">// 声明要引用的dll中的方法</span>
+<span class="kd">var</span> <span class="nx">helloWorld</span> <span class="o">=</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">func</span><span class="p">({</span>
+    <span class="na">assemblyFile</span><span class="p">:</span> <span class="s1">'./TestEdgeForNodejs.dll'</span><span class="p">,</span>	<span class="c1">// dll路径</span>
+    <span class="na">typeName</span><span class="p">:</span> <span class="s1">'TestEdgeForNodejs.HelloWorld'</span><span class="p">,</span>	<span class="c1">// namespace.class</span>
+    <span class="na">methodName</span><span class="p">:</span> <span class="s1">'HelloWorldMessage'</span>				<span class="c1">// method</span>
+<span class="p">});</span>
+
+<span class="kd">function</span> <span class="nx">createWindow</span><span class="p">(){</span>
+    <span class="nx">mainWindow</span><span class="o">=</span><span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+        <span class="na">width</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span>
+        <span class="na">height</span><span class="p">:</span><span class="mi">300</span>
+    <span class="p">});</span>
+
+    <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">loadURL</span><span class="p">(</span><span class="s1">'file://'</span><span class="o">+</span><span class="nx">__dirname</span><span class="o">+</span><span class="s1">'/index.html'</span><span class="p">);</span> 
+
+    <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"closed"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">mainWindow</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span><span class="nx">createWindow</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"window-all-closed"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span><span class="o">!=</span><span class="s2">"darwin"</span><span class="p">){</span>
+        <span class="nx">app</span><span class="p">.</span><span class="nx">quit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"activate"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">mainWindow</span><span class="o">===</span><span class="kc">null</span><span class="p">){</span>
+        <span class="nx">createWindow</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// 调用dll中的HelloWorldMessage方法</span>
+<span class="kd">function</span> <span class="nx">callHelloWorld</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">helloWorld</span><span class="p">(</span><span class="s2">"World"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>index.html</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Victoriest Demo Apps<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+            estest
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">onclick=</span><span class="s">"callHelloWorld();"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"./main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="section-5">运行</h3>
+<p>在命令行中, 进入electron工程所在的目录.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>electron .
+</code></pre>
+</div>
+
+<h3 id="section-6">数据通讯</h3>
+<p>通过edge-electron可以进行双向的数据传递<a href="https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js">https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js</a></p>
+
+<h3 id="section-7">不足</h3>
+<p>到目前为止, 还没有找到类似于在electron中监听c#dll中发出的event的方法. 而目前客户端代码中大量使用了这种形式来控制UI显示状态, 如若转换架构, 涉及到修改重构的代码量会比较大.</p>
+
+<h3 id="section-8">阶段性结论</h3>
+<p>在找到能够监听c#dll发出的event的方法(或等价方法)前, 暂不考虑此方案.</p>
+
+
+<a href="http://victoriest.me/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">
+      我是个懒人么?新年的TODO LIST
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-01-31'>2017-01-31</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/jabber">jabber</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   我是个懒人么?新年的TODO LIST -->
+    <!-- </p> -->
+    <p>作为程序员, 电脑很重要; 就像音乐家之于乐器, 摄影师之于镜头一样, 是用来谋生的东西. 他们花费十几万的吉他, 几万块钱的一堆镜头, 彰显着专业和对客户认证态度.</p>
+
+<p>去年我是出于以上想法, 花了大价钱买个了mac book pro, 弄了个filco的蓝牙键盘, 灯场的蓝牙鼠标, 舒服的椅子, 宽敞的桌子.  想着, 既然是用来谋生的技能所需要的道具, 贵一点, 好一点也理所应当. 一来算是犒劳自己; 一来算是督促自己, 用这些花了不老少钱的东西总不能心安理得的打游戏了吧.<br />
+然而, 半年过去了, 按照目前的效果看, 似乎有些效果, 但是没有在买的时候想象的那么显著. 依然是每天总想看看剧, 玩玩游戏. 完全没有当时想着用着filco噼里啪啦敲代码的场景, 其实压根没好好敲过几次代码.</p>
+
+<p>现在我来梳理一下现象, 然后分析一下原因:<br />
+工作日, 早起上班, 到公司开电脑, 泡杯茶, 看看业内新闻, 经常发现一些新技术, 新工具, 非常想试验一下, 于是就在oneDrive上弄个memo记录下来, 计划晚上回去用我的豪华套件研究一下. 然后就开始当天的工作, 一天下来, 比较疲倦. 回到家, 想法就改变了: 哎, 今天好累, 看看剧玩玩游戏休息一下先; 然后, 时间就到了11点, 才想到memo上的东西, 想着就这样不管会有负罪感. 于是才打开该打开的东西(IDE之类的)开始学习之类的, 随便摆弄一下1个多小时过去了, 该睡觉了, 其实只是开了个头, 于是想:明天上班时候闲的时候继续弄. 然而, 因为晚睡, 第二天精神不好, 另外在公司弄自己的东西总是会担心别人看到, 于是不能全神贯注, 于是又推到晚上回去弄. 周而复始…</p>
+
+<p>还有, 我还有个很奇怪的执念:”一个晚上只做一件事情太浪费了”, 或者”一周之内只学一样东西太浪费(枯燥)了”. 于是, 总把整块的时间拆成小块. 一块弄这个, 一块弄那个. 我知道这样不好, 但是改掉这个执念需要长期努力…</p>
+
+<p>之前我在blog里摘过一段话算是写到我的痛点上了:”我们大多数人得时间都用在了抉择上 : 你可以选择多看一会电视剧, 也可以选择多看一本书籍. 毕竟知识和放松都是同等重要的, 你选择淡泊的同时也可以选择充实. 它们都可以给你带来很多应该学习的东西, 即使是只有快乐也就足够了. 最怕的一种生活状态, 其实是看完了书却不记得书名, 电视剧看完了却又后悔浪费了时间, 梦想做过了却一直感到惆怅”.</p>
+
+<p>写这些只是为了给自己一个警醒:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>我有拖延症
+我不能持之以恒的做一件事
+我总是纠结于选择
+我总给自己挖坑, 从来没有好好填过一个坑
+我总是怕浪费时间, 然而奇怪的执念却是导致时间被浪费的主要原因
+</code></pre>
+</div>
+
+<p>新的一年, 计划啥的, 虽然感觉没啥用; 但提醒一下直接也是有必要的, 下面是填坑的todo list:</p>
+<ul>
+  <li>ES6的应用</li>
+  <li>机器学习</li>
+  <li>R语言</li>
+  <li>微积分</li>
+  <li>概率论</li>
+  <li>每天的边听边看(书)</li>
+  <li>一周两次的身体锻炼</li>
+  <li>一周要抽点时间写点东西</li>
+</ul>
+
+
+<a href="http://victoriest.me/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2017/01/%E6%96%B0%E5%85%A5%E4%B8%80%E5%9D%91">
+      新入一坑
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2017-01-02'>2017-01-02</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/摄影">摄影</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   摄影 -->
+    <!-- </p> -->
+    <p>元旦假期, 去了一趟才开通的东湖绿道, 人多如牛毛…<br />
+以后还是坚定信念, 要出去转就挑工作日. 不过还是用刚入坑的微单拍了一些不怎么好的片子. <br />
+然后, 就是展现后期强大的时候了.</p>
+
+<p><img src="http://victoriest.me/images/2017-01-02/20170101-06.jpg" alt="6.jpg" /></p>
+
+
+<a href="http://victoriest.me/2017/01/%E6%96%B0%E5%85%A5%E4%B8%80%E5%9D%91">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/12/%E5%B9%B4%E6%9C%AB%E6%84%9F%E6%82%9F">
+      年末感悟
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-12-12'>2016-12-12</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/jabber">jabber</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   年末感悟 -->
+    <!-- </p> -->
+    <p>临近年末, 圣诞夜过完了, 总要对自己碌碌无为的一年做一个总结:</p>
+
+<h1 id="js">对js的从新认识</h1>
+<p>我一直都很在意技术更新, 对js的看法的改变也是源自想了解一下大家都在说2016年js开发的巨大变化. 在我的上一篇文章<a href="./2016-11-27-老前端开发遇到的新问题.md">老前端开发遇到的新问题</a>里也会有详细介绍.</p>
+
+<h1 id="section">今年从事的相关工作</h1>
+<p>工作上, 主要是进行图像视觉识别相关的开发, 基于opencv. opencv是个较为庞大的体系, 但工作上, 只会利用到其中的很小一部分功能. 用上去更像是一个用代码操作的PhotoShop.</p>
+
+<h1 id="section-1">从机器学习发现自己的短板</h1>
+<p>机器学习又是今年自己挖的一个深坑; 起初打算就是学一道两个机器学习的函数库啥的, 简单运用一下就点到为止. 然而, 发现机器学习这个领域的学习路程, 并非一个只有一条路走到头的过程, 而是需要有许分支支持的, 并且这些分支同等重要. <br />
+比如, 学习中涉及到的一系列数学概念; 虽然, 可以不去了解而只用框架而已, 但我还是想知道个所以然. 这就让我有动力捡起我曾经认为一辈子不会再碰的数学了. 然后就是一通买书找视频. 这应该是个漫长的过程. 而且应该还比我学函数式编程的过程更加漫长. 先从微积分开始…</p>
+
+<h1 id="section-2">函数式编程</h1>
+<p>这个坑了好长时间, 断断续续的学习, 虽然没有达到目标(用一个函数式语言写一个网站之类的). 但是, 经常在思考, 编码过程中, 似乎下意识的就会想想用函数式的思想怎么解决当前问题. 也就是多了一个解决问题的思路(而且是较优的思路).</p>
+
+<h1 id="section-3">从对学习的态度找到突破瓶颈的方法</h1>
+<p>学无止境, 真的, 一年前我还认为, 我老了, 学了数学也用不上, 也学不动了. 然而, 什么时候学, 都不算晚; 不管是当时觉得再没用的东西, 了解一下没有坏处. 直到有一天, 你突然发现你曾经浪费时间学的一些垃圾居然这么有用. 尤其是类似数学这样的工具学科.<br />
+“我想学xx, 但是没时间啊.” 这样的论调听到太多了. 归根结底, 就是懒. 这时候, 自己能选择的, 也就是两条路: 1. 跟他们一起霍霍, 浪费时间, 这样你可以结交很多的朋友; 2. 抛下他们, 自己继续前进, 你会被认为不合群, 你会觉得孤独; 但是, 会有更多的路人在你成长的路上与你相识, 成为新的朋友, 这这些新朋友, 都会比现在的你, 和现在的朋友更加优秀.<br />
+我还不够优秀, 但我仍然能够成长的更加优秀. 我时常给自己这样打气.<br />
+现在利用碎片时间, 接受新知识的手段越来越多, 似乎慢慢变成主流. 互联网的各种信息推送, app之类的知识服务越来越多. <br />
+比如, 积累一些比较优秀的微信公众号, 在喜马拉雅之类的类似音频节目中订阅一些, 自己感兴趣的知识热点. <br />
+这里我要提起一档音频节目叫”卓老板聊科技”, 就是这档节目, 让我对数学之类的学科重新燃起了学习动力.</p>
+
+<h1 id="section-4">其他软能力</h1>
+<p>近期工作中深深地感受到, 沟通能力, 文字表达能力真特么重要. 能够将一个问题跟一个世界观教育程度成长环境和自己完全不同的人描述清楚的技能, 比写代码做架构要难得多. <br />
+道理, 只能跟讲道理的人讲 - 就像上面说的, 一个世界观教育程度成长环境完全不同的人, 再加上不讲道理. 赶快远离他吧.</p>
+
+
+<a href="http://victoriest.me/2016/12/%E5%B9%B4%E6%9C%AB%E6%84%9F%E6%82%9F">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/11/%E8%80%81%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E6%96%B0%E9%97%AE%E9%A2%98">
+      不做前端开发2,3年 整个世界都变了
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-11-27'>2016-11-27</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/js">js</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   不做前端开发2,3年 整个世界都变了 -->
+    <!-- </p> -->
+    <p>在今年重新拾起JS等前端开发工具之前, 最后一次使用进行前端开发是在大概3年前.<br />
+在我的印象中, 那时的前端开发大概的特点:</p>
+<ul>
+  <li>一个jquery走天下</li>
+  <li>js的丑陋并且含有歧义的语义(诸如this)</li>
+  <li>遇到最多的bug就是多浏览器兼容</li>
+</ul>
+
+<p>于是, 当工作上与web开发没有交集后, 便毫无留念的舍弃了这些东西, 并且产生了”js是世界上最丑的语言”的印象.</p>
+
+<p>而最近半年, 有太多的推送向我传达了一个讯息:前端开发要炸了, 各种新技术新工具, 爆炸似的产生. 好奇驱动我又一次踏入这个我曾经认为改浏览器兼容问题几乎是工作内容全部的领域.</p>
+
+<p>作为一个混迹江湖多年的老油条, 觉得不会有啥难的, 但是经过一天后发现, 我发现我依旧是一脸懵逼得状态, 随后我看到了一篇特别能描述我当时情况的文章:<a href="https://www.oschina.net/news/77853/how-about-learn-javascript-at-2016?from=timeline&amp;isappinstalled=0">在 2016 年学 JavaScript 是一种什么样的体验？</a></p>
+
+<p>一阵子摸爬滚打之后, 算是大概梳理清楚了. 然后觉得还是有必要把前端开发的变化, 以及现在最流行的一些开发流程/工具, 记录一下; 免得以后用的时候又要重新折腾(希望到时候不要又出现”前端开发又炸了”的情况).</p>
+
+<h3 id="section">基础设施</h3>
+
+<h4 id="section-1">编辑器</h4>
+<p>sublime text, atom, webstorm, vim, emacs 都行. 选你自己喜欢的.</p>
+
+<h4 id="nodejs">node.js</h4>
+<p>现在的前端开发已经离不开它了, 几乎所有的前端开发所需要用到的库都是用node.js所带的npm管理的. 必备.<br />
+以下提起到得所有工具, 都可以在命令行下, 通过npm进行安装<br />
+如, 我想安装一个webpack工具</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install webpack
+</code></pre>
+</div>
+
+<h4 id="section-2">打包工具</h4>
+<p><a href="https://webpack.github.io/">webpack</a> - 是近期最火的一款模块加载器兼打包工具，它能把各种资源，例如JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理<br />
+说到打包工具, 如今也是前端开发的基础设施之一了. 类似的工具还有Bower, gulp等.</p>
+
+<h4 id="es5-es6-es">ES5, ES6, 以及我熟悉的ES</h4>
+<p>其实今天年才知道, 那个我曾经熟悉的js是ES3的标准. ES3与ES5有太多的不同, 最好找个文档看看 - <a href="http://yanhaijing.com/es5/#48">ES5.1</a><br />
+然后ES6就是在ES5上增加了一些语法糖. 如果你也是和我一样2,3年没有接触前端js开发, 还是需要看看ES5的文档的.<br />
+恩, 现在的js, 比当初丑陋的ES3时代的js变美了不少.</p>
+
+<h4 id="section-3">开发框架</h4>
+<p>angular与<a href="https://facebook.github.io/react/">react</a>的大名, 我早有耳闻. 然而查阅一些资料后, 我觉得我会更喜欢React, 因为它奉行linux哲学. <br />
+react只是一个MVVM中视图层的东东, 要想搭建起一个完整的前端框架; 还需要用到FaceBook奉行的Flux应用架构. 而<a href="https://github.com/reactjs/redux">Redux</a>, 就是这套应用架构的具体实现.</p>
+
+<h4 id="section-4">代码转换/编译(?!)</h4>
+<p>啥, js还需要编译?! 额, 其实是翻译. 就是吧一些新兴脚本语言翻译成比较通用js语言(看来觉得js丑的人不止一两个), 这些语言有些是js的扩展(jsx, coffescript); 有的一看就是要搞事情, 完全是另外一种语言(clojure script).<br />
+然后, 还会有些浏览器还没有支持ES6, 通过代码转换工具, 会翻译成更通用的ES5. <a href="https://babeljs.io/">babel</a>就是这样的工具.</p>
+
+<h3 id="section-5">进一步</h3>
+<p>爬完以上的坑, 大概就可以成为2016年的前端开发了. 但是要想成为更加优雅, 更加有逼格的程序员. 下面这些进阶工具就必须要掌握了</p>
+
+<h4 id="section-6">单元测试框架</h4>
+<p>哦, 是的, 前端也有单元测试框架了. <a href="https://mochajs.org/">Mocha</a>和<a href="https://jasmine.github.io/">Jasmine</a>比较流行.</p>
+
+<h4 id="section-7">移动开发/原生应用框架</h4>
+<p>现在有不少基于js语言的原生APP的开发框架了. react native就是其中一个.</p>
+
+<h4 id="section-8">热加载</h4>
+<p><a href="http://livereload.com/">livereload</a> 是一个web开发辅助工具，当我们修改完html、css和js的时候会自动刷新浏览器，解放码农的双手。 这样在双屏切图、写js代码的时候会提高很多效率。</p>
+
+<h4 id="mernhttpmernio--meanhttpmeanio"><a href="http://mern.io/">MERN</a> / <a href="http://mean.io/">MEAN</a></h4>
+<p>其实就是Mogodb + express + react + node.js的全栈框架 类似于php的lamp, wamp</p>
+
+<h3 id="section-9">参考资料</h3>
+
+<ul>
+  <li>es5 的快速入门 尅一看babel的官网的Learn ES2015</li>
+  <li>webpack的github下有webpack的demo 十来个 看完就会用了</li>
+  <li>react的github下也有类似的例子 看完同样会用</li>
+  <li><a href="http://yanhaijing.com/es5/#20">es5标准</a></li>
+  <li><a href="http://cn.redux.js.org/index.html">Redux 中文文档 Join the chat at https://gitter.im/camsong/redux-in-chinese</a></li>
+  <li><a href="http://www.kancloud.cn/kancloud/create-voting-app/63976">使用React、Node.js、MongoDB、Socket.IO开发一个角色投票应用</a></li>
+  <li><a href="http://yanhaijing.com/javascript/2015/09/11/learn-es2015/">ECMAScript 2015 简易教程</a></li>
+  <li><a href="http://stateofjs.com/2016/introduction/">The State Of JavaScript</a></li>
+  <li><a href="https://uedsky.com/2016-06/es6/">es6 语法简介</a></li>
+</ul>
+
+<a href="http://victoriest.me/2016/11/%E8%80%81%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E6%96%B0%E9%97%AE%E9%A2%98">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/11/BTrace%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1">
+      BTrace学习小计
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-11-25'>2016-11-25</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/java">java</a></li>
+    
+    <li><a href="http://victoriest.me/tag/BTrace">BTrace</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   BTrace学习小计 -->
+    <!-- </p> -->
+    <h2 id="section">去官网下载</h2>
+<p>https://github.com/btraceio/btrace</p>
+
+<h2 id="btracehome-path">配置BTRACE_HOME, PATH环境变量</h2>
+
+<h2 id="jpsjvmpid">通过jps获取待监控的jvm的pid</h2>
+
+<h2 id="section-1">通过如下命令开始监控</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>btrace &lt;PID&gt; &lt;trace_script&gt;
+</code></pre>
+</div>
+
+<h2 id="section-2">脚本的写法 官网里有很多例子 看完就会了</h2>
+
+<a href="http://victoriest.me/2016/11/BTrace%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/10/jabber">
+      2016-10-30 jabber
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-10-30'>2016-10-30</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/jabber">jabber</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   jabber -->
+    <!-- </p> -->
+    <ul>
+  <li>
+    <p>绝大部分人都相信, 环境和自身是梦想成真的两大必要因素; 同时, 他们也坚信, 环境都是别人的, 脸黑都是自己的.</p>
+  </li>
+  <li>
+    <p>绝大部分追梦者都是一群没有自知之明的人, 毕竟一个人的上限是由他的天赋决定的; 努力在做的东西, 只不过是不让自己的下限变得太低, 进一寸有一寸的欢喜; 我们大多数人得时间都用在了抉择上 : 你可以选择多看一会电视剧, 也可以选择多看一本书籍. 毕竟知识和放松都是同等重要的, 你选择淡泊的同时也可以选择充实. 它们都可以给你带来很多应该学习的东西, 即使是只有快乐也就足够了. 最怕的一种生活状态, 其实是看完了书却不记得书名, 电视剧看完了却又后悔浪费了时间, 梦想做过了却一直感到惆怅; 而且还好为人师, 将自己的世界观价值观和他的思而不学+犹豫不决的风格强行传输于别人. 梦想只能控制自己的大脑; 有钱才有可能控制别人的大脑. 你的梦想对于别人 一文不值.</p>
+  </li>
+  <li>
+    <p>一定要小心一种人，你跟他说话的次数不用掰指头都数的出来。但他却跟你总是称兄道弟，兄弟长兄弟短的称呼。这种人嘴里的兄弟，太廉价，太容易得到，而廉价的东西，往往很容易去被抛弃。</p>
+  </li>
+  <li>
+    <p>当你的老板觉得，是他在养活你的生活，不管你买什么东西，他都觉得是你用他给你的钱去买。赶快辞职。因为他搞不懂他付的薪水到底是用来支付什么。他搞不懂整个公司是基于什么规则在运作。他会耍流氓一般的无视契约精神。他不会去尊重你为工作所付出的时间。你在他眼里只是一个用钱买来的奴隶。</p>
+  </li>
+</ul>
+
+<a href="http://victoriest.me/2016/10/jabber">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/08/jabber">
+      2016-08-30 jabber
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-08-30'>2016-08-30</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/jabber">jabber</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   jabber -->
+    <!-- </p> -->
+    <ul>
+  <li>
+    <p>infoq上, 打着技术交流的旗号进行产品广告的演讲越来越多了</p>
+  </li>
+  <li>
+    <p>如果你以为混乱是创业的常态, 并且引以为豪的话, 洗洗睡吧.</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>如果天空是黑暗的，那就摸黑生存；
+如果发出声音是危险的，那就保持沉默；
+如果自觉无力发光的，那就蜷伏于墙角。
+但不要习惯了黑暗就为黑暗辩护；
+不要为自己的苟且而得意；
+不要嘲讽那些比自己更勇敢热情的人们。
+我们可以卑微如尘土，不可扭曲如蛆虫。
+——曼德拉
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>之前跟公司的同事一起出去吃饭, 谈到了一个话题:我们与B.A.T的技术的差距是什么, 我当时说没差距, 只是因为我们在一个不知名的小公司, 而他们在阿里而已. 但, 他们不信. 于是, 我深刻的意识到, 并且为自己打气: 不要让别人的见识影响到自己的认知.</p>
+  </li>
+  <li>
+    <p>打从心底鄙视那些做了一两年技术就自我感觉良好, 想转管理的人.</p>
+  </li>
+</ul>
+
+<a href="http://victoriest.me/2016/08/jabber">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/07/vim%E5%80%92%E8%85%BE%E7%AC%94%E8%AE%B0">
+      VIM 倒腾笔记
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-07-17'>2016-07-17</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/vim">vim</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   VIM 倒腾笔记 -->
+    <!-- </p> -->
+    <h1 id="section">引子</h1>
+
+<p>略</p>
+
+<h1 id="vimrc">vimrc</h1>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">:version</code>可以查看vim的配置</p>
+  </li>
+  <li>
+    <p>在windows下，有两个可选的用户vimrc文件，一个是$HOME_vimrc，另外一个是$VIM_vimrc。vim启动时，会先尝试执行系统的vimrc文件(通常此文件不存在)，然后将按照上述顺序查找用户vimrc，并执行所找到的第一个用户vimrc中的命令，忽略其余的用户vimrc。</p>
+  </li>
+  <li>
+    <p>在Linux下使用的vimrc文件名为.vimrc，而在windows下因为不支持以点(.)开头的文件名，vimrc文件的名字使用_vimrc。不过，在Linux下，如果未找到名为.vimrc的文件，也会尝试查找名为_vimrc的文件；而在windows下也是这样，只不过查找顺序颠倒一下，如果未找到名为_vimrc的文件，会去查找.vimrc。</p>
+  </li>
+  <li>
+    <p>从这里可以看出，vimrc的执行先于gvimrc。所以我们可以把全部vim配置命令都放在vimrc中，不需要用gvimrc。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">:echo $VIM</code>和<code class="highlighter-rouge">:echo $HOME</code>用于查看路径</p>
+  </li>
+  <li>
+    <p>windows与linux的差别, windows下是_vimrc, linux下是.vimrc</p>
+  </li>
+</ul>
+
+
+<a href="http://victoriest.me/2016/07/vim%E5%80%92%E8%85%BE%E7%AC%94%E8%AE%B0">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/04/apache+tomcat%E6%90%AD%E5%BB%BA%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%8E%AF%E5%A2%83">
+      使用 apache 和 tomcat 搭建负载均衡环境
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-04-26'>2016-04-26</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/负载均衡">负载均衡</a></li>
+    
+    <li><a href="http://victoriest.me/tag/apache">apache</a></li>
+    
+    <li><a href="http://victoriest.me/tag/tomcat">tomcat</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   使用 apache 和 tomcat 搭建负载均衡环境 -->
+    <!-- </p> -->
+    <h3 id="section">前置环境</h3>
+<ul>
+  <li>安装apache 其中配置文件在/etc/httpd/conf/httpd.conf</li>
+  <li>安装tomcat, 复制两个tomcat实例用来测试(分别为/tomcat0, /tomcat1)</li>
+</ul>
+
+<h3 id="tomcat">tomcat配置</h3>
+<p>因为需要启动两个tomcat实例, 所以需要修改其中一个实例的配置文件, 以避免端口号占用. (tomcat配置文件在/tomcat/conf/server.xml)</p>
+
+<h3 id="apache">apache配置</h3>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+
+ProxyRequests Off
+<span class="nt">&lt;Proxy</span> <span class="err">balancer://mycluster</span><span class="nt">&gt;</span>
+    BalancerMember ajp://172.29.226.144:8009
+    BalancerMember ajp://172.29.226.144:8019 status=+H
+<span class="nt">&lt;/Proxy&gt;</span>
+ProxyPass /test balancer://mycluster/
+ProxyPassReverse /test balancer://mycluster/
+
+<span class="nt">&lt;Proxy</span> <span class="err">balancer://mycluster1</span><span class="nt">&gt;</span>
+    BalancerMember ajp://172.29.226.144:8019
+    BalancerMember ajp://172.29.226.144:8009 status=+H
+<span class="nt">&lt;/Proxy&gt;</span>
+ProxyPass /test2 balancer://mycluster1/
+ProxyPassReverse /test2 balancer://mycluster1/
+
+<span class="nt">&lt;Location</span> <span class="err">/balancer-manager</span><span class="nt">&gt;</span>
+SetHandler balancer-manager
+Order Deny,Allow
+Allow from all
+<span class="nt">&lt;/Location&gt;</span>
+</code></pre>
+</div>
+
+
+<a href="http://victoriest.me/2016/04/apache+tomcat%E6%90%AD%E5%BB%BA%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%8E%AF%E5%A2%83">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/03/Solr5-%E4%BB%8Emysql%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE,%E5%B9%B6%E8%BF%9B%E8%A1%8Chtml%E6%A0%87%E7%AD%BE%E8%BF%87%E6%BB%A4,%E6%90%9C%E5%AF%BB%E7%9B%B8%E4%BC%BC%E6%96%87%E6%A1%A3%E7%9A%84-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">
+      Solr5 从mysql导入数据,并进行html标签过滤,搜寻相似文档的 最佳实践
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-03-04'>2016-03-04</time>
+  </div>
+  <!--
+  <ul>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   Solr5从mysql导入数据,并进行html标签过滤,搜寻相似文档的最佳实践 -->
+    <!-- </p> -->
+    <h1 id="section">准备工作</h1>
+
+<h2 id="solr55">Solr5.5</h2>
+<p>从<a href="http://lucene.apache.org/solr/">solr主页</a>中获取对应系统的最新版本的solr(写此文时时5.5)解压即可, 无需安装</p>
+<h2 id="mysqlimporter---mysql">mysqlImporter - 从mysql导入数据</h2>
+<p>先下载mysql-connector-java的jar包, <a href="http://dev.mysql.com/downloads/connector/j/">下载地址</a></p>
+
+<p>将其放到solr目录下的contrib/dataimporthander/lib/目录下</p>
+
+<h2 id="mmseg4j---">mmseg4j - 中文分词器</h2>
+<p>下载最新版本的mmseg4j, 可以到其作者的github中相应的项目地址下载, <a href="https://github.com/chenlb">链接</a></p>
+
+<p>将其放到solr目录下的contrib/extraction/lib/目录下</p>
+
+<h2 id="section-1">配置文件</h2>
+<p><strong>在solr的”./server/solr/configsets/”目录下可以看到几个configs的例子, 这里我们复制一个”basic_configs”例子, 给他重命名为你希望的名字. 这里我们给他起为victoriest, 进入这个victoriest/conf目录后, 我们就要进行一系列的配置文件的修改了</strong></p>
+
+
+<a href="http://victoriest.me/2016/03/Solr5-%E4%BB%8Emysql%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE,%E5%B9%B6%E8%BF%9B%E8%A1%8Chtml%E6%A0%87%E7%AD%BE%E8%BF%87%E6%BB%A4,%E6%90%9C%E5%AF%BB%E7%9B%B8%E4%BC%BC%E6%96%87%E6%A1%A3%E7%9A%84-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2016/02/%E7%B2%97%E6%83%B3%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">
+      粗想分布式缓存方案
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2016-02-16'>2016-02-16</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/PerSharding">PerSharding</a></li>
+    
+    <li><a href="http://victoriest.me/tag/一致性哈希">一致性哈希</a></li>
+    
+    <li><a href="http://victoriest.me/tag/分布式缓存">分布式缓存</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   粗想分布式缓存方案 -->
+    <!-- </p> -->
+    <p>脑补了一下有可能遇到的redis缓存的分布式方案 于是google了一下相关文章, 发现除了之前一直用的自己实现的一个简单的一致性HASH的方案, 还有其他很成熟的一些开源方案, 网上已经有很多优秀的文章来介绍了, 我也就不搬运一遍了.<br />
+实现思想大致就有两类: <strong>PreSharding, 一致性哈希</strong>.<br />
+以下是部分参考:</p>
+
+<p><a href="http://www.infoq.com/cn/news/2014/11/open-source-redis-cache">高可用、开源的Redis缓存集群方案</a></p>
+
+<p><a href="http://blog.csdn.net/cywosp/article/details/23397179">一致性哈希</a></p>
+
+<p><a href="http://blog.log4d.com/2015/07/redis-migration/">Redis 集群扩容</a></p>
+
+
+<a href="http://victoriest.me/2016/02/%E7%B2%97%E6%83%B3%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2015/11/zookeeper%E4%BC%AA%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E7%AC%94%E8%AE%B0">
+      zookeeper伪集群搭建笔记
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2015-11-20'>2015-11-20</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/storm">storm</a></li>
+    
+    <li><a href="http://victoriest.me/tag/zookeeper">zookeeper</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   zookeeper伪集群搭建笔记 -->
+    <!-- </p> -->
+    <p>这几天准备研究一下storm, 想先把storm的环境搭起来, 为了实现真是的集群环境, 在网上找了一些引导教程, 发现前置条件是需要搭建好zookeeper的服务器环境. 于是便有了此文.<br />
+此文, 用于记录<strong>在linux环境下, 搭建zookeeper的(伪)集群环境的步骤.</strong></p>
+
+<ol>
+  <li>
+    <h5 id="zookeeper">下载最新的稳定版的zookeeper</h5>
+    <p>编写此文时, zookeeper的最新版本是3.4.6, 可以在zookeeper的官网<a href="http://www.apache.org/dyn/closer.cgi/zookeeper/">下载界面</a>, 通过wget下载, 如:</p>
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>wget http://apache.dataguru.cn/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz
+</code></pre>
+    </div>
+    <p>下载成功后, 解压:</p>
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>tar -xzf ./zookeeper-3.3.6.tar.gz
+</code></pre>
+    </div>
+    <p>为了方便, 重命名zookeeper并且将zookepper移动到根目录:</p>
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>mv ./zookeeper-3.3.6.tar.gz /zookeeper
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <h5 id="zookeeper-1">zookeeper伪集群环境的配置文件</h5>
+    <p>zookeeper配置文件在conf目录下, 这里, 我们以启动3个服务器大小的zookeeper集群.</p>
+    <ul>
+      <li>新建名为zoo1.cfg, zoo2.cfg, zoo3.cfg的文件, 内容如下:</li>
+    </ul>
+  </li>
+</ol>
+
+
+<a href="http://victoriest.me/2015/11/zookeeper%E4%BC%AA%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E7%AC%94%E8%AE%B0">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2015/11/Intellj%E4%B8%8B%E7%9A%84clojure%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E5%80%92%E8%85%BE">
+      IntelliJ IDEA 下的clojure 开发环境配置笔记
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2015-11-19'>2015-11-19</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/clojure">clojure</a></li>
+    
+    <li><a href="http://victoriest.me/tag/IntelliJ">IntelliJ</a></li>
+    
+    <li><a href="http://victoriest.me/tag/Leiningen">Leiningen</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   IntelliJ IDEA 下的clojure 开发环境配置笔记 -->
+    <!-- </p> -->
+    <h3 id="section">系统环境</h3>
+<ul>
+  <li>MacOS 10.11.1</li>
+  <li>IntelliJ IDEA 14.1</li>
+</ul>
+
+<h3 id="leiningen">安装Leiningen</h3>
+
+<p>mac下, 可以使用<code class="highlighter-rouge">brew install leiningen</code>安装, 很简单; 当然, 你也可以访问<a href="http://leiningen.org/#install">Leiningen官网安装引导界面</a>, 下载一个lein.sh文件, 并按照网页上描述的方式下载并安装Leiningen</p>
+
+<h3 id="cursive">安装Cursive插件</h3>
+
+<p>首先, 你要有IntelliJ, 在<a href="https://cursive-ide.com/userguide/index.html">Cursive的安装引导页面</a>有详细安装引导.</p>
+
+
+<a href="http://victoriest.me/2015/11/Intellj%E4%B8%8B%E7%9A%84clojure%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E5%80%92%E8%85%BE">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2015/11/Golang%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95tcp%E6%9C%8D%E5%8A%A1%E5%99%A8">
+      Golang实现简单tcp服务器
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2015-11-18'>2015-11-18</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/golang">golang</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   Golang实现简单tcp服务器 -->
+    <!-- </p> -->
+    <h2 id="section">概述</h2>
+
+<p>Golang作为一门近些年来非常风光的开发语言, 其实用范围很广, 图形界面, web框架, 图像引擎等等.<br />
+由于其语言特性简化了并发/多核的开发, 受到了很大的关注. 而使用它进行服务器开发, 也是非常高校而简洁的.<br />
+废话不多说, 本项目实践的目的是使用golang开发一个简单的基于tcp协议的服务器/客户端.</p>
+
+<h3 id="section-1">预备知识</h3>
+<p>首先, 我们需要了解一下golang下的如下包与特性:</p>
+
+<h3 id="goroutine">goroutine</h3>
+<p>goroutine是一种轻量型的线程, 作为golang语言的语言特性, 可以很简单的在golang中进行多线程的开发. 利用go关键字, 我们能把任何一个方法/函数, 放在一个新的goroutine里执行.<br />
+实验01:</p>
+
+<p>在<strong>实验环境</strong>的<strong>主文件夹</strong>里, 建立一个名为test.go的文本文档, 并开始编写以下代码</p>
+
+
+<a href="http://victoriest.me/2015/11/Golang%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95tcp%E6%9C%8D%E5%8A%A1%E5%99%A8">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2015/11/windows%E4%B8%8B%E7%9A%84golang%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">
+      windows下的golang交叉编译环境搭建
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2015-11-18'>2015-11-18</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/golang">golang</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   windows下的golang交叉编译环境搭建 -->
+    <!-- </p> -->
+    <ol>
+  <li>
+    <p>下载<a href="http://sourceforge.net/projects/mingw/files/">mingw</a></p>
+  </li>
+  <li>
+    <p>下载安装完成后, MinGW/bin添加到系统环境变量 PATH 中</p>
+  </li>
+  <li>
+    <p>在GO\src的目录下 执行如下批处理</p>
+  </li>
+</ol>
+
+<blockquote>
+  <div class="highlighter-rouge"><pre class="highlight"><code>rm -rf ../bin ../pkg
+set CGO_ENABLED=0
+::x86块
+set GOARCH=386
+set GOOS=windows
+call make.bat --no-clean
+set GOOS=linux
+call make.bat --no-clean
+set GOOS=freebsd
+call make.bat --no-clean
+set GOOS=darwin
+call make.bat --no-clean
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::x64块
+set GOARCH=amd64
+set GOOS=linux
+call make.bat --no-clean
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+::arm块
+set GOARCH=arm
+set GOOS=linux
+call make.bat --no-clean
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set GOARCH=386
+set GOOS=windows
+go get github.com/nsf/gocode
+pause
+</code></pre>
+  </div>
+</blockquote>
+
+<p>运行完毕将会产生交叉编译环境列表如下(不完全，请根据自己需要修改)</p>
+
+
+<a href="http://victoriest.me/2015/11/windows%E4%B8%8B%E7%9A%84golang%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">read more</a>
+  </div>
+  
+  <h2 class="post-title">
+    <a href="http://victoriest.me/2015/11/goprotobuf%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8">
+      goprotobuf安装与使用
+    </a>
+  </h2>
+
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='2015-11-18'>2015-11-18</time>
+  </div>
+  <!--
+  <ul>
+    
+    <li><a href="http://victoriest.me/tag/golang">golang</a></li>
+    
+    <li><a href="http://victoriest.me/tag/protobuff">protobuff</a></li>
+    
+  </ul>
+  -->
+</div>
+
+  <div class="post-descr">
+    <!-- <p> -->
+    <!--   goprotobuf安装与使用 -->
+    <!-- </p> -->
+    <ul>
+  <li>安装 :</li>
+</ul>
+
+<blockquote>
+  <p>go get code.google.com/p/goprotobuf/{proto,protoc-gen-go}</p>
+
+  <p>go install  code.google.com/p/goprotobuf/proto</p>
+</blockquote>
+
+<ul>
+  <li>编译.proto文件</li>
+</ul>
+
+<blockquote>
+  <p>protoc 文件路径.proto –go_out=输出路径</p>
+</blockquote>
+
+<ul>
+  <li>导入包 “code.google.com/p/goprotobuf/proto”
+    <div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">  </span><span class="n">buff</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">pb</span><span class="o">.</span><span class="n">MobileSuiteProtobuf</span><span class="p">{</span><span class="x">  
+  	</span><span class="n">Type</span><span class="o">:</span><span class="n">proto</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="m">321</span><span class="p">),</span><span class="x">  
+  	</span><span class="n">Arena</span><span class="o">:</span><span class="x">   </span><span class="n">proto</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="m">111</span><span class="p">),</span><span class="x">  
+  	</span><span class="n">Command</span><span class="o">:</span><span class="x"> </span><span class="n">proto</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="m">0xa</span><span class="p">),</span><span class="x">  
+  	</span><span class="n">Message</span><span class="o">:</span><span class="x"> </span><span class="n">byt</span><span class="p">,</span><span class="x">  
+  </span><span class="p">}</span><span class="x">  
+  </span><span class="n">bybuf</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">proto</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span><span class="x">  
+</span></code></pre>
+    </div>
+    <p>如果遇到不能下载goprotobuf的情况, 修改自己的 hosts文件 参见这里</p>
+  </li>
+  <li>参考文献:</li>
+</ul>
+
+<blockquote>
+  <p>http://www.cnblogs.com/zhangqingping/archive/2012/10/28/2743274.html</p>
+
+  <p>https://godoc.org/code.google.com/p/goprotobuf/proto</p>
+</blockquote>
+
+
+<a href="http://victoriest.me/2015/11/goprotobuf%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8">read more</a>
+  </div>
+  
+
+
+<div class="post-footer">
+  <div class="column-full">
+    <h3><a href="http://victoriest.me/archive.html">Blog archives</a></h3>
+  </div>
+</div>
+
+          </div>
+        </div>
+        <div class="col-md-4 hidden-xs">
+          <div class="sidebar ">
+  <h2>Recent Posts</h2>
+  <ul>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译]</a></li>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译]</a></li>
+    
+    <li><a href="/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">我拍照的时候是在拍什么</a></li>
+    
+    <li><a href="/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">客户端软件架构nodejs+edgejs+electron调查报告</a></li>
+    
+    <li><a href="/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">我是个懒人么?新年的TODO LIST</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar ">
+  <h2>Wechat Official Accounts</h2>
+  <img src="/images/qrcode_victoriest.jpg" />
+</div>
+
+
+<div class="sidebar ">
+  <h2>Follow me</h2>
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  </ul>
+</div>
+<!--
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+<div class="sidebar">
+  <h2>Tags</h2>
+  <ul>
+    
+      <li><a href="/tag/golang">golang</a></li>
+    
+      <li><a href="/tag/tcp服务器">tcp服务器</a></li>
+    
+      <li><a href="/tag/clojure">clojure</a></li>
+    
+      <li><a href="/tag/protobuff">protobuff</a></li>
+    
+      <li><a href="/tag/IntelliJ">IntelliJ</a></li>
+    
+      <li><a href="/tag/Leiningen">Leiningen</a></li>
+    
+      <li><a href="/tag/storm">storm</a></li>
+    
+      <li><a href="/tag/zookeeper">zookeeper</a></li>
+    
+      <li><a href="/tag/PerSharding">PerSharding</a></li>
+    
+      <li><a href="/tag/一致性哈希">一致性哈希</a></li>
+    
+      <li><a href="/tag/分布式缓存">分布式缓存</a></li>
+    
+      <li><a href="/tag/负载均衡">负载均衡</a></li>
+    
+      <li><a href="/tag/apache">apache</a></li>
+    
+      <li><a href="/tag/tomcat">tomcat</a></li>
+    
+      <li><a href="/tag/vim">vim</a></li>
+    
+      <li><a href="/tag/jabber">jabber</a></li>
+    
+      <li><a href="/tag/java">java</a></li>
+    
+      <li><a href="/tag/BTrace">BTrace</a></li>
+    
+      <li><a href="/tag/js">js</a></li>
+    
+      <li><a href="/tag/摄影">摄影</a></li>
+    
+      <li><a href="/tag/nodejs">nodejs</a></li>
+    
+      <li><a href="/tag/electron">electron</a></li>
+    
+  </ul>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+  </div>
+      <footer class="footer-distributed">
+      <div class="container">
+        <div class="footer">
+          <p>VcitoriEST &copy; 2016. Powered by <a href="http://jekyllrb.com/">jekyll,</a> <a href="https://github.com/streetturtle/jekyll-clean-dark">Jekyll Clean Dark</a></p>
+          <h6>Follow me</h6>
+
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+</div>

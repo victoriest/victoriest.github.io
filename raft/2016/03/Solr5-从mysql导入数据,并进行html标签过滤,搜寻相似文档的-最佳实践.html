@@ -1,0 +1,429 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Victoriest's Lab</title>
+  <meta name="theme-color" content="#222222" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://victoriest.me/js/jquery.min.js"></script>
+  <script src="http://victoriest.me/js/bootstrap.min.js"></script>
+  <script src="http://victoriest.me/js/header.js"></script>
+  <script src="http://victoriest.me/js/toc.js"></script>
+  <link href="http://victoriest.me/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/theme.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/syntax.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+
+  
+
+
+ <script type="text/javascript">
+  WebFontConfig = {
+    google: {
+      families: ['Ubuntu::latin']
+    }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://victoriest.me/">Victoriest's Lab</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://victoriest.me/index.html">Home</a></li>
+          <li><a href="http://victoriest.me/memo.html">Memo</a></li>
+          <li><a href="http://victoriest.me/archive.html">Archive</a></li>
+          <!--<li><a href="http://victoriest.me/tags.html">Tags</a></li>-->
+          <li><a href="http://victoriest.me/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="wrapper">
+  <div class="content">
+    <div class="container container-center">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="article">
+            <div class="well">
+              <h1><a href="http://victoriest.me/2016/03/Solr5-%E4%BB%8Emysql%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE,%E5%B9%B6%E8%BF%9B%E8%A1%8Chtml%E6%A0%87%E7%AD%BE%E8%BF%87%E6%BB%A4,%E6%90%9C%E5%AF%BB%E7%9B%B8%E4%BC%BC%E6%96%87%E6%A1%A3%E7%9A%84-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">Solr5 从mysql导入数据,并进行html标签过滤,搜寻相似文档的 最佳实践</a></h1>
+              <div class="post-meta">
+                <div class="post-time">
+                  <i class="fa fa-calendar"></i>
+                  <time>2016-03-04</time>
+                </div>
+                <!--
+                <ul>
+                  
+                </ul>
+                -->
+              </div>
+              <div class="post-content">
+                <div id="toc" class="toc"></div>
+                <h1 id="section">准备工作</h1>
+
+<h2 id="solr55">Solr5.5</h2>
+<p>从<a href="http://lucene.apache.org/solr/">solr主页</a>中获取对应系统的最新版本的solr(写此文时时5.5)解压即可, 无需安装</p>
+<h2 id="mysqlimporter---mysql">mysqlImporter - 从mysql导入数据</h2>
+<p>先下载mysql-connector-java的jar包, <a href="http://dev.mysql.com/downloads/connector/j/">下载地址</a></p>
+
+<p>将其放到solr目录下的contrib/dataimporthander/lib/目录下</p>
+
+<h2 id="mmseg4j---">mmseg4j - 中文分词器</h2>
+<p>下载最新版本的mmseg4j, 可以到其作者的github中相应的项目地址下载, <a href="https://github.com/chenlb">链接</a></p>
+
+<p>将其放到solr目录下的contrib/extraction/lib/目录下</p>
+
+<h2 id="section-1">配置文件</h2>
+<p><strong>在solr的”./server/solr/configsets/”目录下可以看到几个configs的例子, 这里我们复制一个”basic_configs”例子, 给他重命名为你希望的名字. 这里我们给他起为victoriest, 进入这个victoriest/conf目录后, 我们就要进行一系列的配置文件的修改了</strong><br />
+<!--more--></p>
+
+<h3 id="mysql">进行mysql数据导入相关配置</h3>
+<p>在solrconfig.xml文件中, 加入如下配置:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;lib</span> <span class="na">dir=</span><span class="s">"${solr.install.dir:../../../..}/contrib/dataimporthandler/lib"</span> <span class="na">regex=</span><span class="s">".*\.jar"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;lib</span> <span class="na">dir=</span><span class="s">"${solr.install.dir:../../../..}/dist/"</span> <span class="na">regex=</span><span class="s">"solr-dataimporthandler-\d.*\.jar"</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="mmseg4j">进行mmseg4j相关配置</h3>
+<p>同样是在solrconfig.xml文件中, 加入配置:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;lib</span> <span class="na">dir=</span><span class="s">"${solr.install.dir:../../../..}/contrib/extraction/lib"</span> <span class="na">regex=</span><span class="s">".*\.jar"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;lib</span> <span class="na">dir=</span><span class="s">"${solr.install.dir:../../../..}/dist/"</span> <span class="na">regex=</span><span class="s">"solr-cell-\d.*\.jar"</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="mysqlrequesthandler">配置mysql数据导入的requestHandler</h3>
+<p>在solrconfig.xml文件中, 加入:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;requestHandler</span> <span class="na">name=</span><span class="s">"/dataimport"</span> <span class="na">class=</span><span class="s">"org.apache.solr.handler.dataimport.DataImportHandler"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">"defaults"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">"config"</span><span class="nt">&gt;</span>data-config.xml<span class="nt">&lt;/str&gt;</span>
+    <span class="nt">&lt;/lst&gt;</span>
+<span class="nt">&lt;/requestHandler&gt;</span>
+</code></pre>
+</div>
+
+<p>其中, data-config.xml文件是需要我们手动在solrconfig.xml中新建的, 内容如下:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;dataConfig&gt;</span>
+    <span class="nt">&lt;dataSource</span> <span class="na">type=</span><span class="s">"JdbcDataSource"</span> <span class="na">driver=</span><span class="s">"com.mysql.jdbc.Driver"</span> <span class="na">url=</span><span class="s">"jdbc:mysql://[数据库ip]:[端口号]/[数据库schame]"</span> <span class="na">user=</span><span class="s">"[用户名]"</span> <span class="na">password=</span><span class="s">"[密码]"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;document</span> <span class="na">name=</span><span class="s">"testVictoriest"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;entity</span> <span class="na">name=</span><span class="s">"t_name"</span> <span class="na">transformer=</span><span class="s">"HTMLStripTransformer"</span>
+             <span class="na">query=</span><span class="s">"SELECT COL1, COL2, COL3, UPDATE_TIME FROM T_NAME"</span>
+             <span class="na">deltaImportQuery=</span><span class="s">"select COL1, COL2, COL3, UPDATE_TIME FROM T_NAME where COL1='${dataimporter.delta.COL1}'"</span>
+             <span class="na">deltaQuery=</span><span class="s">"select  COL1, COL2, COL3, UPDATE_TIME FROM T_NAME where UPDATE_TIME &gt;'${dataimporter.last_index_time}'"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">"COL1"</span> <span class="na">name=</span><span class="s">"col1"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">"COL2"</span> <span class="na">name=</span><span class="s">"col2"</span> <span class="na">stripHTML=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">"COL3"</span> <span class="na">name=</span><span class="s">"col3"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">"UPDATE_TIME"</span> <span class="na">name=</span><span class="s">"updateTime"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/entity&gt;</span>
+    <span class="nt">&lt;/document&gt;</span>
+<span class="nt">&lt;/dataConfig&gt;</span>
+</code></pre>
+</div>
+<p>其中:<br />
+dataSource为数据库连接的相关配置;<br />
+document为生成文档的相关配置;<br />
+query为初始化导入数据时所引用的sql语句<br />
+deltaQuery为增量导入数据是得查询语句<br />
+deltaImportQuery为增量导入时的插入查询语句<br />
+field为数据索引项, column对应数据库字段, name对应schema.xml中定义的field名</p>
+
+<h3 id="schemaxml">建立配置文件schema.xml</h3>
+<p>在solrconfig.xml同级目录下, 没有schema.xml文件, 我们可以将managed-schema文件重命名为schema.xml</p>
+
+<h3 id="section-2">中文分词相关配置</h3>
+<p>在schema.xml文件中, 加入如下配置:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_mmseg4j_complex"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span> <span class="nt">&gt;</span>
+<span class="nt">&lt;analyzer&gt;</span>
+    <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"com.chenlb.mmseg4j.solr.MMSegTokenizerFactory"</span> <span class="na">mode=</span><span class="s">"simple"</span> <span class="na">dicPath=</span><span class="s">"J:\solr-5.5.0\server\solr\victoriest\conf"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"words.dic"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/analyzer&gt;</span>
+<span class="nt">&lt;/fieldType&gt;</span>
+<span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_mmseg4j_maxword"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span> <span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="nt">&lt;charFilter</span> <span class="na">class=</span><span class="s">"solr.HTMLStripCharFilterFactory"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"com.chenlb.mmseg4j.solr.MMSegTokenizerFactory"</span> <span class="na">mode=</span><span class="s">"max-word"</span> <span class="na">dicPath=</span><span class="s">"J:\solr-5.5.0\server\solr\victoriest\conf"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"words.dic"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+<span class="nt">&lt;/fieldType&gt;</span>
+<span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_mmseg4j_simple"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span> <span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"com.chenlb.mmseg4j.solr.MMSegTokenizerFactory"</span> <span class="na">mode=</span><span class="s">"simple"</span> <span class="na">dicPath=</span><span class="s">"J:\solr-5.5.0\server\solr\victoriest\conf"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"words.dic"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+<span class="nt">&lt;/fieldType&gt;</span>
+</code></pre>
+</div>
+
+<p>其中 filter中指定的words.dic就是分词字典文件, 可以在mmseg4j-core的jar包中找到, 解压到此目录中, 并将tokenizer的dicPath属性指定到该目录</p>
+
+<h3 id="section-3">自定义字段配置</h3>
+<p>在schema.xml中, 添加:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"col1"</span> <span class="na">type=</span><span class="s">"text_mmseg4j_maxword"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"col2"</span> <span class="na">type=</span><span class="s">"text_mmseg4j_maxword"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="na">termVectors=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"col3"</span> <span class="na">type=</span><span class="s">"text_mmseg4j_maxword"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"updateTime"</span> <span class="na">type=</span><span class="s">"date"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uniqueKey&gt;</span>col1<span class="nt">&lt;/uniqueKey&gt;</span>
+</code></pre>
+</div>
+
+<p>这里我们分别定义了4个field, 其中name就是与data-config.xml中field的name相对应, 而type就是我们刚刚定义的中文分词的filedType; 另外, 我们将col1定义为标识列, 所以给col1添加了属性<code class="highlighter-rouge">required="true"</code>, 并添加了一个<code class="highlighter-rouge">&lt;uniqueKey&gt;col1&lt;/uniqueKey&gt;</code>标签</p>
+
+<h2 id="section-4">测试运行一下</h2>
+
+<h3 id="solr">启动solr</h3>
+<p>将我们上面建立的victoriest配置复制到solr中的server\solr\目录下;<br />
+在终端中进入solr中的bin目录下, 启动solr:<code class="highlighter-rouge">solr start</code>;<br />
+启动后, 可以通过浏览器访问http://localhost:8983/solr, 可以看到如下界面:<br />
+<img src="http://victoriest.me/images/20160304105834.jpg" alt="Battery Widget" /></p>
+
+<p>在name和instanceDir中输入victoriest(也就是我们实例的名字), 点击Add Core按钮就会创建一个该名字的实例</p>
+
+<h3 id="section-5">初始化数据导入</h3>
+<p>如图 选择 full-import, 然后点击Execute按钮<br />
+之后就会初始化索引, 初始化索引的过程中, 可以点击Refresh Status查看索引的进度:<br />
+<img src="http://victoriest.me/images/20160304110600.jpg" alt="Battery Widget" /></p>
+
+<h3 id="section-6">增量数据导入</h3>
+<p>如图, 与 full-import相似, 但是请注意图中红框标注出来的选项变化:<br />
+<img src="http://victoriest.me/images/20160304111223.jpg" alt="Battery Widget" /></p>
+
+<h3 id="section-7">通过控制台查询文档</h3>
+<p>可以在控制台中的Query进行查询, 如图:<br />
+<img src="http://victoriest.me/images/20160304112305.jpg" alt="Battery Widget" /></p>
+<h3 id="url">通过url进行查询访问</h3>
+<p>另外也可以通过url进行查询访问, 详细参考文档:<a href="http://blog.javachen.com/2014/03/03/solr-query-syntax.html">http://blog.javachen.com/2014/03/03/solr-query-syntax.html</a></p>
+
+<h2 id="section-8">添加额外功能</h2>
+
+<h3 id="html">去除html标签</h3>
+<p>在某些场景中, 我们可能从数据库查询出来的数据是个html文档, 其中包含大量html的标签等无用的信息. solr提供了一些工具组件用来过滤这些无用的html标签. 其配置如下:</p>
+
+<ol>
+  <li>
+    <p>在数据库的读取文件data-config.xml 中的entity标记里边添加 transformer=”HTMLStripTransformer” 代码;</p>
+  </li>
+  <li>
+    <p>同样是data-config.xml文件中, 在field 字段需要过滤html代码的字段添加stripHTML=”true”;</p>
+  </li>
+  <li>
+    <p>修改schema.xml文件中的fieldType标记中的内容，添加:</p>
+  </li>
+</ol>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;charFilter</span> <span class="na">class=</span><span class="s">”solr.HTMLStripCharFilterFactory”</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<p>以上相关配置在前面的给出的xml配置例子中都可以找到</p>
+
+<h3 id="morelikethis">moreLikeThis组件使用</h3>
+<p>使用MoreLikeThis组件可以给出查询结果的近似结果, 典型的应用场景如: 在文档库中, 给定文档id, 找到该与文档相似或雷同的文档;<br />
+在solrconfig.xml中, 添加如下配置项:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;requestHandler</span> <span class="na">name=</span><span class="s">"/mlt"</span> <span class="na">class=</span><span class="s">"solr.MoreLikeThisHandler"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">"defaults"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">"mlt.fl"</span><span class="nt">&gt;</span>questionContext<span class="nt">&lt;/str&gt;</span>
+        <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">"mlt.mintf"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/str&gt;</span>
+        <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">"mlt.minwl"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/str&gt;</span>
+        <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">"rows"</span><span class="nt">&gt;</span>5<span class="nt">&lt;/int&gt;</span>
+    <span class="nt">&lt;/lst&gt;</span>
+<span class="nt">&lt;/requestHandler&gt;</span>
+</code></pre>
+</div>
+
+<p>另外，在schema.xml配置中, 在希望引入MoreLikeThis搜索结果的filed标签内添加属性:<code class="highlighter-rouge">termVectors="true"</code>; 如上面例子中的filed:col2</p>
+
+<p>其中的参数, 可以参考如下连接:<br />
+<a href="https://cwiki.apache.org/confluence/display/solr/MoreLikeThis">https://cwiki.apache.org/confluence/display/solr/MoreLikeThis</a><br />
+<a href="http://www.cnblogs.com/a198720/p/4016052.html">http://www.cnblogs.com/a198720/p/4016052.html</a></p>
+
+<h3 id="mlt">mlt查询调用</h3>
+<p>如若需要在查询结果中获取相似文档的内容, 则需要通过/mlt进行查询:<br />
+<img src="http://victoriest.me/images/20160304112305.jpg" alt="Battery Widget" /></p>
+
+<p>其查询条件语法与普通的/select查询相似, 也可通过url访问查询, 其特有参数可以参考:<a href="http://www.cnblogs.com/a198720/p/4016052.html">http://www.cnblogs.com/a198720/p/4016052.html</a></p>
+
+
+                
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 hidden-xs">
+          <div class="sidebar ">
+  <h2>Recent Posts</h2>
+  <ul>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译]</a></li>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译]</a></li>
+    
+    <li><a href="/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">我拍照的时候是在拍什么</a></li>
+    
+    <li><a href="/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">客户端软件架构nodejs+edgejs+electron调查报告</a></li>
+    
+    <li><a href="/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">我是个懒人么?新年的TODO LIST</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar ">
+  <h2>Wechat Official Accounts</h2>
+  <img src="/images/qrcode_victoriest.jpg" />
+</div>
+
+
+<div class="sidebar ">
+  <h2>Follow me</h2>
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  </ul>
+</div>
+<!--
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+<div class="sidebar">
+  <h2>Tags</h2>
+  <ul>
+    
+      <li><a href="/tag/golang">golang</a></li>
+    
+      <li><a href="/tag/tcp服务器">tcp服务器</a></li>
+    
+      <li><a href="/tag/clojure">clojure</a></li>
+    
+      <li><a href="/tag/protobuff">protobuff</a></li>
+    
+      <li><a href="/tag/IntelliJ">IntelliJ</a></li>
+    
+      <li><a href="/tag/Leiningen">Leiningen</a></li>
+    
+      <li><a href="/tag/storm">storm</a></li>
+    
+      <li><a href="/tag/zookeeper">zookeeper</a></li>
+    
+      <li><a href="/tag/PerSharding">PerSharding</a></li>
+    
+      <li><a href="/tag/一致性哈希">一致性哈希</a></li>
+    
+      <li><a href="/tag/分布式缓存">分布式缓存</a></li>
+    
+      <li><a href="/tag/负载均衡">负载均衡</a></li>
+    
+      <li><a href="/tag/apache">apache</a></li>
+    
+      <li><a href="/tag/tomcat">tomcat</a></li>
+    
+      <li><a href="/tag/vim">vim</a></li>
+    
+      <li><a href="/tag/jabber">jabber</a></li>
+    
+      <li><a href="/tag/java">java</a></li>
+    
+      <li><a href="/tag/BTrace">BTrace</a></li>
+    
+      <li><a href="/tag/js">js</a></li>
+    
+      <li><a href="/tag/摄影">摄影</a></li>
+    
+      <li><a href="/tag/nodejs">nodejs</a></li>
+    
+      <li><a href="/tag/electron">electron</a></li>
+    
+  </ul>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+      <footer class="footer-distributed">
+      <div class="container">
+        <div class="footer">
+          <p>VcitoriEST &copy; 2016. Powered by <a href="http://jekyllrb.com/">jekyll,</a> <a href="https://github.com/streetturtle/jekyll-clean-dark">Jekyll Clean Dark</a></p>
+          <h6>Follow me</h6>
+
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+</div>

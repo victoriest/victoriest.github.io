@@ -1,0 +1,385 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Victoriest's Lab</title>
+  <meta name="theme-color" content="#222222" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://victoriest.me/js/jquery.min.js"></script>
+  <script src="http://victoriest.me/js/bootstrap.min.js"></script>
+  <script src="http://victoriest.me/js/header.js"></script>
+  <script src="http://victoriest.me/js/toc.js"></script>
+  <link href="http://victoriest.me/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/theme.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/syntax.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+
+  
+
+
+ <script type="text/javascript">
+  WebFontConfig = {
+    google: {
+      families: ['Ubuntu::latin']
+    }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://victoriest.me/">Victoriest's Lab</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://victoriest.me/index.html">Home</a></li>
+          <li><a href="http://victoriest.me/memo.html">Memo</a></li>
+          <li><a href="http://victoriest.me/archive.html">Archive</a></li>
+          <!--<li><a href="http://victoriest.me/tags.html">Tags</a></li>-->
+          <li><a href="http://victoriest.me/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="wrapper">
+  <div class="content">
+    <div class="container container-center">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="article">
+            <div class="well">
+              <h1><a href="http://victoriest.me/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">客户端软件架构nodejs+edgejs+electron调查报告</a></h1>
+              <div class="post-meta">
+                <div class="post-time">
+                  <i class="fa fa-calendar"></i>
+                  <time>2017-02-02</time>
+                </div>
+                <!--
+                <ul>
+                  
+                    <li><a href="http://victoriest.me/tag/js">js</a></li>
+                  
+                    <li><a href="http://victoriest.me/tag/nodejs">nodejs</a></li>
+                  
+                    <li><a href="http://victoriest.me/tag/electron">electron</a></li>
+                  
+                </ul>
+                -->
+              </div>
+              <div class="post-content">
+                <div id="toc" class="toc"></div>
+                <h1 id="section">概述</h1>
+<p>随着扫描客户端功能与算法趋于稳定. 可以预见, 今后会有越来越多关于交互方式/UI样式/个性化方面的需求. <br />
+然而当前客户端使用的架构为单纯的windowsform. 虽然有开发快速, 上手简单的优点; 但缺点是界面单调, 个性化外观定制较难实现.</p>
+
+<p>故需要寻找一套上手门槛低, 方便进行样式调整/个性化定制的客户端架构, nodejs+edgejs+electron便是备选方案之一.</p>
+
+<p>以下便为该架构的调查报告</p>
+
+<h1 id="section-1">准备</h1>
+<h3 id="section-2">需要工具</h3>
+<ul>
+  <li><a href="https://nodejs.org/en/">node.js</a></li>
+  <li><a href="http://electron.atom.io/">electron</a></li>
+  <li><a href="http://tjanczuk.github.io/edge/">edge.js</a></li>
+  <li><a href="https://github.com/kexplo/electron-edge">electron-edge</a></li>
+</ul>
+
+<p>electron的安装容易在运行install.js时卡住. <br />
+解决的方法就是在~/.npmrc里做如下设置</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>electron_mirror="https://npm.taobao.org/mirrors/electron/"
+</code></pre>
+</div>
+
+<p>electron不能直接利用edge.js调用.net的dll, 需要用electron-edge</p>
+
+<h1 id="section-3">调查</h1>
+
+<h2 id="section-4">实现</h2>
+
+<h3 id="c">c#部分实现</h3>
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Windows.Forms</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">TestEdgeForNodejs</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">HelloWorld</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;</span> <span class="nf">HelloWorldMessage</span><span class="p">(</span><span class="kt">object</span> <span class="n">input</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">MessageBox</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="s">"Hello "</span> <span class="p">+</span> <span class="n">input</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre>
+</div>
+<p>利用IDE VS生成dll, 拷贝到electron工程所在的目录中.</p>
+
+<h3 id="js">js部分实现</h3>
+
+<p>main.js</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">edge</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'electron-edge'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">electron</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">"electron"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span><span class="o">=</span><span class="nx">electron</span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">BrowserWindow</span><span class="o">=</span><span class="nx">electron</span><span class="p">.</span><span class="nx">BrowserWindow</span><span class="p">;</span>
+
+<span class="c1">// 声明要引用的dll中的方法</span>
+<span class="kd">var</span> <span class="nx">helloWorld</span> <span class="o">=</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">func</span><span class="p">({</span>
+    <span class="na">assemblyFile</span><span class="p">:</span> <span class="s1">'./TestEdgeForNodejs.dll'</span><span class="p">,</span>	<span class="c1">// dll路径</span>
+    <span class="na">typeName</span><span class="p">:</span> <span class="s1">'TestEdgeForNodejs.HelloWorld'</span><span class="p">,</span>	<span class="c1">// namespace.class</span>
+    <span class="na">methodName</span><span class="p">:</span> <span class="s1">'HelloWorldMessage'</span>				<span class="c1">// method</span>
+<span class="p">});</span>
+
+<span class="kd">function</span> <span class="nx">createWindow</span><span class="p">(){</span>
+    <span class="nx">mainWindow</span><span class="o">=</span><span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+        <span class="na">width</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span>
+        <span class="na">height</span><span class="p">:</span><span class="mi">300</span>
+    <span class="p">});</span>
+
+    <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">loadURL</span><span class="p">(</span><span class="s1">'file://'</span><span class="o">+</span><span class="nx">__dirname</span><span class="o">+</span><span class="s1">'/index.html'</span><span class="p">);</span> 
+
+    <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"closed"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">mainWindow</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span><span class="nx">createWindow</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"window-all-closed"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span><span class="o">!=</span><span class="s2">"darwin"</span><span class="p">){</span>
+        <span class="nx">app</span><span class="p">.</span><span class="nx">quit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"activate"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">mainWindow</span><span class="o">===</span><span class="kc">null</span><span class="p">){</span>
+        <span class="nx">createWindow</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// 调用dll中的HelloWorldMessage方法</span>
+<span class="kd">function</span> <span class="nx">callHelloWorld</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">helloWorld</span><span class="p">(</span><span class="s2">"World"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>index.html</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Victoriest Demo Apps<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+            estest
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">onclick=</span><span class="s">"callHelloWorld();"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"./main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="section-5">运行</h3>
+<p>在命令行中, 进入electron工程所在的目录.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>electron .
+</code></pre>
+</div>
+
+<h3 id="section-6">数据通讯</h3>
+<p>通过edge-electron可以进行双向的数据传递<a href="https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js">https://github.com/kexplo/electron-edge/blob/electron_v1.4.4/samples/108_func.js</a></p>
+
+<h3 id="section-7">不足</h3>
+<p>到目前为止, 还没有找到类似于在electron中监听c#dll中发出的event的方法. 而目前客户端代码中大量使用了这种形式来控制UI显示状态, 如若转换架构, 涉及到修改重构的代码量会比较大.</p>
+
+<h3 id="section-8">阶段性结论</h3>
+<p>在找到能够监听c#dll发出的event的方法(或等价方法)前, 暂不考虑此方案. <br />
+<!--more--></p>
+
+                
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 hidden-xs">
+          <div class="sidebar ">
+  <h2>Recent Posts</h2>
+  <ul>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译]</a></li>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译]</a></li>
+    
+    <li><a href="/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">我拍照的时候是在拍什么</a></li>
+    
+    <li><a href="/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">客户端软件架构nodejs+edgejs+electron调查报告</a></li>
+    
+    <li><a href="/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">我是个懒人么?新年的TODO LIST</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar ">
+  <h2>Wechat Official Accounts</h2>
+  <img src="/images/qrcode_victoriest.jpg" />
+</div>
+
+
+<div class="sidebar ">
+  <h2>Follow me</h2>
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  </ul>
+</div>
+<!--
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+<div class="sidebar">
+  <h2>Tags</h2>
+  <ul>
+    
+      <li><a href="/tag/golang">golang</a></li>
+    
+      <li><a href="/tag/tcp服务器">tcp服务器</a></li>
+    
+      <li><a href="/tag/clojure">clojure</a></li>
+    
+      <li><a href="/tag/protobuff">protobuff</a></li>
+    
+      <li><a href="/tag/IntelliJ">IntelliJ</a></li>
+    
+      <li><a href="/tag/Leiningen">Leiningen</a></li>
+    
+      <li><a href="/tag/storm">storm</a></li>
+    
+      <li><a href="/tag/zookeeper">zookeeper</a></li>
+    
+      <li><a href="/tag/PerSharding">PerSharding</a></li>
+    
+      <li><a href="/tag/一致性哈希">一致性哈希</a></li>
+    
+      <li><a href="/tag/分布式缓存">分布式缓存</a></li>
+    
+      <li><a href="/tag/负载均衡">负载均衡</a></li>
+    
+      <li><a href="/tag/apache">apache</a></li>
+    
+      <li><a href="/tag/tomcat">tomcat</a></li>
+    
+      <li><a href="/tag/vim">vim</a></li>
+    
+      <li><a href="/tag/jabber">jabber</a></li>
+    
+      <li><a href="/tag/java">java</a></li>
+    
+      <li><a href="/tag/BTrace">BTrace</a></li>
+    
+      <li><a href="/tag/js">js</a></li>
+    
+      <li><a href="/tag/摄影">摄影</a></li>
+    
+      <li><a href="/tag/nodejs">nodejs</a></li>
+    
+      <li><a href="/tag/electron">electron</a></li>
+    
+  </ul>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+      <footer class="footer-distributed">
+      <div class="container">
+        <div class="footer">
+          <p>VcitoriEST &copy; 2016. Powered by <a href="http://jekyllrb.com/">jekyll,</a> <a href="https://github.com/streetturtle/jekyll-clean-dark">Jekyll Clean Dark</a></p>
+          <h6>Follow me</h6>
+
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+</div>

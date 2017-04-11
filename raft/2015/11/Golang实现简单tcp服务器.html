@@ -1,0 +1,709 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Victoriest's Lab</title>
+  <meta name="theme-color" content="#222222" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://victoriest.me/js/jquery.min.js"></script>
+  <script src="http://victoriest.me/js/bootstrap.min.js"></script>
+  <script src="http://victoriest.me/js/header.js"></script>
+  <script src="http://victoriest.me/js/toc.js"></script>
+  <link href="http://victoriest.me/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/theme.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/syntax.css" rel="stylesheet">
+  <link href="http://victoriest.me/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+
+  
+
+
+ <script type="text/javascript">
+  WebFontConfig = {
+    google: {
+      families: ['Ubuntu::latin']
+    }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://victoriest.me/">Victoriest's Lab</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://victoriest.me/index.html">Home</a></li>
+          <li><a href="http://victoriest.me/memo.html">Memo</a></li>
+          <li><a href="http://victoriest.me/archive.html">Archive</a></li>
+          <!--<li><a href="http://victoriest.me/tags.html">Tags</a></li>-->
+          <li><a href="http://victoriest.me/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="wrapper">
+  <div class="content">
+    <div class="container container-center">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="article">
+            <div class="well">
+              <h1><a href="http://victoriest.me/2015/11/Golang%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95tcp%E6%9C%8D%E5%8A%A1%E5%99%A8">Golang实现简单tcp服务器</a></h1>
+              <div class="post-meta">
+                <div class="post-time">
+                  <i class="fa fa-calendar"></i>
+                  <time>2015-11-18</time>
+                </div>
+                <!--
+                <ul>
+                  
+                    <li><a href="http://victoriest.me/tag/golang">golang</a></li>
+                  
+                </ul>
+                -->
+              </div>
+              <div class="post-content">
+                <div id="toc" class="toc"></div>
+                <h2 id="section">概述</h2>
+
+<p>Golang作为一门近些年来非常风光的开发语言, 其实用范围很广, 图形界面, web框架, 图像引擎等等.<br />
+由于其语言特性简化了并发/多核的开发, 受到了很大的关注. 而使用它进行服务器开发, 也是非常高校而简洁的.<br />
+废话不多说, 本项目实践的目的是使用golang开发一个简单的基于tcp协议的服务器/客户端.</p>
+
+<h3 id="section-1">预备知识</h3>
+<p>首先, 我们需要了解一下golang下的如下包与特性:</p>
+
+<h3 id="goroutine">goroutine</h3>
+<p>goroutine是一种轻量型的线程, 作为golang语言的语言特性, 可以很简单的在golang中进行多线程的开发. 利用go关键字, 我们能把任何一个方法/函数, 放在一个新的goroutine里执行.<br />
+实验01:</p>
+
+<p>在<strong>实验环境</strong>的<strong>主文件夹</strong>里, 建立一个名为test.go的文本文档, 并开始编写以下代码</p>
+
+<!--more-->
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">	</span><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+ 	</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+ 		</span><span class="s">"fmt"</span><span class="x">
+ 	</span><span class="p">)</span><span class="x">
+
+ 	</span><span class="k">var</span><span class="x"> </span><span class="n">quit</span><span class="x"> </span><span class="k">chan</span><span class="x"> </span><span class="kt">bool</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="kt">bool</span><span class="p">)</span><span class="x">
+
+ 	</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+ 		</span><span class="k">go</span><span class="x"> </span><span class="n">testGorountine</span><span class="p">()</span><span class="x">
+ 		</span><span class="o">&lt;-</span><span class="n">quit</span><span class="x">
+ 	</span><span class="p">}</span><span class="x">
+
+ 	</span><span class="k">func</span><span class="x"> </span><span class="n">testGorountine</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+ 		</span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="m">10</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+ 			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Hello world!"</span><span class="p">)</span><span class="x">
+ 		</span><span class="p">}</span><span class="x">
+ 		</span><span class="n">quit</span><span class="x"> </span><span class="o">&lt;-</span><span class="x"> </span><span class="no">true</span><span class="x">
+ 	</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+<p>然后, 打开xFce终端, 键入命令</p>
+<blockquote>
+  <p>go run test.go</p>
+</blockquote>
+
+<p>我们就会看到终端的输出, 可以看到10行”hello world”.  这里, 我们的hello world程序就是利用了gorountine创建了一个多线程/协程程序, 然后利用channel等待开启的协程处理完毕, 才结束主线程.</p>
+
+<h3 id="net">net包</h3>
+<p>在net包中, 提供了常用网络I/O操作的api, 包括我们的试验中需要用到的, Listen, Accept, Write, Read等方法. 具体参考链接:<a href="http://godoc.golangtc.com/pkg/net/">http://godoc.golangtc.com/pkg/net/</a></p>
+
+<h3 id="bufio">bufio包</h3>
+<p>bufio包则提供了一套有缓存的I/O读写操作的方法, 在我们的服务器与客户端进行数据通讯时, 会用到. 参考链接:<a href="http://godoc.golangtc.com/pkg/bufio/">http://godoc.golangtc.com/pkg/bufio/</a></p>
+
+<p>然后, 还需要对<strong>长连接的TCP服务器</strong>与客户端通讯有个基本的认识:<br />
+client向server发起连接，server接受client连接，双方建立连接。Client与server完成一次读写之后，它们之间的连接并不会主动关闭，后续的读写操作会继续使用这个连接。 关于这个概念, 网上有很多参考资料, 如果还不清楚, 随便google一下~</p>
+
+<h2 id="golang-echo">用Golang实现 echo服务器/客户端</h2>
+
+<p>本节我们就从实现一个简单的echo的服务端/客户端来入手, 了解golang的实现tcp长连接服务器的具体细节.</p>
+
+<p>首先, 我们先列一下<strong>服务端的实现思路及步骤</strong>:</p>
+<ol>
+  <li>创建一个套接字对象, 指定其IP以及端口.</li>
+  <li>开始监听套接字指定的端口.</li>
+  <li>如有新的客户端连接请求, 则建立一个goroutine, 在goroutine中, 读取客户端消息, 并转发回去, 直到客户端断开连接</li>
+  <li>主进程继续监听端口.</li>
+</ol>
+
+<p>我们可以在实验环境的主文件夹中, 建立一个名为server.go的文件, 在其中编写服务器端程序代码<br />
+服务端程序清单如下:</p>
+
+<p><strong>server.go</strong></p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">    </span><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+    </span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    	</span><span class="s">"bufio"</span><span class="x">
+    	</span><span class="s">"fmt"</span><span class="x">
+    	</span><span class="s">"net"</span><span class="x">
+    	</span><span class="s">"time"</span><span class="x">
+    </span><span class="p">)</span><span class="x">
+
+    </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    	</span><span class="k">var</span><span class="x"> </span><span class="n">tcpAddr</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPAddr</span><span class="x">
+
+    	</span><span class="n">tcpAddr</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ResolveTCPAddr</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="s">"127.0.0.1:9999"</span><span class="p">)</span><span class="x">
+
+    	</span><span class="n">tcpListener</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ListenTCP</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="n">tcpAddr</span><span class="p">)</span><span class="x">
+
+    	</span><span class="k">defer</span><span class="x"> </span><span class="n">tcpListener</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+
+    	</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+    		</span><span class="n">tcpConn</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">tcpListener</span><span class="o">.</span><span class="n">AcceptTCP</span><span class="p">()</span><span class="x">
+    		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    			</span><span class="k">continue</span><span class="x">
+    		</span><span class="p">}</span><span class="x">
+
+    		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"A client connected : "</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">tcpConn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">())</span><span class="x">
+    		</span><span class="k">go</span><span class="x"> </span><span class="n">tcpPipe</span><span class="p">(</span><span class="n">tcpConn</span><span class="p">)</span><span class="x">
+    	</span><span class="p">}</span><span class="x">
+
+    </span><span class="p">}</span><span class="x">
+
+    </span><span class="k">func</span><span class="x"> </span><span class="n">tcpPipe</span><span class="p">(</span><span class="n">conn</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    	</span><span class="n">ipStr</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">conn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()</span><span class="x">
+    	</span><span class="k">defer</span><span class="x"> </span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"disconnected :"</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">ipStr</span><span class="p">)</span><span class="x">
+    		</span><span class="n">conn</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    	</span><span class="p">}()</span><span class="x">
+    	</span><span class="n">reader</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+
+    	</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+    		</span><span class="n">message</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">ReadString</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">)</span><span class="x">
+    		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    			</span><span class="k">return</span><span class="x">
+    		</span><span class="p">}</span><span class="x">
+
+    		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">message</span><span class="p">))</span><span class="x">
+    		</span><span class="n">msg</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="x">
+    		</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="x">
+    		</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+    	</span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>接着, 我们打开终端, 编译服务端程序:</p>
+
+<blockquote>
+  <p>go build server.go</p>
+</blockquote>
+
+<p>编译成功的话, 会在主目录中看到编译成功的server程序</p>
+
+<p>接下来, 是<strong>客户端的代码实现步骤</strong>:</p>
+<ol>
+  <li>创建一个套接字对象, ip与端口指定到上面我们实现的服务器的ip与端口上.</li>
+  <li>使用创建好的套接字对象连接服务器.</li>
+  <li>连接成功后, 开启一个goroutine, 在这个goroutine内, 定时的向服务器发送消息, 并接受服务器的返回消息, 直到错误发生或断开连接.</li>
+</ol>
+
+<p>程序清单如下:</p>
+
+<p>client.go</p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">    </span><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+    </span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    	</span><span class="s">"bufio"</span><span class="x">
+    	</span><span class="s">"fmt"</span><span class="x">
+    	</span><span class="s">"net"</span><span class="x">
+    	</span><span class="s">"time"</span><span class="x">
+    </span><span class="p">)</span><span class="x">
+
+    </span><span class="k">var</span><span class="x"> </span><span class="n">quitSemaphore</span><span class="x"> </span><span class="k">chan</span><span class="x"> </span><span class="kt">bool</span><span class="x">
+
+    </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    	</span><span class="k">var</span><span class="x"> </span><span class="n">tcpAddr</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPAddr</span><span class="x">
+    	</span><span class="n">tcpAddr</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ResolveTCPAddr</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="s">"127.0.0.1:9999"</span><span class="p">)</span><span class="x">
+
+    	</span><span class="n">conn</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">DialTCP</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="n">tcpAddr</span><span class="p">)</span><span class="x">
+    	</span><span class="k">defer</span><span class="x"> </span><span class="n">conn</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    	</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"connected!"</span><span class="p">)</span><span class="x">
+
+    	</span><span class="k">go</span><span class="x"> </span><span class="n">onMessageRecived</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+
+    	</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="s">"time</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="x">
+    	</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+
+    	</span><span class="o">&lt;-</span><span class="n">quitSemaphore</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+
+    </span><span class="k">func</span><span class="x"> </span><span class="n">onMessageRecived</span><span class="p">(</span><span class="n">conn</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    	</span><span class="n">reader</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+    	</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+    		</span><span class="n">msg</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">ReadString</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">)</span><span class="x">
+    		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="x">
+    		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    			</span><span class="n">quitSemaphore</span><span class="x"> </span><span class="o">&lt;-</span><span class="x"> </span><span class="no">true</span><span class="x">
+    			</span><span class="k">break</span><span class="x">
+    		</span><span class="p">}</span><span class="x">
+    		</span><span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span><span class="x">
+    		</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="x">
+    		</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+    	</span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>编译客户端:</p>
+
+<blockquote>
+  <p>go build client.go</p>
+</blockquote>
+
+<p>最后, 开启两个终端, 分别运行server和client</p>
+
+<p>可以看到以下类似的输出:</p>
+
+<blockquote>
+  <p>connected!<br />
+2015-03-19 23:42:08.4875559 +0800 CST</p>
+
+  <p>2015-03-19 23:42:09.4896132 +0800 CST</p>
+
+  <p>2015-03-19 23:42:10.4906704 +0800 CST</p>
+
+  <p>2015-03-19 23:42:11.4917277 +0800 CST</p>
+</blockquote>
+
+<p>这样, 一个简单的echo服务器/客户端就实现了</p>
+
+<h2 id="golang-">用Golang实现 文本广播式聊天服务器/客户端</h2>
+
+<p>本节, 我们将一步一步的把上一节完成的echo服务器/客户端改造成一个文本信息的聊天室</p>
+
+<p><strong>服务端的改动</strong></p>
+
+<ol>
+  <li>服务器为了实现聊天信息的群体广播, 需要记录所有连接到服务器的客户端信息, 所以, 我们需要添加一个集合来保存所有客户端的连接:
+    <blockquote>
+      <p>var ConnMap map[string]*net.TCPConn</p>
+    </blockquote>
+  </li>
+  <li>接着, 每次当有新的客户端连接到服务器时, 需要把这个客户端连接行信息加入集合:
+    <blockquote>
+      <p>ConnMap[tcpConn.RemoteAddr().String()] = tcpConn</p>
+    </blockquote>
+  </li>
+  <li>当服务器收到客户端的聊天信息时, 需要广播到所有客户端, 所以我们需要利用上面保存TCPConn的map来遍历所有TCPConn进行广播, 用以下方法实现:
+    <div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">     </span><span class="k">func</span><span class="x"> </span><span class="n">boradcastMessage</span><span class="p">(</span><span class="n">message</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+         </span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="x">
+         </span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">conn</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">ConnMap</span><span class="x"> </span><span class="p">{</span><span class="x">
+         </span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+         </span><span class="p">}</span><span class="x">
+     </span><span class="p">}</span><span class="x">
+</span></code></pre>
+    </div>
+    <p><strong>客户端代码改动</strong></p>
+  </li>
+</ol>
+
+<p>客户端代码改动相对简单, 只是加入了用户自己输入聊天信息的功能, 在连接成功并且 启动了消息接收的gorountine后, 加入以下代码:</p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">		</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">var</span><span class="x"> </span><span class="n">msg</span><span class="x"> </span><span class="kt">string</span><span class="x">
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Scanln</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span><span class="x">
+			</span><span class="k">if</span><span class="x"> </span><span class="n">msg</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="s">"quit"</span><span class="x"> </span><span class="p">{</span><span class="x">
+				</span><span class="k">break</span><span class="x">
+			</span><span class="p">}</span><span class="x">
+			</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">msg</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="x">
+			</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>完整的服务端代码如下:</p>
+
+<p>server.go</p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">	</span><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+	</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+		</span><span class="s">"bufio"</span><span class="x">
+		</span><span class="s">"fmt"</span><span class="x">
+		</span><span class="s">"net"</span><span class="x">
+	</span><span class="p">)</span><span class="x">
+
+	</span><span class="c">// 用来记录所有的客户端连接</span><span class="x">
+	</span><span class="k">var</span><span class="x"> </span><span class="n">ConnMap</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="k">var</span><span class="x"> </span><span class="n">tcpAddr</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPAddr</span><span class="x">
+		</span><span class="n">ConnMap</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="p">)</span><span class="x">
+		</span><span class="n">tcpAddr</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ResolveTCPAddr</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="s">"127.0.0.1:9999"</span><span class="p">)</span><span class="x">
+
+		</span><span class="n">tcpListener</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ListenTCP</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="n">tcpAddr</span><span class="p">)</span><span class="x">
+
+		</span><span class="k">defer</span><span class="x"> </span><span class="n">tcpListener</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+
+		</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">tcpConn</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">tcpListener</span><span class="o">.</span><span class="n">AcceptTCP</span><span class="p">()</span><span class="x">
+			</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+				</span><span class="k">continue</span><span class="x">
+			</span><span class="p">}</span><span class="x">
+
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"A client connected : "</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">tcpConn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">())</span><span class="x">
+			</span><span class="c">// 新连接加入map</span><span class="x">
+			</span><span class="n">ConnMap</span><span class="p">[</span><span class="n">tcpConn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">tcpConn</span><span class="x">
+			</span><span class="k">go</span><span class="x"> </span><span class="n">tcpPipe</span><span class="p">(</span><span class="n">tcpConn</span><span class="p">)</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+
+	</span><span class="p">}</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">tcpPipe</span><span class="p">(</span><span class="n">conn</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">ipStr</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">conn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()</span><span class="x">
+		</span><span class="k">defer</span><span class="x"> </span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"disconnected :"</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">ipStr</span><span class="p">)</span><span class="x">
+			</span><span class="n">conn</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+		</span><span class="p">}()</span><span class="x">
+		</span><span class="n">reader</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+
+		</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">message</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">ReadString</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">)</span><span class="x">
+			</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+				</span><span class="k">return</span><span class="x">
+			</span><span class="p">}</span><span class="x">
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">":"</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="kt">string</span><span class="p">(</span><span class="n">message</span><span class="p">))</span><span class="x">
+			</span><span class="c">// 这里返回消息改为了广播</span><span class="x">
+			</span><span class="n">boradcastMessage</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">RemoteAddr</span><span class="p">()</span><span class="o">.</span><span class="n">String</span><span class="p">()</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">":"</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="kt">string</span><span class="p">(</span><span class="n">message</span><span class="p">))</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">boradcastMessage</span><span class="p">(</span><span class="n">message</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="x">
+		</span><span class="c">// 遍历所有客户端并发送消息</span><span class="x">
+		</span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">conn</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">ConnMap</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>客户端完整代码如下:</p>
+
+<p>client.go</p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">	</span><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+	</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+		</span><span class="s">"bufio"</span><span class="x">
+		</span><span class="s">"fmt"</span><span class="x">
+		</span><span class="s">"net"</span><span class="x">
+	</span><span class="p">)</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="k">var</span><span class="x"> </span><span class="n">tcpAddr</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPAddr</span><span class="x">
+		</span><span class="n">tcpAddr</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">ResolveTCPAddr</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="s">"127.0.0.1:9999"</span><span class="p">)</span><span class="x">
+
+		</span><span class="n">conn</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">net</span><span class="o">.</span><span class="n">DialTCP</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="n">tcpAddr</span><span class="p">)</span><span class="x">
+		</span><span class="k">defer</span><span class="x"> </span><span class="n">conn</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"connected!"</span><span class="p">)</span><span class="x">
+
+		</span><span class="k">go</span><span class="x"> </span><span class="n">onMessageRecived</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+
+		</span><span class="c">// 控制台聊天功能加入</span><span class="x">
+		</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">var</span><span class="x"> </span><span class="n">msg</span><span class="x"> </span><span class="kt">string</span><span class="x">
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Scanln</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span><span class="x">
+			</span><span class="k">if</span><span class="x"> </span><span class="n">msg</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="s">"quit"</span><span class="x"> </span><span class="p">{</span><span class="x">
+				</span><span class="k">break</span><span class="x">
+			</span><span class="p">}</span><span class="x">
+			</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">msg</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="x">
+			</span><span class="n">conn</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">onMessageRecived</span><span class="p">(</span><span class="n">conn</span><span class="x"> </span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">TCPConn</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">reader</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="x">
+		</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">msg</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">ReadString</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">)</span><span class="x">
+			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="x">
+			</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+				</span><span class="n">quitSemaphore</span><span class="x"> </span><span class="o">&lt;-</span><span class="x"> </span><span class="no">true</span><span class="x">
+				</span><span class="k">break</span><span class="x">
+			</span><span class="p">}</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+<p>最后分别编译server与client试试效果吧!</p>
+
+<blockquote>
+  <p>go build server.go</p>
+
+  <p>go build client.go</p>
+</blockquote>
+
+<p>先启动server端, 然后新开两个个终端, 启动客户端, 在其中一个客户端里键入聊天信息后回车, 会发现另外一个客户端收到了刚刚发送的聊下天信息</p>
+
+<p>完事大吉!</p>
+
+<h2 id="section-2">服务器的粘包处理</h2>
+
+<p><strong>什么是粘包</strong></p>
+
+<p>一个完成的消息可能会被TCP拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这个就是TCP的拆包和封包问题</p>
+
+<p><strong>TCP粘包和拆包产生的原因</strong></p>
+
+<ol>
+  <li>
+    <p>应用程序写入数据的字节大小大于套接字发送缓冲区的大小</p>
+  </li>
+  <li>
+    <p>进行MSS大小的TCP分段。MSS是最大报文段长度的缩写。MSS是TCP报文段中的数据字段的最大长度。数据字段加上TCP首部才等于整个的TCP报文段。所以MSS并不是TCP报文段的最大长度，而是：MSS=TCP报文段长度-TCP首部长度</p>
+  </li>
+  <li>
+    <p>以太网的payload大于MTU进行IP分片。MTU指：一种通信协议的某一层上面所能通过的最大数据包大小。如果IP层有一个数据包要传，而且数据的长度比链路层的MTU大，那么IP层就会进行分片，把数据包分成托干片，让每一片都不超过MTU。注意，IP分片可以发生在原始发送端主机上，也可以发生在中间路由器上。</p>
+  </li>
+</ol>
+
+<p><strong>TCP粘包和拆包的解决策略</strong></p>
+
+<ol>
+  <li>消息定长。例如100字节。</li>
+  <li>在包尾部增加回车或者空格符等特殊字符进行分割，典型的如FTP协议</li>
+  <li>将消息分为消息头和消息尾。</li>
+  <li>其它复杂的协议，如RTMP协议等。</li>
+</ol>
+
+<p>参考(http://blog.csdn.net/initphp/article/details/41948919)</p>
+
+<p><strong>我们的处理方式</strong></p>
+
+<p>解决粘包问题有多种多样的方式, 我们这里的做法是:</p>
+
+<ul>
+  <li>发送方在每次发送消息时将消息长度写入一个int32作为包头一并发送出去, 我们称之为Encode</li>
+  <li>接受方则先读取一个int32的长度的消息长度信息, 再根据长度读取相应长的byte数据, 称之为Decode</li>
+</ul>
+
+<p>在实验环境中的主文件夹内,  新建一个名为codec的文件夹在其之下新建一个文件codec.go, 将我们的Encode和Decode方法写入其中, 这里给出Encode与Decode相应的代码:</p>
+
+<p>codec.go</p>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="x">	</span><span class="k">package</span><span class="x"> </span><span class="n">codec</span><span class="x">
+	</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+		</span><span class="s">"bufio"</span><span class="x">
+		</span><span class="s">"bytes"</span><span class="x">
+		</span><span class="s">"encoding/binary"</span><span class="x">
+	</span><span class="p">)</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">Encode</span><span class="p">(</span><span class="n">message</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="c">// 读取消息的长度</span><span class="x">
+		</span><span class="k">var</span><span class="x"> </span><span class="n">length</span><span class="x"> </span><span class="kt">int32</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="kt">int32</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">))</span><span class="x">
+		</span><span class="k">var</span><span class="x"> </span><span class="n">pkg</span><span class="x"> </span><span class="o">*</span><span class="n">bytes</span><span class="o">.</span><span class="n">Buffer</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">new</span><span class="p">(</span><span class="n">bytes</span><span class="o">.</span><span class="n">Buffer</span><span class="p">)</span><span class="x">
+		</span><span class="c">// 写入消息头</span><span class="x">
+		</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">pkg</span><span class="p">,</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">LittleEndian</span><span class="p">,</span><span class="x"> </span><span class="n">length</span><span class="p">)</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+		</span><span class="c">// 写入消息实体</span><span class="x">
+		</span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">pkg</span><span class="p">,</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">LittleEndian</span><span class="p">,</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">message</span><span class="p">))</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+
+		</span><span class="k">return</span><span class="x"> </span><span class="n">pkg</span><span class="o">.</span><span class="n">Bytes</span><span class="p">(),</span><span class="x"> </span><span class="no">nil</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+
+	</span><span class="k">func</span><span class="x"> </span><span class="n">Decode</span><span class="p">(</span><span class="n">reader</span><span class="x"> </span><span class="o">*</span><span class="n">bufio</span><span class="o">.</span><span class="n">Reader</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="c">// 读取消息的长度</span><span class="x">
+		</span><span class="n">lengthByte</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">Peek</span><span class="p">(</span><span class="m">4</span><span class="p">)</span><span class="x">
+		</span><span class="n">lengthBuff</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">lengthByte</span><span class="p">)</span><span class="x">
+		</span><span class="k">var</span><span class="x"> </span><span class="n">length</span><span class="x"> </span><span class="kt">int32</span><span class="x">
+		</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">lengthBuff</span><span class="p">,</span><span class="x"> </span><span class="n">binary</span><span class="o">.</span><span class="n">LittleEndian</span><span class="p">,</span><span class="x"> </span><span class="o">&amp;</span><span class="n">length</span><span class="p">)</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="kt">int32</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">Buffered</span><span class="p">())</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="n">length</span><span class="o">+</span><span class="m">4</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+
+		</span><span class="c">// 读取消息真正的内容</span><span class="x">
+		</span><span class="n">pack</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="x"> </span><span class="kt">int</span><span class="p">(</span><span class="m">4</span><span class="o">+</span><span class="n">length</span><span class="p">))</span><span class="x">
+		</span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">reader</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">pack</span><span class="p">)</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+		</span><span class="k">return</span><span class="x"> </span><span class="kt">string</span><span class="p">(</span><span class="n">pack</span><span class="p">[</span><span class="m">4</span><span class="o">:</span><span class="p">]),</span><span class="x"> </span><span class="no">nil</span><span class="x">
+	</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+<p>这里就不帖服务器与客户端的调用代码了, 同学们自己动手试试~</p>
+
+                
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 hidden-xs">
+          <div class="sidebar ">
+  <h2>Recent Posts</h2>
+  <ul>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-02[译]</a></li>
+    
+    <li><a href="/2017/03/CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01-%E8%AF%91">CLOJURE-for-the-BRAVE-and-TRUE-Chapter-01[译]</a></li>
+    
+    <li><a href="/2017/02/%E6%88%91%E6%8B%8D%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%9C%A8%E6%8B%8D%E4%BB%80%E4%B9%88">我拍照的时候是在拍什么</a></li>
+    
+    <li><a href="/2017/02/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84nodejs+edgejs+electron%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A">客户端软件架构nodejs+edgejs+electron调查报告</a></li>
+    
+    <li><a href="/2017/01/%E6%88%91%E6%98%AF%E4%B8%AA%E6%87%92%E4%BA%BA%E4%B9%88-%E6%96%B0%E5%B9%B4%E7%9A%84TODO-LIST">我是个懒人么?新年的TODO LIST</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar ">
+  <h2>Wechat Official Accounts</h2>
+  <img src="/images/qrcode_victoriest.jpg" />
+</div>
+
+
+<div class="sidebar ">
+  <h2>Follow me</h2>
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  </ul>
+</div>
+<!--
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+<div class="sidebar">
+  <h2>Tags</h2>
+  <ul>
+    
+      <li><a href="/tag/golang">golang</a></li>
+    
+      <li><a href="/tag/tcp服务器">tcp服务器</a></li>
+    
+      <li><a href="/tag/clojure">clojure</a></li>
+    
+      <li><a href="/tag/protobuff">protobuff</a></li>
+    
+      <li><a href="/tag/IntelliJ">IntelliJ</a></li>
+    
+      <li><a href="/tag/Leiningen">Leiningen</a></li>
+    
+      <li><a href="/tag/storm">storm</a></li>
+    
+      <li><a href="/tag/zookeeper">zookeeper</a></li>
+    
+      <li><a href="/tag/PerSharding">PerSharding</a></li>
+    
+      <li><a href="/tag/一致性哈希">一致性哈希</a></li>
+    
+      <li><a href="/tag/分布式缓存">分布式缓存</a></li>
+    
+      <li><a href="/tag/负载均衡">负载均衡</a></li>
+    
+      <li><a href="/tag/apache">apache</a></li>
+    
+      <li><a href="/tag/tomcat">tomcat</a></li>
+    
+      <li><a href="/tag/vim">vim</a></li>
+    
+      <li><a href="/tag/jabber">jabber</a></li>
+    
+      <li><a href="/tag/java">java</a></li>
+    
+      <li><a href="/tag/BTrace">BTrace</a></li>
+    
+      <li><a href="/tag/js">js</a></li>
+    
+      <li><a href="/tag/摄影">摄影</a></li>
+    
+      <li><a href="/tag/nodejs">nodejs</a></li>
+    
+      <li><a href="/tag/electron">electron</a></li>
+    
+  </ul>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+      <footer class="footer-distributed">
+      <div class="container">
+        <div class="footer">
+          <p>VcitoriEST &copy; 2016. Powered by <a href="http://jekyllrb.com/">jekyll,</a> <a href="https://github.com/streetturtle/jekyll-clean-dark">Jekyll Clean Dark</a></p>
+          <h6>Follow me</h6>
+
+<ul class="social-media">
+
+  
+    <li>
+      <a title="victoriest on Github" href="https://github.com/victoriest" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <li>
+      <a title="feed.xml RSS" href="/feed.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  
+
+</ul>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+</div>
