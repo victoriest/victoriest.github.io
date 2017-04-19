@@ -10,10 +10,11 @@ excerpt_separator: <!--more-->
 
 # 深入函数核心
 
-You might be asking yourself similar questions if you’ve started playing with Clojure’s core functions. “Why did map return a list when I gave it a vector?” and “How come reduce treats my map like a list of vectors?” and so on. (With Clojure, though, you’re at least spared from contemplating the profound existential horror of being a 17-year-old for eternity.)
+当你开始使用Clojure的核心函数时, 你可能会有如下类似的问题. "为什么我传入一个vector给map函数, 却返回给我一个list?"; "为什么reduce函数处理map起来看起来像处理一个vector的list?"
 
 In this chapter, you’ll learn about Clojure’s deep, dark, bloodthirsty, supernatur—*cough* I mean, in this chapter, you’ll learn about Clojure’s underlying concept of programming to abstractions and about the sequence and collection abstractions. You’ll also learn about lazy sequences. This will give you the grounding you need to read the documentation for functions you haven’t used before and to understand what’s happening when you give them a try.
 
+在这一章中，你将了解Clojure的基本概念和编程抽象的序列和集合的抽象. 您还可以了解懒惰序列。这将给你的基础，你需要阅读的文件，你以前没有使用的功能，并了解发生了什么，当你给他们一个尝试。
 
 Next, you’ll get more experience with the functions you’ll be reaching for the most. You’ll learn how to work with lists, vectors, maps, and sets with the functions map, reduce, into, conj, concat, some, filter, take, drop, sort, sort-by, and identity. You’ll also learn how to create new functions with apply, partial, and complement. All this information will help you understand how to do things the Clojure way, and it will give you a solid foundation for writing your own code as well as for reading and learning from others’ projects.
 
@@ -784,7 +785,7 @@ Good luck, McFishwich!
 
 > 译后续
 >
-> 本文原文链接:<http://www.braveclojure.com/do-things/>
+> 本文原文链接:<http://www.braveclojure.com/core-functions-in-depth/>
 > 学习Clojure的计划已经失败了太多次了, 这次又要挑战一回. 突然萌生出, 找本好的不枯燥的入门读物来翻译一下的想法, 边学边翻译. 希望这次能坚持下去. 23333...
 >
 > 开始这一章翻译的时候, 才知道看懂E文和翻译出来完全不是一回事, 现在读一遍自己的译文是在是太生硬了, 而且还有几段文字实在不知道咋翻译. 不过好歹大体上弄出来了, 如果有谁看不爽了请轻拍. 
