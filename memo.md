@@ -37,9 +37,6 @@ java后端相关博客
 - [鸟窝](http://colobu.com/)
 golang相关的一个博客
 
-- [码农周刊](http://weekly.manong.io/)
-码农周刊是一份专为程序员打造的IT技术周刊。我们会为你精选一周IT技术干货，每周一发送
-
 - [brook's blog](https://uedsky.com/)
 讲前端的博客
 
@@ -53,9 +50,6 @@ golang相关的一个博客
 江南白衣，公众号：春天的旁边  java & python相关
 
 - [我爱计算机](http://www.52cs.org/)
-
-- [worldhello](http://www.worldhello.net/)
-蒋鑫 - git权威指南 作者, 博客内容以版本控制工具使用, 软件工程内容为主
 
 - [雁起平沙的网络日志](http://yanping.me/cn/)
 雁起平沙 - jekyll+gitpage博客环境, R语言
@@ -99,10 +93,16 @@ java技术栈
 - [Gaccob 的博客](http://www.gaccob.com/)
 游戏后台开发, 好长时间没更新了
 
+- [唐磊的个人博客](https://www.tanglei.name/)
+
 - [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
+(https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
 
 <h1 id="杂项">杂项</h1>
 -------
+
+[文本型艺术字生成网站](http://patorjk.com/software/taag/#p=display&f=3D-ASCII&t=VictoriEST)
+
 [http://www.icourse163.org/](http://www.icourse163.org/)
 
 [mooc 国内的在线教育视频门户网站](http://mooc.guokr.com/course/)
@@ -114,8 +114,6 @@ java技术栈
 [Datacamp 关于python与R语言的机器学习相关的视频教程](https://www.datacamp.com/courses/)
 
 [微信公众号阅读器](https://next.36kr.com/posts/collections/271)
-
-[微广场](http://www.iwgc.cn/)
 
 [Best Free Apps For Mac](http://xclient.info/)
 
@@ -155,8 +153,6 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 
 [直播写代码的网站](https://www.livecoding.tv)
 
-[StuQ 技能图](https://git.oschina.net/stuq/skill-map/)
-
 <h2 id="mac/ios">mac/ios开发相关</h2>
 
 [OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
@@ -188,6 +184,8 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 [http://jekyllcn.com/](http://jekyllcn.com/)
 
 [搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)
+
+[准备充分了嘛就想学函数式编程？](https://github.com/xitu/gold-miner/blob/master/TODO/so-you-want-to-be-a-functional-programmer-part-1.md)
 
 <h1 id="开发语言">开发语言</h1>
 
@@ -312,6 +310,12 @@ java为主的技术站点
 
 - [使用Netty实现通用二进制协议的高效数据传输](http://www.blogjava.net/hankchen/archive/2012/02/04/369378.html)
 
+- [关键业务系统的JVM参数推荐(2016热冬版)](https://mp.weixin.qq.com/s?__biz=MzIzODYyNjkzNw==&mid=2247483687&idx=1&sn=41f24dac62c0ca65e4dfe32eae62f3f2&chksm=e9373031de40b927497e5b9aa5dacae6e0a5bac8c760e05ae1d983baf700f45fe8f6c1cfca41&mpshare=1)
+
+- [Spring-Boot干货系列](http://tengj.top/categories/Spring-Boot%E5%B9%B2%E8%B4%A7%E7%B3%BB%E5%88%97/)
+
+- [Spring Boot参考指南中文版](https://segmentfault.com/a/1190000007333846)
+
 <h2 id="js">JavaScript前端开发</h2>
 -------
 [MERN](http://mern.io/)
@@ -363,7 +367,21 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [React 技术栈系列教程](http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html)
 
+[React 生态系（Ecosystem）入门简介](https://mp.weixin.qq.com/s?__biz=MzA5NTM2MTEzNw==&mid=2736711126&idx=1&sn=52482c37793d83b031c05e6af368cf31&chksm=b6aac4c881dd4dde3a1c9edcbaff395117a6f8338253d307f02f37d020e8a84137778d3cc801&mpshare=1)
+
+[React 学习资源汇总](https://juejin.im/entry/582042a3d2030900550a6f22)
+
 [es5标准](http://yanhaijing.com/es5/#20)
+
+[web前端检查兼容性在线工具](http://webdevchecklist.com/)
+
+[写给后端看的前端技术——webpack]https://mp.weixin.qq.com/s?__biz=MzIxMjAzMDA1MQ==&mid=2648945804&idx=1&sn=602698b6937004f3c2cad0a634ca5cf0&chksm=8f5b5380b82cda96c0c2d7a7f15d51af728f66a267391b14b531b9090f7e71f071e15b6debf3&mpshare=1)
+
+[Webpack 2 入门](https://mp.weixin.qq.com/s?__biz=MjM5NjQ4MjYwMQ==&mid=2664608614&idx=1&sn=78561db972967be9d12ea70a5eb94259&chksm=bdce88208ab901368e6ba10044287244adff87e7b570c706099c48d7eeeb6e90fd2a7ec576da&mpshare=1)
+(https://my.oschina.net/u/1416844/blog/849602)
+(https://my.oschina.net/wangshijun/blog/857834)
+
+[开发团队必备的现代前端开发指南](https://www.oschina.net/translate/grabs-front-end-guide-for-large-teams)
 
 <h1>工具</h1>
 
@@ -498,6 +516,14 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 [R语言官方文档](https://cran.r-project.org/other-docs.html)
 
 [TensorFlow的中文网站](http://tensorfly.cn/tfdoc/get_started/introduction.html)
+
+[TensorFlow 官方文档中文版](https://github.com/jikexueyuanwiki/tensorflow-zh/blob/master/README.md)
+
+[十个主题，最全的优秀 TensorFlow 相关资源列表](https://my.oschina.net/hardbone/blog/798552)
+
+[Bandit算法与推荐系统](https://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&mid=2650688724&idx=1&sn=6cc2d0be59d497c0226a5e54b02ec019&chksm=bea63d0789d1b4117b3fb91f886bd5f214425293e27aeb5c729660c6a58e85bcda6ce2c0973e&mpshare=1)
+
+[问答系统中机器学习算法应用：Quora 2017年ML平台规划](https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653548680&idx=1&sn=85102002a7cb5bbb119604b2666baa1c&chksm=813a6110b64de806aae8ad702e6f025f5217d72e71cf5fa3135015002d8c0cfe65bf869eae4b&mpshare=1)
 
 <h3>jekyll主题相关</h3>
 
