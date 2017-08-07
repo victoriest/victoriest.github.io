@@ -12,37 +12,51 @@ excerpt_separator: <!--more-->
 
 当你开始使用Clojure的核心函数时, 你可能会有如下类似的问题. "为什么我传入一个vector给map函数, 却返回给我一个list?"; "为什么reduce函数处理map起来看起来像处理一个vector的list?"
 
-In this chapter, you’ll learn about Clojure’s deep, dark, bloodthirsty, supernatur—*cough* I mean, in this chapter, you’ll learn about Clojure’s underlying concept of programming to abstractions and about the sequence and collection abstractions. You’ll also learn about lazy sequences. This will give you the grounding you need to read the documentation for functions you haven’t used before and to understand what’s happening when you give them a try.
+在本章中, 您将了解到Clojure的抽象概念以及序列和收集抽象的基本概念. 您还将了解延迟序列. 这将为您提供阅读以前未使用的功能的文档所需的基础, 并了解当您尝试时发生的情况.
 
-在这一章中，你将了解Clojure的基本概念和编程抽象的序列和集合的抽象. 您还可以了解懒惰序列。这将给你的基础，你需要阅读的文件，你以前没有使用的功能，并了解发生了什么，当你给他们一个尝试。
+接下来, 您将获得更多关于function的使用经验. 您将学习如何使用list,vector,map和set与函数map,reduce,into,conj,concat,some,filter,take,drop,sort,sort-by和identity.
 
-Next, you’ll get more experience with the functions you’ll be reaching for the most. You’ll learn how to work with lists, vectors, maps, and sets with the functions map, reduce, into, conj, concat, some, filter, take, drop, sort, sort-by, and identity. You’ll also learn how to create new functions with apply, partial, and complement. All this information will help you understand how to do things the Clojure way, and it will give you a solid foundation for writing your own code as well as for reading and learning from others’ projects.
+最后, 您将学习如何解析和查询CSV.
 
-Finally, you’ll learn how to parse and query a CSV of vampire data to determine what nosferatu lurk in your hometown.
+### 抽象编程
 
-Programming to Abstractions
-To understand programming to abstractions, let’s compare Clojure to a language that wasn’t built with that principle in mind: Emacs Lisp (elisp). In elisp, you can use the mapcar function to derive a new list, which is similar to how you use map in Clojure. However, if you want to map over a hash map (similar to Clojure’s map data structure) in elisp, you’ll need to use the maphash function, whereas in Clojure you can still just use map. In other words, elisp uses two different, data structure–specific functions to implement the map operation, but Clojure uses only one. You can also call reduce on a map in Clojure, whereas elisp doesn’t provide a function for reducing a hash map.
+为了理解面向抽象编程, 我们来比较Clojure与一个不是以这个原则构建的语言:Emacs Lisp(elisp).
+在elisp中,您可以使用`mapcar`函数导出新的列表, 这与Clojure中如何使用`map`类似. 
+但是, 如果要在elisp中映射Hashmap(类似于Clojure的`map`数据结构)，则需要使用`maphash`函数, 而在Clojure中, 您仍然可以使用`map`.
+换句话说，elisp使用两种不同的数据结构特定功能来实现`map`操作，但Clojure只使用一种. 
+您也可以在Clojure的地图上调用`reduce`, 而elisp不提供减少Hashmap的功能.
 
-The reason is that Clojure defines map and reduce functions in terms of the sequence abstraction, not in terms of specific data structures. As long as a data structure responds to the core sequence operations (the functions first, rest, and cons, which we’ll look at more closely in a moment), it will work with map, reduce, and oodles of other sequence functions for free. This is what Clojurists mean by programming to abstractions, and it’s a central tenet of Clojure philosophy.
+原因是Clojure不是根据具体的数据结构而是根据序列抽象定义了`map`和`reduce`函数.
+只要数据结构响应核心序列操作(函数`first`, `rest`和`cons`我们稍后会更仔细地说明)，它将与其他序列函数的`map`, `reduce`和`oodle`一起自由组合. Clojure哲学的核心原则就是面向抽象编程.
 
-I think of abstractions as named collections of operations. If you can perform all of an abstraction’s operations on an object, then that object is an instance of the abstraction. I think this way even outside of programming. For example, the battery abstraction includes the operation “connect a conducting medium to its anode and cathode,” and the operation’s output is electrical current. It doesn’t matter if the battery is made out of lithium or out of potatoes. It’s a battery as long as it responds to the set of operations that define battery.
+我认为抽象是一些列操作的集合. 一个对象如果可以执行所有所定义的操作, 那么该对象就是这个抽象的一个实例. 
+这个定义可以延伸到更广的范围: 
+例如, 电池抽象定义包括"将导电介质连接到其阳极和阴极"的操作, 并且操作的输出是电流. 
+电池是用锂还是从土豆制成都没关系. 只要它响应一组定义电池的操作, 它就是一个电池. 
 
 Similarly, map doesn’t care about how lists, vectors, sets, and maps are implemented. It only cares about whether it can perform sequence operations on them. Let’s look at how map is defined in terms of the sequence abstraction so you can understand programming to abstractions in general.
 
-Treating Lists, Vectors, Sets, and Maps as Sequences
+与上例类似, `map`不关心如何实现`list`, `vector`, `set`和`map`. 它只关心它是否可以对它们执行操作. 
+
+我们来看看`map`是如何根据序列抽象来定义的, 所以你可以将编程理解为一般的抽象.
+
+### 将Lists, Vectors, Sets, and Maps 作为 Sequences 
 
 If you think about the map operation independently of any programming language, or even of programming altogether, its essential behavior is to derive a new sequence y from an existing sequence x using a function ƒ such that y1 = ƒ(x1), y2 = ƒ(x2), . . . yn = ƒ(xn). Figure 4-1 illustrates how you might visualize a mapping applied to a sequence.
 
-
+![1]({{ site.url | append:site.baseurl }}/images/mapping.png)
 Figure 4-1: Visualizing a mapping
+
 The term sequence here refers to a collection of elements organized in linear order, as opposed to, say, an unordered collection or a graph without a before-and-after relationship between its nodes. Figure 4-2 shows how you might visualize a sequence, in contrast to the other two collections mentioned.
 
-
+![2]({{ site.url | append:site.baseurl }}/images/collections.png)
 Figure 4-2: Sequential and nonsequential collections
+
 Absent from this description of mapping and sequences is any mention of lists, vectors, or other concrete data structures. Clojure is designed to allow us to think and program in such abstract terms as much as possible, and it does this by implementing functions in terms of data structure abstractions. In this case, map is defined in terms of the sequence abstraction. In conversation, you would say map, reduce, and other sequence functions take a sequence or even take a seq. In fact, Clojurists usually use seq instead of sequence, using terms like seq functions and the seq library to refer to functions that perform sequential operations. Whether you use sequence or seq, you’re indicating that the data structure in question will be treated as a sequence and that what it actually is in its truest heart of hearts doesn’t matter in this context.
 
 If the core sequence functions first, rest, and cons work on a data structure, you can say the data structure implements the sequence abstraction. Lists, vectors, sets, and maps all implement the sequence abstraction, so they all work with map, as shown here:
 
+```clojure
 (defn titleize
   [topic]
   (str topic " for the Brave and True"))
@@ -58,6 +72,8 @@ If the core sequence functions first, rest, and cons work on a data structure, y
 
 (map #(titleize (second %)) {:uncomfortable-thing "Winking"})
 ; => ("Winking for the Brave and True")
+```
+
 The first two examples show that map works identically with vectors and lists. The third example shows that map can work with unsorted sets. In the fourth example, you must call second on the anonymous function’s argument before title-izing it because the argument is a map. I’ll explain why soon, but first let’s look at the three functions that define the sequence abstraction.
 
 first, rest, and cons
@@ -86,7 +102,7 @@ var node1 = {
 };
 Graphically, you could represent this list as shown in Figure 4-3.
 
-
+![2]({{ site.url | append:site.baseurl }}/images/linked-list.png)
 Figure 4-3: A linked list
 You can perform three core functions on a linked list: first, rest, and cons. first returns the value for the requested node, rest returns the remaining values after the requested node, and cons adds a new node with the given value to the beginning of the list. After those are implemented, you can implement map, reduce, filter, and other seq functions on top of them.
 
