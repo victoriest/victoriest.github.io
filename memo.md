@@ -16,8 +16,7 @@ title: about
     	* [IntelliJ IDEA](#IntelliJ IDEA)
     	* [Emacs](#Emacs)
     	* [Vim](#Vim)
-    * [Git相关](#git)
-    * [Ant相关](#Ant相关)
+   	* [Git相关](#git)
 	* [Maven相关](#Maven相关)
 	* [Storm相关](#Storm相关)
     * [Docker](#Docker)
@@ -96,7 +95,7 @@ java技术栈
 - [唐磊的个人博客](https://www.tanglei.name/)
 
 - [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
-(https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
+<https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io>
 
 <h1 id="杂项">杂项</h1>
 -------
@@ -375,11 +374,11 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [web前端检查兼容性在线工具](http://webdevchecklist.com/)
 
-[写给后端看的前端技术——webpack]https://mp.weixin.qq.com/s?__biz=MzIxMjAzMDA1MQ==&mid=2648945804&idx=1&sn=602698b6937004f3c2cad0a634ca5cf0&chksm=8f5b5380b82cda96c0c2d7a7f15d51af728f66a267391b14b531b9090f7e71f071e15b6debf3&mpshare=1)
+[写给后端看的前端技术——webpack](https://mp.weixin.qq.com/s?__biz=MzIxMjAzMDA1MQ==&mid=2648945804&idx=1&sn=602698b6937004f3c2cad0a634ca5cf0&chksm=8f5b5380b82cda96c0c2d7a7f15d51af728f66a267391b14b531b9090f7e71f071e15b6debf3&mpshare=1)
 
 [Webpack 2 入门](https://mp.weixin.qq.com/s?__biz=MjM5NjQ4MjYwMQ==&mid=2664608614&idx=1&sn=78561db972967be9d12ea70a5eb94259&chksm=bdce88208ab901368e6ba10044287244adff87e7b570c706099c48d7eeeb6e90fd2a7ec576da&mpshare=1)
-(https://my.oschina.net/u/1416844/blog/849602)
-(https://my.oschina.net/wangshijun/blog/857834)
+<https://my.oschina.net/u/1416844/blog/849602>
+<https://my.oschina.net/wangshijun/blog/857834>
 
 [开发团队必备的现代前端开发指南](https://www.oschina.net/translate/grabs-front-end-guide-for-large-teams)
 
@@ -451,8 +450,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [从零开始——Emacs 安装配置使用教程](http://www.jianshu.com/p/b4cf683c25f3)
 
-[Org-mode五分钟教程](http://blog.chinaunix.net/uid-16237159-id-62365.html)
-
 [Hello, Emacs](http://jerrypeng.me/2012/08/hello-emacs/)
 
 <http://emacsist.com/>
@@ -464,14 +461,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 [git book](https://git-scm.com/book/zh/v2)
 
 [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
-
-<h2 id="Ant相关">Ant相关</h2>
-
-[如何使用ANT实现FTP功能??利用ant实现SSH(SFTP)功能](http://blog.sina.com.cn/s/blog_9ed782ea010146h1.html)
-
-[Ant脚本 ftp、telnet、ssh 使用](http://www.51testing.com/html/00/1800-131605.html)
-
-[在Ant下使用ftp](http://soukenan.blog.51cto.com/5130995/1171157)
 
 <h2 id="Maven相关">Maven相关</h2>
 
