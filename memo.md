@@ -4,27 +4,18 @@ title: about
 ---
 # 目录
 -------
+* [优秀技术博客](#优秀技术博客)
 * [开发语言](#Golang)
     * [Golang](#Golang)
     * [Clojure](#Clojure)
     * [Java](#Java)
     * [JavaScript前端开发](#js)
 * [工具](#IDEs)
-    * [ProtoBuff](#ProtoBuff)
     * [IDEs](#IDEs)
-    	* [Sublime Text](#Sublime Text)
-    	* [IntelliJ IDEA](#IntelliJ IDEA)
     	* [Emacs](#Emacs)
     	* [Vim](#Vim)
-   	* [Git相关](#git)
-	* [Maven相关](#Maven相关)
-	* [Storm相关](#Storm相关)
-    * [Docker](#Docker)
-* [优秀技术博客](#优秀技术博客)
 * [机器学习](#ML)
 * [杂项](#杂项)
-	* [mac/ios开发相关](#mac/ios)
-	* [mysql数据库配置部署相关](#mysql数据库配置部署相关)
     * [个人站点搭建(jekyll & git-page)](#jekyll)
 * [游戏开发](#游戏开发)
 
@@ -97,6 +88,24 @@ java技术栈
 - [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
 <https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io>
 
+<h1 id="ML">机器学习</h1>
+
+[10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
+
+[机器学习最佳入门学习资料汇总](http://article.yeeyan.org/view/22139/410514)
+
+[R语言官方文档](https://cran.r-project.org/other-docs.html)
+
+[TensorFlow的中文网站](http://tensorfly.cn/tfdoc/get_started/introduction.html)
+
+[TensorFlow 官方文档中文版](https://github.com/jikexueyuanwiki/tensorflow-zh/blob/master/README.md)
+
+[十个主题，最全的优秀 TensorFlow 相关资源列表](https://my.oschina.net/hardbone/blog/798552)
+
+[Bandit算法与推荐系统](https://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&mid=2650688724&idx=1&sn=6cc2d0be59d497c0226a5e54b02ec019&chksm=bea63d0789d1b4117b3fb91f886bd5f214425293e27aeb5c729660c6a58e85bcda6ce2c0973e&mpshare=1)
+
+[问答系统中机器学习算法应用：Quora 2017年ML平台规划](https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653548680&idx=1&sn=85102002a7cb5bbb119604b2666baa1c&chksm=813a6110b64de806aae8ad702e6f025f5217d72e71cf5fa3135015002d8c0cfe65bf869eae4b&mpshare=1)
+
 <h1 id="杂项">杂项</h1>
 -------
 
@@ -151,30 +160,6 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 [大数据/数据挖掘/推荐系统/机器学习相关资源](https://github.com/Flowerowl/Big-Data-Resources)
 
 [直播写代码的网站](https://www.livecoding.tv)
-
-<h2 id="mac/ios">mac/ios开发相关</h2>
-
-[OS X Development Tutorials](https://www.raywenderlich.com/category/os-x)
-
-[apple官方开发者页面](https://developer.apple.com/programs/)
-
-[马上着手开发Mac应用程序](http://www.cocoachina.com/industry/20131211/7517.html)
-
-[Swift学习教程](http://letsswift.com/category/swiftguide/language-guide/page/3/)
-
-[戴维营教育-零基础iOS8-Swift编程开发教程](http://www.swiftv.cn/course/hwlrt694)
-
-[10个最佳的 Swift 教程实例](http://www.oschina.net/translate/best-swift-tutorials-with-examples)
-
-<h2 id="mysql数据库配置部署相关">mysql数据库配置部署相关</h2>
-
-[mysql主从复制](http://369369.blog.51cto.com/319630/790921)
-
-[高性能Mysql主从架构的复制原理及配置详解](http://blog.csdn.net/hguisu/article/details/7325124)
-
-[在linux同一台主机下面搭建两个mysql 实例并实现主从复制 (一)](http://www.it165.net/database/html/201404/6178.html)
-
-[在linux同一台主机下面搭建两个mysql 实例并实现主从复制(二)](http://www.it165.net/database/html/201404/6179.html)
 
 <h2 id="jekyll">个人站点搭建(jekyll & git-page)</h2>
 
@@ -288,14 +273,10 @@ java为主的技术站点
 分布式缓存
 
 - [中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
-    
-- [Google Guava官方教程](http://ifeve.com/google-guava/)
 
 - [使用Spring进行面向切面编程（AOP）](http://shouce.jb51.net/spring/aop.html)
 
 - [聊一聊Spring AOP](http://yangfei520.blog.51cto.com/1041581/1273069)
-
-- [跟我学Shiro](http://jinnianshilongnian.iteye.com/blog/2018398)
 
 <h3>hit point</h3>
 
@@ -335,8 +316,6 @@ livereload是一个web开发辅助工具，当我们修改完html、css和js的�
 RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避免不必要的js文件加载，提升网页浏览速度。
 
 [gulp example](https://github.com/AnnaSu/gulp-example/blob/master/README.md)
-
-[动态可视化库visjs](http://visjs.org/)
 
 [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
 
@@ -384,36 +363,7 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 <h1>工具</h1>
 
-<h2 id="ProtoBuff">ProtoBUff</h2>
-
-[Protocol Buffer技术详解(语言规范)](http://www.cnblogs.com/stephen-liu74/archive/2013/01/02/2841485.html)
-
-[protobuf在netty里面的应用举例](http://blog.csdn.net/goldenfish1919/article/details/6719276)
-
-[google Protocol Buffers 入门](http://shitouer.cn/2013/04/google-protocol-buffers-tutorial/)
-
-[google protobuf与as3的通信协议](http://blog.csdn.net/luna84/article/details/8694767)
-
 <h2 id="IDEs">IDEs</h2>
-
-<h3 id="Sublime Text">Sublime Text</h3>
--------
-[sublime text 3](http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/)
-
-[Sublime Text 2 入门及技巧](http://lucifr.com/2011/08/31/sublime-text-2-tricks-and-tips/)
-
-[视频: sublime text2 简介](http://v.youku.com/v_show/id_XMzU5NzQ5ODgw.html)
-
-[Sublime Text 使用介绍、全套快捷键及插件推荐](http://www.daqianduan.com/4820.html)
-
-<h3 id="IntelliJ IDEA">IntelliJ IDEA</h3>
--------
-
-[idea主题网站](http://color-themes.com/)
-
-[IntelliJ IDEA 简体中文专题教程](https://github.com/judasn/IntelliJ-IDEA-Tutorial)
-
-[Keyboard Shortcuts You Cannot Miss](https://www.jetbrains.com/idea/help/keyboard-shortcuts-you-cannot-miss.html)
 
 <h3 id="Vim">Vim</h3>
 -------
@@ -438,12 +388,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 - [将你的Vim 打造成轻巧强大的IDE](http://yuez.me/jiang-ni-de-vim-da-zao-cheng-qing-qiao-qiang-da-de-ide/)
 
-- [My Clojure Toolchain: Vim](http://blog.venanti.us/clojure-vim/)
-
-- [Writing Clojure in Vim](https://robots.thoughtbot.com/writing-clojure-in-vim)
-
-- [Programming Clojure with Vim (2013 edition)](http://www.deepbluelambda.org/programming/clojure/programming-clojure-with-vim-2013-edition)
-
 <h3 id="Emacs">Emacs</h3>
 -------
 [一年成为Emacs高手](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org)
@@ -455,64 +399,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 <http://emacsist.com/>
 
 <https://github.com/syl20bnr/spacemacs/>
-
-<h2 id="git">Git相关</h2>
-
-[git book](https://git-scm.com/book/zh/v2)
-
-[git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
-
-<h2 id="Maven相关">Maven相关</h2>
-
-[Maven官方搜索](http://search.maven.org/)
-
-[http://www.mvnrepository.com/](http://www.mvnrepository.com/)
-
-<h2 id="Storm相关">Storm相关</h2>
-
-[基于Storm的Nginx log实时监控系统](http://tech.uc.cn/?p=2866)
-
-[Storm开发环境快速搭建（单机、集群模式)](http://www.flyne.org/article/181)
-
-[zookeeper入门（1）在单机上实现ZooKeeper伪机群/伪集群部署](http://blog.csdn.net/poechant/article/details/6633923)
-
-[Storm集群安装部署步骤](http://www.cnblogs.com/panfeng412/archive/2012/11/30/how-to-install-and-deploy-storm-cluster.html)
-
-<h2 id="Docker">Docker</h2>
-
-[欢迎来到docker用户指南](http://www.widuu.com/chinese_docker/userguide/README.html)
-
-[Docker：利用Linux容器实现可移植的应用部署](http://www.infoq.com/cn/articles/docker-containers)
-
-[从主机复制文件到Docker的几种方法](http://blog.e3rp4y.me/blog/2014/05/23/copy-file-from-host-to-docker.html)
-
-[Docker文档](http://redmine.foreveross.com/documents/4)
-
-[使用docker 搭建基础的 mysql 应用](http://blog.csdn.net/smallfish1983/article/details/40080305)
-
-[常用docker命令，及一些坑](http://blog.csdn.net/wsscy2004/article/details/25878363)
-
-[一站式 Docker 服务](http://www.dockerpool.com/)
-
-<https://docker.cn/p/docker-base-dockerfile-java-dev>
-
-<h1 id="ML">机器学习</h1>
-
-[10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
-
-[机器学习最佳入门学习资料汇总](http://article.yeeyan.org/view/22139/410514)
-
-[R语言官方文档](https://cran.r-project.org/other-docs.html)
-
-[TensorFlow的中文网站](http://tensorfly.cn/tfdoc/get_started/introduction.html)
-
-[TensorFlow 官方文档中文版](https://github.com/jikexueyuanwiki/tensorflow-zh/blob/master/README.md)
-
-[十个主题，最全的优秀 TensorFlow 相关资源列表](https://my.oschina.net/hardbone/blog/798552)
-
-[Bandit算法与推荐系统](https://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&mid=2650688724&idx=1&sn=6cc2d0be59d497c0226a5e54b02ec019&chksm=bea63d0789d1b4117b3fb91f886bd5f214425293e27aeb5c729660c6a58e85bcda6ce2c0973e&mpshare=1)
-
-[问答系统中机器学习算法应用：Quora 2017年ML平台规划](https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653548680&idx=1&sn=85102002a7cb5bbb119604b2666baa1c&chksm=813a6110b64de806aae8ad702e6f025f5217d72e71cf5fa3135015002d8c0cfe65bf869eae4b&mpshare=1)
 
 <h3>jekyll主题相关</h3>
 
