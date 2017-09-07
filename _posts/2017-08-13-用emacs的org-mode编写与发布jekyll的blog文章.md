@@ -1,4 +1,14 @@
-﻿## 随便说说
+﻿---
+layout: post
+title: 用emacs的org-mode编写与发布jekyll的blog文章
+date: 2017-08-13
+description: 用emacs的org-mode编写与发布jekyll的blog文章
+excerpt_separator: <!--more-->
+---
+
+# 用emacs的org-mode编写与发布jekyll的blog文章
+
+## 随便说说
 
 最近开始玩起emacs起来. 因为一直比较好奇, 还有他的elisp也是很好地lisp方言, 并希望能借助使用emacs的时候, 运用一下非常正统lisp方言写些小东西. 另外是因为知道了[spacemacs](https://github.com/syl20bnr/spacemacs) 这个东西的存在. 
 
