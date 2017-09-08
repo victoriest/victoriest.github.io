@@ -104,6 +104,10 @@ java技术栈
 
 [TensorFlow 官方文档中文版](https://github.com/jikexueyuanwiki/tensorflow-zh/blob/master/README.md)
 
+[keras](https://keras.io/)
+
+[Keras中文文档](https://keras-cn.readthedocs.io/en/latest/)
+
 [十个主题，最全的优秀 TensorFlow 相关资源列表](https://my.oschina.net/hardbone/blog/798552)
 
 [Bandit算法与推荐系统](https://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&mid=2650688724&idx=1&sn=6cc2d0be59d497c0226a5e54b02ec019&chksm=bea63d0789d1b4117b3fb91f886bd5f214425293e27aeb5c729660c6a58e85bcda6ce2c0973e&mpshare=1)
@@ -176,12 +180,6 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 [go by example](https://gobyexample.com/)
 
 <h3>第三方库</h3>
-
-- [goprotobuf](https://github.com/golang/protobuf)
-protobuff的golang实现
-
-- [goconfig](https://github.com/Unknwon/goconfig)
-config文件读取库
 
 - [gopm](http://gopm.io/)
 Go 语言包管理-无需 Git 和 Hg 等版本管理工具，就可以下载指定版本的 Go 语言包
