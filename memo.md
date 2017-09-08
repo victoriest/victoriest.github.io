@@ -90,6 +90,10 @@ java技术栈
 
 <h1 id="ML">机器学习</h1>
 
+[cousrsa上吴恩达的机器学习教程](https://www.coursera.org/learn/machine-learning/home/week/1)
+
+[网易云课堂的机器学习教程](https://mooc.study.163.com/smartSpec/detail/1001319001.htm)
+
 [10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
 
 [机器学习最佳入门学习资料汇总](http://article.yeeyan.org/view/22139/410514)
@@ -143,21 +147,11 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 
 [assciinema](https://asciinema.org/)
 
-[Gradle学习系列](http://www.cnblogs.com/davenkin/p/gradle-learning-1.html)
-
-[极客学院](http://www.jikexueyuan.com/)
-
-[慧智网 - 一个在线学习it技能的网站](http://www.hubwiz.com/)
-
 [百度的api store](http://apistore.baidu.com/)
 
 [零基础入门学习汇编语言](http://www.tudou.com/playlist/id/14918629/)
 
-[100万并发连接服务器笔记之1M并发连接目标达成](http://www.blogjava.net/yongboy/archive/2013/04/11/397677.html)
-
 [免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
-
-[大数据/数据挖掘/推荐系统/机器学习相关资源](https://github.com/Flowerowl/Big-Data-Resources)
 
 [直播写代码的网站](https://www.livecoding.tv)
 
