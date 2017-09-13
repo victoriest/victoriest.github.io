@@ -3,6 +3,8 @@ layout: post
 title: 用emacs的org-mode编写与发布jekyll的blog文章
 date: 2017-08-13
 description: 用emacs的org-mode编写与发布jekyll的blog文章
+tags:
+ - 杂项
 excerpt_separator: <!--more-->
 ---
 
