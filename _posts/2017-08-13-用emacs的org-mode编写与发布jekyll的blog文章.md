@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: 用emacs的org-mode编写与发布jekyll的blog文章
 date: 2017-08-13
@@ -21,3 +21,4 @@ excerpt_separator: <!--more-->
 3) [org-mode使用手册, 需要经常看看](https://github.com/marboo/orgmode-cn/blob/master/org.org)
 
  <!--more-->
+ 
