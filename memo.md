@@ -39,6 +39,8 @@ golang相关的一个博客
 - [花钱的年华](http://calvin1978.blogcn.com/)
 江南白衣，公众号：春天的旁边  java & python相关
 
+- [我爱计算机](http://www.52cs.org/)
+
 - [雁起平沙的网络日志](http://yanping.me/cn/)
 雁起平沙 - jekyll+gitpage博客环境, R语言
 
@@ -63,6 +65,9 @@ vim使用者
 - [四火的唠叨](http://www.raychase.net/)
 四火，Amazon程序员 全栈工程师
 
+- [riotgames的技术博客](http://engineering.riotgames.com/)
+拳头公司, 嗯
+
 - [MacTalk-池建强的随想录](http://macshuo.com/)
 MacTalk作者, 软文为主
 
@@ -81,12 +86,9 @@ java技术栈
 - [唐磊的个人博客](https://www.tanglei.name/)
 
 - [技术类博客网站推荐](http://www.jianshu.com/p/ca676b17603e)
-
-- [Mac 软件推荐续(!程序猿篇)](https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
+<https://www.tanglei.name/blog/app-in-mac-for-common.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io>
 
 <h1 id="ML">机器学习</h1>
-
-[fast.ai](http://www.fast.ai/)
 
 [cousrsa上吴恩达的机器学习教程](https://www.coursera.org/learn/machine-learning/home/week/1)
 
