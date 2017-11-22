@@ -416,9 +416,31 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 
 [网络游戏的同步](http://wenku.baidu.com/view/26f7d1ec172ded630b1cb63d.html)
 
-[66RPG 素材](http://6rweb.sinaapp.com/res.php)
-
 [2d游戏素材网站](http://www.spriters-resource.com/)
+
+[iugame游戏素材网站](http://iugame.me/)
+
+[opengameart](https://opengameart.org/)
+
+[Unity Manual 用户手册](http://www.ceeger.com/Manual/)
+
+[Unity 2d-game-creation](https://unity3d.com/cn/learn/tutorials/s/2d-game-creation)
+
+[photon游戏服务器框架](https://www.photonengine.com/zh-cn/photon/)
+
+[【Unity3D基础教程】给初学者看的Unity教程](http://www.cnblogs.com/neverdie/p/How_To_Learn_Unity3D.html)
+
+<h3 id="独立游戏平台">独立游戏平台</h3>
+
+[GOG](https://www.gog.com/)
+
+[gamejolt](https://gamejolt.com/)
+
+[itch](https://itch.io/)
+
+[indiegamer](http://forums.indiegamer.com/)
+
+[indienova](https://www.indienova.com/)
 
 ## Bonus
 
