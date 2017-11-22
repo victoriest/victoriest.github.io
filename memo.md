@@ -358,7 +358,6 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 <h2 id="IDEs">IDEs</h2>
 
 <h3 id="Vim">Vim</h3>
--------
 
 [vim插件推荐](http://vimawesome.com/)
 
@@ -381,7 +380,7 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 - [将你的Vim 打造成轻巧强大的IDE](http://yuez.me/jiang-ni-de-vim-da-zao-cheng-qing-qiao-qiang-da-de-ide/)
 
 <h3 id="Emacs">Emacs</h3>
--------
+
 [一年成为Emacs高手](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org)
 
 [从零开始——Emacs 安装配置使用教程](http://www.jianshu.com/p/b4cf683c25f3)
@@ -403,18 +402,13 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 [有哪些简洁明快的 Jekyll 模板](http://www.zhihu.com/question/20223939)
 
 <h1 id="游戏开发">游戏开发</h1>
+-------
 
 [MMORPG服务器架构](http://www.blogjava.net/landon/archive/2012/07/14/383092.html)
 
 [11平台天梯原理分析](http://www.cnblogs.com/DebugLZQ/archive/2012/05/06/2486138.html)
 
-[Alloy Game Engine让游戏制作变得超级容易](https://github.com/AlloyTeam/AlloyGameEngine)
-
-[游戏服务器JVM性能调优](http://janeky.iteye.com/blog/1900538)
-
 [帧锁定算法解决游戏同步](http://www.joynb.net/blog/archives/131)
-
-[网络游戏的同步](http://wenku.baidu.com/view/26f7d1ec172ded630b1cb63d.html)
 
 [2d游戏素材网站](http://www.spriters-resource.com/)
 
@@ -445,9 +439,5 @@ RequireJS 是一个根据需要来加载 js 文件的 JavaScript 框架，可避
 ## Bonus
 
 http://www.readfar.com/
-
-http://girl-atlas.com/
-
-http://www.7kk.com/
 
 [hosts](http://laod.cn/hosts)
