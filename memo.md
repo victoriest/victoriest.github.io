@@ -249,11 +249,10 @@ java为主的技术站点
 
 <h3>第三方库</h3>
 
+- [java8 函数式库](http://www.vavr.io/vavr-docs/)
+
 - [BTrace](https://github.com/btraceio/btrace)
 一个Java应用监控器
-
-- [amoeba](http://docs.hexnova.com/amoeba/)
-分布式数据库
 
 - [Akka](http://akka.io/)
 更加简单的可伸缩性、容错性、并发性、远程调用的Actor模型应用
@@ -266,7 +265,7 @@ java为主的技术站点
 
 - [中文翻译《Spring Framework 4.x参考文档》](https://github.com/waylau/spring-framework-4-reference)
 
-- [使用Spring进行面向切面编程（AOP）](http://shouce.jb51.net/spring/aop.html)
+- [使用Spring进行面向切面编程(AOP)](http://shouce.jb51.net/spring/aop.html)
 
 - [聊一聊Spring AOP](http://yangfei520.blog.51cto.com/1041581/1273069)
 
