@@ -153,8 +153,6 @@ Build cross platform desktop apps with JavaScript, HTML, and CSS
 
 [百度的api store](http://apistore.baidu.com/)
 
-[零基础入门学习汇编语言](http://www.tudou.com/playlist/id/14918629/)
-
 [免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
 
 [直播写代码的网站](https://www.livecoding.tv)
