@@ -5,11 +5,13 @@
        href="{{ site.github.repo }}">
       {% include svg/github.svg %}
     </a>
+    <!--
     <a id="github-download-link"
        class="icon" title="Download" aria-label="Download"
        href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">
       {% include svg/download.svg %}
     </a>
+  -->
   {% endif %}
 
   <a id="subscribe-link"
@@ -31,6 +33,7 @@
     {% endif %}
   {% endfor %}
 
+<!--
   {% if tags_page %}
     <a id="tags-link"
        class="icon{% if page.url == '/tags' %} active{% endif %}"
@@ -39,6 +42,7 @@
       {% include svg/tags.svg %}
     </a>
   {% endif %}
+-->
 
   {% if search_page %}
     <a id="search-link"

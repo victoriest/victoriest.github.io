@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            
+title:            VictoriEST
 tagline:          '技术宅的实验室'
 description:      "VictoriEST's lab"
 url:              'http://victoriest.me'
@@ -34,4 +34,5 @@ sidebar_home_link:  true
                                 # set this to the root of the paginate_path
                                 # to enable a separate blog link.
 github:
-  repo:             https://github.com/fongandrew/hydeout
+  repo: https://github.com/victoriest
+
