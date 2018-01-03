@@ -17,12 +17,12 @@ excerpt_separator: <!--more-->
 * 通过`trx_mysql_thread_id`去查询`information_schema.processlist`找到执行事务的客户端请求的SQL线程
 * 通过SQL线程, 找到应用程序的IP地址以及端口
 * 进入应用服务器, 通过netstat检索端口找到正在运行的应用工程的PID
+
 ```
 netstat -nlatp |grep 23452
 tcp        0      0 ::ffff:10.xx.3.2x:23452    ::ffff:10.xx4.3.x1:3306     ESTABLISHED 12059/java          
 
 ps -eaf|grep 12059
-...
 ```
 
 通过以上步骤就可以确定是那个程序调用的mysql出现的running的事务.
