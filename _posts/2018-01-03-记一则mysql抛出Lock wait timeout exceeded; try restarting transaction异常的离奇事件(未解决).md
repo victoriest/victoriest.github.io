@@ -3,7 +3,6 @@ layout: post
 title: 记一则mysql抛出Lock wait timeout exceeded; try restarting transaction异常的离奇事件(未解决)
 date: 2017-10-24
 description: 记一则mysql抛出Lock wait timeout exceeded; try restarting transaction异常的离奇事件(未解决)
-excerpt_separator: <!--more-->
 ---
 
 一直以来, 数据库方面的东西对我来说是个黑盒子, 期望将问题留给DBA解决. 不过, 近日, 在我的项目上突然在没有任何负载的情况下经常抛出出Lock wait timeout exceeded; try restarting transaction异常. 而迫使我慢慢了解数据库问题排查方面的套路.
@@ -31,14 +30,22 @@ ps -eaf|grep 12059
 
 另外, 我也彻底排查了一下程序中的sql语句的问题, 基本排除由于程序逻辑导致未提交事务产生. 
 
-调查陷入了死胡同. 而此时发现, 与我们的服务器程序公用一台虚拟机的其他程序cpu占用异常高, 导致服务器经常卡顿. 联系了运维后发现, 服务器虚拟机资源已耗尽. 重启服务器, 将我们的服务器程序独立出来后, 暂时未出现running的事务. 我们的服务器程序使用的连接池是阿里的Druid, 后续可以对其进行配置从而实现数据库连接相关的监控<https://github.com/alibaba/druid>, 此持续跟踪中....
+调查陷入了死胡同. 而此时发现, 与我们的服务器程序公用一台虚拟机的其他程序cpu占用异常高, 导致服务器经常卡顿. 联系了运维后发现, 服务器虚拟机资源已耗尽. 重启服务器, 将我们的服务器程序独立出来后, 问题依然出现. 
 
+重启数据库开启数据库的binlog依然找不到一些线索. 
+<http://www.bkjia.com/Mysql/1203859.html>
+<https://www.cnblogs.com/martinzhang/p/3454358.html>
+
+我们的服务器程序使用的连接池是阿里的Druid, 后续可以对其进行配置从而实现数据库连接相关的监控<https://github.com/alibaba/druid>, 此持续跟踪中....
 
 
 #### 调查中参考资料
 
 <http://keithlan.github.io/2017/06/05/innodb_locks_1/>
 <http://blog.csdn.net/mchdba/article/details/39459347>
+<http://www.bkjia.com/Mysql/1203859.html>
+<https://www.cnblogs.com/martinzhang/p/3454358.html>
+<http://blog.51cto.com/comtv/722655>
 
 ```
 
