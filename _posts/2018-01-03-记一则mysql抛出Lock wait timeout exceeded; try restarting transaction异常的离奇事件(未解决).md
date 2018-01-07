@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 记一则mysql抛出Lock wait timeout exceeded; try restarting transaction异常的离奇事件(未解决)
-date: 2017-10-24
+date: 2018-01-03
 description: 记一则mysql抛出Lock wait timeout exceeded; try restarting transaction异常的离奇事件(未解决)
 ---
 
