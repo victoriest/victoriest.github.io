@@ -90,6 +90,10 @@ java技术栈
 
 <h1 id="ML">机器学习</h1>
 
+[莫烦的tensorflow教程](https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/)
+
+[谷歌出品 机器学习速成课程](https://developers.google.cn/machine-learning/crash-course/)
+
 [cousrsa上吴恩达的机器学习教程](https://www.coursera.org/learn/machine-learning/home/week/1)
 
 [网易云课堂的机器学习教程](https://mooc.study.163.com/smartSpec/detail/1001319001.htm)
