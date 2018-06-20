@@ -12,12 +12,18 @@ excerpt_separator: <!--more-->
 
 2. Python微服务, 添加一个健康检查的接口.
 
+3. 实现python微服务
+
+4. 依次启动, python微服务, eureka, sidecar, java服务
+
 
 ##### 参考
 
 <https://blog.csdn.net/LoveCarpenter/article/details/78819227>
 
 <https://www.cnblogs.com/YrlixJoe/p/7509655.html>
+
+<http://www.dayexie.com/detail1214412.html>
 
 
 
