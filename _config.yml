@@ -6,7 +6,7 @@ highlighter:      rouge
 title:            VictoriEST
 tagline:          '技术宅的实验室'
 description:      "VictoriEST's lab"
-url:              'http://victoriest.me'
+url:              'http://victoriest.github.io'
 baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
                   # If you want to move just the blog index pages but keep
@@ -15,7 +15,7 @@ baseurl:          # the optional subpath of your site, e.g. "/blog"
 
 author:
   name:           'VictoriEST'
-  url:            'http://victoriest.me'
+  url:            'http://victoriest.github.io'
 
 paginate:         10
 # paginate_path:    '/page:num'
