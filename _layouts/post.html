@@ -16,18 +16,3 @@ layout: default
   {% include comments.html %}
   {% include related_posts.html %}
 </div>
-
-<div id="gitmentContainer"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    owner: 'victoriest',
-    repo: 'https://github.com/victoriest/victoriest.github.io',
-    oauth: {
-      client_id: 'b149a27c222e7c3052cd',
-      client_secret: '2b453b1be490923404d6c0ffb6b6fad4f133e1c0',
-    },
-  });
-  gitment.render('gitmentContainer');
-</script>
