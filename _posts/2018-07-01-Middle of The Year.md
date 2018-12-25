@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Middle for The Year
+title: Middle of The Year
 date: 2018-07-01
-description: Middle for The Year
+description: Middle of The Year
 excerpt_separator: <!--more-->
 ---
 
